@@ -48,12 +48,11 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
         </p>
       ) : (
         <>
-          <div className="chips" role="tablist">
+          <div className="chips">
             {bodies.map((b) => (
               <button
                 key={b}
-                role="tab"
-                aria-selected={b === active}
+                aria-pressed={b === active}
                 className={b === active ? 'chip on' : 'chip'}
                 onClick={() => setBody(b)}
               >

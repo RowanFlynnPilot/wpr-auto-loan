@@ -112,7 +112,11 @@ export default function App() {
       <div className="layout">
         <InputsPanel inputs={inputs} onChange={setInputs} />
         <main className="results">
-          <Ceiling inputs={inputs} ceiling={ceiling} prices={inventory?.vehicles.map((v) => v.price) ?? []} />
+          <Ceiling
+            inputs={inputs}
+            ceiling={ceiling}
+            lot={inventory?.vehicles.map((v) => ({ label: `${v.year} ${v.make} ${v.model}`, price: v.price })) ?? []}
+          />
           <TermTable
             inputs={inputs}
             price={ceiling}

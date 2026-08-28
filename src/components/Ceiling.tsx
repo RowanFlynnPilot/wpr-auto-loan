@@ -55,13 +55,18 @@ function CopyLink() {
   );
 }
 
+export interface LotDot {
+  label: string;
+  price: number;
+}
+
 interface Props {
   inputs: LoanInputs;
   ceiling: number;
-  prices: number[];
+  lot: LotDot[];
 }
 
-export function Ceiling({ inputs, ceiling, prices }: Props) {
+export function Ceiling({ inputs, ceiling, lot }: Props) {
   const q = quote(ceiling, inputs);
   const levers = ceilingLevers(inputs);
   const figure = useCountUp(ceiling);
@@ -85,7 +90,7 @@ export function Ceiling({ inputs, ceiling, prices }: Props) {
         .
       </p>
       <CopyLink />
-      <PriceLine ceiling={ceiling} prices={prices} />
+      <PriceLine ceiling={ceiling} lot={lot} />
       <p className="note">
         For scale: the median Marathon County household earns about{' '}
         {dollars(COUNTY_MEDIAN_HOUSEHOLD_INCOME / 12)} a month before taxes (Census ACS); shopping your
@@ -96,7 +101,7 @@ export function Ceiling({ inputs, ceiling, prices }: Props) {
 }
 
 // Every vehicle in the lot as a dot on a price line, with the ceiling marked.
-function PriceLine({ ceiling, prices }: { ceiling: number; prices: number[] }) {
+function PriceLine({ ceiling, lot }: { ceiling: number; lot: LotDot[] }) {
   const ref = useRef<HTMLElement>(null);
   const [W, setW] = useState(640);
   useLayoutEffect(() => {
@@ -107,15 +112,15 @@ function PriceLine({ ceiling, prices }: { ceiling: number; prices: number[] }) {
   }, []);
   const H = 84;
   const PAD = 24;
-  const top = Math.max(ceiling, ...prices, 10_000);
+  const top = Math.max(ceiling, ...lot.map((d) => d.price), 10_000);
   const domain = Math.ceil(top / 10_000) * 10_000;
   const x = (price: number) => PAD + (price / domain) * (W - PAD * 2);
   const ticks = Array.from({ length: domain / 10_000 + 1 }, (_, k) => k * 10_000);
-  const under = prices.filter((p) => p <= ceiling).length;
+  const under = lot.filter((d) => d.price <= ceiling).length;
 
   return (
     <figure className="priceline" ref={ref}>
-      <svg viewBox={`0 0 ${W} ${H}`} height={H} role="img" aria-label={`${under} of ${prices.length} vehicles under your ceiling`}>
+      <svg viewBox={`0 0 ${W} ${H}`} height={H} role="img" aria-label={`${under} of ${lot.length} vehicles under your ceiling`}>
         <line x1={PAD} y1={52} x2={W - PAD} y2={52} className="axis" />
         {ticks.map((t) => (
           <g key={t}>
@@ -125,14 +130,16 @@ function PriceLine({ ceiling, prices }: { ceiling: number; prices: number[] }) {
             </text>
           </g>
         ))}
-        {prices.map((p, k) => (
+        {lot.map((d, k) => (
           <circle
             key={k}
-            cx={x(p)}
+            cx={x(d.price)}
             cy={36 + ((k % 5) - 2) * 4.5}
             r={4}
-            className={p <= ceiling ? 'dot in' : 'dot out'}
-          />
+            className={d.price <= ceiling ? 'dot in' : 'dot out'}
+          >
+            <title>{`${d.label} — ${dollars(d.price)}`}</title>
+          </circle>
         ))}
         <line x1={x(ceiling)} y1={8} x2={x(ceiling)} y2={58} className="marker" />
         <text x={x(ceiling)} y={0} dy={6} textAnchor={ceiling / domain > 0.85 ? 'end' : 'middle'} className="marker-label">
@@ -140,7 +147,7 @@ function PriceLine({ ceiling, prices }: { ceiling: number; prices: number[] }) {
         </text>
       </svg>
       <figcaption>
-        {under} of {prices.length} vehicles in the lot are under your ceiling.
+        {under} of {lot.length} vehicles in the lot are under your ceiling.
       </figcaption>
     </figure>
   );

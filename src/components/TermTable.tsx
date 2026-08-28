@@ -29,7 +29,6 @@ export function TermTable({ inputs, price, onSelectTerm }: Props) {
               key={r.termMonths}
               className={r.termMonths === inputs.termMonths ? 'chosen' : ''}
               tabIndex={0}
-              aria-selected={r.termMonths === inputs.termMonths}
               onClick={() => onSelectTerm(r.termMonths)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
