@@ -1,5 +1,32 @@
+import { useState, type ComponentProps } from 'react';
 import { TERMS, maxPayment, type LoanInputs } from '../lib/loan';
 import { dollars } from '../lib/format';
+
+// Shows the raw text while the field is being edited so backspacing to empty
+// doesn't snap to 0 mid-keystroke; every keystroke still commits its parsed
+// value, and blur restores the canonical number.
+function NumericInput({
+  canonical,
+  commit,
+  ...inputProps
+}: { canonical: string; commit: (raw: string) => void } & Omit<
+  ComponentProps<'input'>,
+  'type' | 'value' | 'onChange' | 'onBlur'
+>) {
+  const [text, setText] = useState<string | null>(null);
+  return (
+    <input
+      {...inputProps}
+      type="number"
+      value={text ?? canonical}
+      onChange={(e) => {
+        setText(e.target.value);
+        commit(e.target.value);
+      }}
+      onBlur={() => setText(null)}
+    />
+  );
+}
 
 interface Props {
   inputs: LoanInputs;
@@ -52,14 +79,13 @@ export function InputsPanel({ inputs, onChange }: Props) {
         <label>
           <span>APR</span>
           <span className="field">
-            <input
-              type="number"
+            <NumericInput
               inputMode="decimal"
               min={0}
               max={30}
               step={0.1}
-              value={Number((inputs.apr * 100).toFixed(2))}
-              onChange={(e) => set('apr', Number(e.target.value) / 100)}
+              canonical={String(Number((inputs.apr * 100).toFixed(2)))}
+              commit={(raw) => set('apr', Math.max(0, Number(raw) || 0) / 100)}
             />
             <b>%</b>
           </span>
@@ -83,13 +109,12 @@ function Money({ value, onChange }: { value: number; onChange: (v: number) => vo
   return (
     <span className="field">
       <b>$</b>
-      <input
-        type="number"
+      <NumericInput
         inputMode="numeric"
         min={0}
         step={100}
-        value={value}
-        onChange={(e) => onChange(Math.max(0, Number(e.target.value)))}
+        canonical={String(value)}
+        commit={(raw) => onChange(Math.max(0, Number(raw) || 0))}
       />
     </span>
   );
