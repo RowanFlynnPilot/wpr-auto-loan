@@ -149,10 +149,11 @@ input[type='range']:focus-visible { outline: 2px solid var(--teal); outline-offs
 .chip.on { background: var(--ink); border-color: var(--ink); color: var(--cream); }
 .chip.on span { color: var(--cream); }
 .chip:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
-.empty { padding: 32px; text-align: center; border: 1px dashed var(--rule); border-radius: 6px; color: var(--ink-soft); }
+.empty, .loading { padding: 32px; text-align: center; border: 1px dashed var(--rule); border-radius: 6px; color: var(--ink-soft); }
 
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; }
 .card { background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; }
+.card:hover { border-color: var(--teal); box-shadow: 0 2px 10px rgba(30, 38, 36, 0.08); }
 .card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
 .photo-blank { aspect-ratio: 16 / 9; background: var(--cream); display: grid; place-items: center; align-content: center; gap: 2px; border-bottom: 1px solid var(--rule); }
 .photo-blank svg { width: 56%; color: var(--ink-soft); opacity: 0.45; }
@@ -187,4 +188,5 @@ input[type='range']:focus-visible { outline: 2px solid var(--teal); outline-offs
 
 @media (prefers-reduced-motion: no-preference) {
   .ceiling .figure { transition: color 120ms ease; }
+  .card { transition: border-color 120ms ease, box-shadow 120ms ease; }
 }
