@@ -45,6 +45,11 @@ No speculative abstraction. Let TypeScript catch it.
 taxable price. Title $214.50 (Oct 1 2025), lien $10, registration $85,
 plate $6, Marathon County wheel tax $25. City of Wausau has no wheel tax.
 
+`FUEL` seeds the per-vehicle gas line: Wausau metro regular average (GasBuddy
+via the wpr-gas-prices tracker, dated in the comment) and 1,100 mi/mo (FHWA
+average). Combined economy is the EPA 55/45 blend of the feed's own mpg.
+Refresh the gas price when it drifts; the tracker updates daily.
+
 ## When a dealer signs
 
 - `src/config/sponsor.ts`: name, disclosure label, UTM campaign.

@@ -1,5 +1,7 @@
 import { SPONSOR } from '../config/sponsor';
+import { FUEL } from '../config/wisconsin';
 import { count, dollars, percent } from '../lib/format';
+import { fuelPerMonth } from '../lib/fuel';
 import { BodyIcon } from './BodyIcon';
 import { quote, type LoanInputs } from '../lib/loan';
 import { trackVehicleClick, vdpLink } from '../lib/track';
@@ -35,6 +37,10 @@ export function VehicleCard({ vehicle: v, inputs }: Props) {
           </span>
           <span className="price">{dollars(v.price)}</span>
         </div>
+        <p className="fuel">
+          + about {dollars(fuelPerMonth(v.mpgCity, v.mpgHwy))}/mo in gas — {count(FUEL.milesPerMonth)} mi
+          at Wausau's ${FUEL.gasPrice.toFixed(2)}/gal
+        </p>
         {/* Reg Z: payment shown with the terms that produce it. */}
         <p className="disclosure">
           {q.termMonths} months at {percent(inputs.apr)} APR with {dollars(inputs.downPayment)} down
