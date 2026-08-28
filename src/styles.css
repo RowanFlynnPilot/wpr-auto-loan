@@ -32,7 +32,8 @@ small { font-size: 0.85em; }
 /* WPR masthead — same header as the paper's other tools */
 .wpr-masthead {
   border-top: 4px solid var(--slate); border-bottom: 1px solid var(--slate);
-  background: var(--paper); text-align: center; padding: 16px 20px 12px;
+  /* Pure white, not --paper: the wordmark PNG has a white background. */
+  background: #fff; text-align: center; padding: 16px 20px 12px;
 }
 .wpr-masthead a {
   display: inline-flex; align-items: center; justify-content: center;
