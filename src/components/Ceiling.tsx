@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-import { maxPayment, purchaseFees, quote, type LoanInputs } from '../lib/loan';
+import { ceilingLevers, maxPayment, purchaseFees, quote, type LoanInputs } from '../lib/loan';
 import { cents, dollars, percent } from '../lib/format';
 
 // The scenario always lives in the URL hash; this just makes that shareable
@@ -34,6 +34,7 @@ interface Props {
 
 export function Ceiling({ inputs, ceiling, prices }: Props) {
   const q = quote(ceiling, inputs);
+  const levers = ceilingLevers(inputs);
   return (
     <section className="ceiling">
       <p className="label">You can shop up to</p>
@@ -42,6 +43,16 @@ export function Ceiling({ inputs, ceiling, prices }: Props) {
         {dollars(maxPayment(inputs))} a month for {inputs.termMonths} months at {percent(inputs.apr)} APR.
         That price carries {cents(q.salesTax)} in sales tax and {cents(purchaseFees())} in title, plate,
         registration and Marathon County wheel tax, so you'd finance {dollars(q.financed)}.
+      </p>
+      <p className="levers">
+        To raise it: another $500 down adds {dollars(levers.down500)}
+        {levers.aprPoint !== null && <> · a point less APR adds {dollars(levers.aprPoint)}</>}
+        {levers.nextTerm && (
+          <>
+            {' '}· {levers.nextTerm.termMonths - inputs.termMonths} more months adds {dollars(levers.nextTerm.delta)}
+          </>
+        )}
+        .
       </p>
       <CopyLink />
       <PriceLine ceiling={ceiling} prices={prices} />

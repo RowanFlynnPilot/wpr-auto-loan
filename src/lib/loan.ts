@@ -90,3 +90,19 @@ export function quote(price: number, i: LoanInputs, termMonths: number = i.termM
 export function termComparison(price: number, i: LoanInputs): Quote[] {
   return TERMS.map((t) => quote(price, i, t));
 }
+
+// How much each realistic move raises the ceiling. aprPoint is null when the
+// APR is already under a point; nextTerm when the longest term is chosen.
+export function ceilingLevers(i: LoanInputs): {
+  down500: number;
+  aprPoint: number | null;
+  nextTerm: { termMonths: number; delta: number } | null;
+} {
+  const base = maxPrice(i);
+  const next = TERMS.find((t) => t > i.termMonths);
+  return {
+    down500: maxPrice({ ...i, downPayment: i.downPayment + 500 }) - base,
+    aprPoint: i.apr >= 0.01 ? maxPrice({ ...i, apr: i.apr - 0.01 }) - base : null,
+    nextTerm: next === undefined ? null : { termMonths: next, delta: maxPrice({ ...i, termMonths: next }) - base },
+  };
+}

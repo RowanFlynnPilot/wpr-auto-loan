@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { amountFinanced, maxPayment, maxPrice, monthlyPayment, quote, termComparison } from './loan';
+import { amountFinanced, ceilingLevers, maxPayment, maxPrice, monthlyPayment, quote, termComparison } from './loan';
 
 const base = {
   monthlyIncome: 5000,
@@ -47,6 +47,24 @@ describe('termComparison', () => {
       expect(rows[k].totalInterest).toBeGreaterThan(rows[k - 1].totalInterest);
       expect(rows[k].payment).toBeLessThan(rows[k - 1].payment);
     }
+  });
+});
+
+describe('ceilingLevers', () => {
+  it('cash down passes through net of sales tax', () => {
+    // Price ceiling scales the extra $500 by 1/(1 + tax rate).
+    expect(ceilingLevers(base).down500).toBeCloseTo(500 / 1.055, 2);
+  });
+  it('a lower APR and a longer term both raise the ceiling', () => {
+    const l = ceilingLevers(base);
+    expect(l.aprPoint).toBeGreaterThan(0);
+    expect(l.nextTerm).toEqual({ termMonths: 72, delta: expect.any(Number) });
+    expect(l.nextTerm!.delta).toBeGreaterThan(0);
+  });
+  it('drops unavailable levers', () => {
+    const l = ceilingLevers({ ...base, apr: 0.005, termMonths: 84 });
+    expect(l.aprPoint).toBeNull();
+    expect(l.nextTerm).toBeNull();
   });
 });
 
