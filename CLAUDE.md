@@ -4,6 +4,16 @@ Wausau Pilot & Review reader tool. A Wisconsin-seeded auto loan affordability
 calculator whose payoff is a sponsoring dealer's live inventory, filtered to
 what the reader can actually afford. Built to demo before a dealer is signed.
 
+## Status (Aug 2026)
+
+Demo-complete for the dealer pitch: sponsor pre-approval CTA in the inventory
+header, body-type silhouettes on photoless cards (demo only — real feeds carry
+photos), shareable scenarios in the URL hash, sample sponsor report at
+`/report/`, iframe height messaging for the WordPress embed, clickable term
+rows. Live: https://rowanflynnpilot.github.io/wpr-auto-loan/
+Before real launch: register the two Plausible goals (below), swap sponsor.ts
+and the feed, attorney check on the Reg Z wording.
+
 ## Principles (Rowan's, apply everywhere)
 
 One correct path, no fallbacks. Fail fast and loud. Surgical changes.
