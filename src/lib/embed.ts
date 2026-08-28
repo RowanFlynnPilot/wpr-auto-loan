@@ -24,4 +24,8 @@ export function initEmbedHeight(id = 'wpr-auto-loan'): void {
   new ResizeObserver(post).observe(document.body);
   window.addEventListener('load', post);
   post();
+  // ResizeObserver callbacks ride the rendering-frame loop, which background
+  // tabs don't run, and React's first commit lands after the load event — so
+  // also post on a short timer, same as the other WPR widgets.
+  for (const ms of [200, 800, 2000]) setTimeout(post, ms);
 }
