@@ -30,16 +30,16 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
         <p className="sponsor">
           {SPONSOR.disclosure} · {SPONSOR.name}
         </p>
-        <a
-          className="preapproval"
-          href={preapprovalLink()}
-          target="_blank"
-          rel="noopener sponsored"
-          onClick={trackPreapprovalClick}
-        >
-          Get pre-approved at {SPONSOR.name} <span aria-hidden="true">→</span>
-        </a>
       </header>
+      <a
+        className="preapproval"
+        href={preapprovalLink()}
+        target="_blank"
+        rel="noopener sponsored"
+        onClick={trackPreapprovalClick}
+      >
+        Get pre-approved at {SPONSOR.name} <span aria-hidden="true">→</span>
+      </a>
 
       {fits.length === 0 ? (
         <p className="empty">
