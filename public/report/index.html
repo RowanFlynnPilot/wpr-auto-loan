@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sample sponsor report — What Can I Drive?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Same tokens as src/styles.css — keep in sync by hand. */
+      :root {
+        --teal: #3a867c;
+        --teal-deep: #2b665e;
+        --cream: #f6f2e9;
+        --paper: #fffdf8;
+        --ink: #1e2624;
+        --ink-soft: #55625e;
+        --rule: #ddd6c7;
+        --display: 'Fraunces', Georgia, serif;
+        --body: 'Public Sans', system-ui, sans-serif;
+        --mono: 'JetBrains Mono', ui-monospace, monospace;
+      }
+      * { box-sizing: border-box; }
+      html { background: var(--cream); }
+      body { margin: 0; color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.5; }
+      h1, h2 { font-family: var(--display); font-weight: 600; margin: 0; }
+      p { margin: 0; }
+
+      .page { max-width: 760px; margin: 0 auto; padding: 32px 24px 48px; }
+
+      .sample {
+        display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 0.06em;
+        text-transform: uppercase; color: var(--paper); background: var(--teal-deep);
+        border-radius: 999px; padding: 4px 12px; margin-bottom: 16px;
+      }
+      .eyebrow {
+        font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+        color: var(--teal-deep); font-weight: 600; margin-bottom: 8px;
+      }
+      h1 { font-size: 36px; line-height: 1.1; font-variation-settings: 'opsz' 144; }
+      .lede { margin-top: 12px; color: var(--ink-soft); max-width: 560px; }
+
+      .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 32px 0 8px; }
+      .stat { background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px; }
+      .stat b { display: block; font-family: var(--display); font-weight: 700; font-size: 30px; color: var(--teal-deep); line-height: 1.15; }
+      .stat span { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); }
+
+      section { margin-top: 36px; }
+      h2 { font-size: 22px; margin-bottom: 4px; }
+      .sub { font-size: 13px; color: var(--ink-soft); margin-bottom: 12px; }
+
+      table { width: 100%; border-collapse: collapse; }
+      th { text-align: left; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); padding: 8px 10px; border-bottom: 1px solid var(--ink); }
+      td { padding: 9px 10px; border-bottom: 1px solid var(--rule); vertical-align: middle; }
+      td.num, th.num { text-align: right; font-family: var(--mono); white-space: nowrap; }
+      td.mono { font-family: var(--mono); font-size: 13px; }
+      td.bar-cell { width: 40%; }
+      .bar { height: 12px; background: var(--teal); border-radius: 2px; min-width: 2px; }
+      .bar.soft { background: var(--teal); opacity: 0.55; }
+
+      .note { margin-top: 10px; font-size: 13px; color: var(--ink-soft); }
+      .colophon { margin-top: 48px; font-size: 12px; color: var(--ink-soft); border-top: 1px solid var(--rule); padding-top: 16px; }
+      @media (max-width: 560px) { td.bar-cell { display: none; } h1 { font-size: 30px; } }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <span class="sample">Sample report — illustrative numbers</span>
+      <p class="eyebrow">Wausau Pilot &amp; Review · What Can I Drive?</p>
+      <h1>Demo Motors, monthly sponsor report</h1>
+      <p class="lede">
+        What your inventory did inside the tool this month: which vehicles readers clicked through
+        to, what they shopped by, the budgets they arrived with, and the pre-approval leads the
+        tool sent you. All measured with Plausible — no reader is tracked individually.
+      </p>
+
+      <div class="stats">
+        <div class="stat"><b>2,410</b><span>Tool sessions</span></div>
+        <div class="stat"><b>486</b><span>Vehicle clicks</span></div>
+        <div class="stat"><b>73</b><span>Pre-approval clicks</span></div>
+        <div class="stat"><b>$21,400</b><span>Median reader ceiling</span></div>
+      </div>
+      <p class="note">A vehicle click is a reader leaving the tool for that vehicle's page on your site.</p>
+
+      <section>
+        <h2>Vehicle clicks by stock number</h2>
+        <p class="sub">Top ten of 40 listed vehicles.</p>
+        <table>
+          <thead>
+            <tr><th>Stock</th><th>Vehicle</th><th class="num">Clicks</th><th class="bar-cell"></th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="mono">DM4106</td><td>2023 Toyota RAV4</td><td class="num">54</td><td class="bar-cell"><div class="bar" style="width:100%"></div></td></tr>
+            <tr><td class="mono">DM4113</td><td>2023 Ford Escape</td><td class="num">47</td><td class="bar-cell"><div class="bar" style="width:87%"></div></td></tr>
+            <tr><td class="mono">DM4109</td><td>2023 Honda Civic</td><td class="num">41</td><td class="bar-cell"><div class="bar" style="width:76%"></div></td></tr>
+            <tr><td class="mono">DM4107</td><td>2022 Subaru Crosstrek</td><td class="num">38</td><td class="bar-cell"><div class="bar" style="width:70%"></div></td></tr>
+            <tr><td class="mono">DM4104</td><td>2020 Ford Explorer</td><td class="num">33</td><td class="bar-cell"><div class="bar" style="width:61%"></div></td></tr>
+            <tr><td class="mono">DM4100</td><td>2021 Toyota Camry</td><td class="num">29</td><td class="bar-cell"><div class="bar" style="width:54%"></div></td></tr>
+            <tr><td class="mono">DM4112</td><td>2022 GMC Terrain</td><td class="num">26</td><td class="bar-cell"><div class="bar" style="width:48%"></div></td></tr>
+            <tr><td class="mono">DM4103</td><td>2022 Toyota Camry</td><td class="num">22</td><td class="bar-cell"><div class="bar" style="width:41%"></div></td></tr>
+            <tr><td class="mono">DM4110</td><td>2023 Jeep Wrangler</td><td class="num">19</td><td class="bar-cell"><div class="bar" style="width:35%"></div></td></tr>
+            <tr><td class="mono">DM4105</td><td>2019 Ford Bronco Sport</td><td class="num">17</td><td class="bar-cell"><div class="bar" style="width:31%"></div></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Clicks by body type</h2>
+        <p class="sub">Where reader interest concentrates.</p>
+        <table>
+          <thead>
+            <tr><th>Body</th><th class="num">Clicks</th><th class="num">Share</th><th class="bar-cell"></th></tr>
+          </thead>
+          <tbody>
+            <tr><td>SUV</td><td class="num">248</td><td class="num">51%</td><td class="bar-cell"><div class="bar" style="width:100%"></div></td></tr>
+            <tr><td>Sedan</td><td class="num">112</td><td class="num">23%</td><td class="bar-cell"><div class="bar" style="width:45%"></div></td></tr>
+            <tr><td>Truck</td><td class="num">68</td><td class="num">14%</td><td class="bar-cell"><div class="bar" style="width:27%"></div></td></tr>
+            <tr><td>Hatchback</td><td class="num">34</td><td class="num">7%</td><td class="bar-cell"><div class="bar" style="width:14%"></div></td></tr>
+            <tr><td>Wagon</td><td class="num">24</td><td class="num">5%</td><td class="bar-cell"><div class="bar" style="width:10%"></div></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Price bands readers landed in</h2>
+        <p class="sub">The affordability ceiling the tool computed from each reader's own numbers.</p>
+        <table>
+          <thead>
+            <tr><th>Ceiling</th><th class="num">Sessions</th><th class="num">Share</th><th class="bar-cell"></th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Under $12,500</td><td class="num">193</td><td class="num">8%</td><td class="bar-cell"><div class="bar soft" style="width:22%"></div></td></tr>
+            <tr><td>$12,500 – $17,500</td><td class="num">434</td><td class="num">18%</td><td class="bar-cell"><div class="bar soft" style="width:50%"></div></td></tr>
+            <tr><td>$17,500 – $22,500</td><td class="num">868</td><td class="num">36%</td><td class="bar-cell"><div class="bar soft" style="width:100%"></div></td></tr>
+            <tr><td>$22,500 – $27,500</td><td class="num">579</td><td class="num">24%</td><td class="bar-cell"><div class="bar soft" style="width:67%"></div></td></tr>
+            <tr><td>$27,500 – $32,500</td><td class="num">241</td><td class="num">10%</td><td class="bar-cell"><div class="bar soft" style="width:28%"></div></td></tr>
+            <tr><td>Over $32,500</td><td class="num">95</td><td class="num">4%</td><td class="bar-cell"><div class="bar soft" style="width:11%"></div></td></tr>
+          </tbody>
+        </table>
+        <p class="note">Six in ten readers arrived shopping between $17,500 and $27,500.</p>
+      </section>
+
+      <section>
+        <h2>Pre-approval clicks</h2>
+        <p class="sub">Readers who left the tool for your financing pre-approval page.</p>
+        <table>
+          <thead>
+            <tr><th>Week</th><th class="num">Clicks</th><th class="bar-cell"></th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Week 1</td><td class="num">14</td><td class="bar-cell"><div class="bar" style="width:56%"></div></td></tr>
+            <tr><td>Week 2</td><td class="num">18</td><td class="bar-cell"><div class="bar" style="width:72%"></div></td></tr>
+            <tr><td>Week 3</td><td class="num">25</td><td class="bar-cell"><div class="bar" style="width:100%"></div></td></tr>
+            <tr><td>Week 4</td><td class="num">16</td><td class="bar-cell"><div class="bar" style="width:64%"></div></td></tr>
+          </tbody>
+        </table>
+        <p class="note">Every pre-approval and vehicle click carries UTM tags, so these visits are also attributable inside your own analytics.</p>
+      </section>
+
+      <p class="colophon">
+        Sample report with illustrative numbers, prepared to show the shape of monthly sponsor
+        reporting for What Can I Drive?, a Wausau Pilot &amp; Review reader tool. Live reports are
+        drawn from Plausible Analytics custom events (Vehicle click, Preapproval click) and carry
+        no personally identifying reader data.
+      </p>
+    </div>
+  </body>
+</html>
