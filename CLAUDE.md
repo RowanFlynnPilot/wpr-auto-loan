@@ -50,6 +50,10 @@ via the wpr-gas-prices tracker, dated in the comment) and 1,100 mi/mo (FHWA
 average). Combined economy is the EPA 55/45 blend of the feed's own mpg.
 Refresh the gas price when it drifts; the tracker updates daily.
 
+`COUNTY_MEDIAN_HOUSEHOLD_INCOME` ($77,884, ACS 5-yr 2020-2024 B19013) powers
+the "for scale" line under the price line — the same figure wpr-finance-tools
+carries, still `verified:false` there. Editor sign-off before real launch.
+
 ## When a dealer signs
 
 - `src/config/sponsor.ts`: name, disclosure label, UTM campaign.

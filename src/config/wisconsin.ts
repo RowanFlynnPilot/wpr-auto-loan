@@ -16,3 +16,8 @@ export const FUEL = {
   gasPrice: 3.83,      // $/gal regular, Wausau metro average — GasBuddy via WPR's gas-prices tracker, Aug 28 2026
   milesPerMonth: 1100, // ~13,200 mi/yr, FHWA average annual miles per driver
 } as const;
+
+// Context, not seeding: Marathon County median household income, ACS 5-year
+// 2020-2024 table B19013. Same figure wpr-finance-tools carries (verified:false
+// there — editor sign-off before real launch).
+export const COUNTY_MEDIAN_HOUSEHOLD_INCOME = 77_884;

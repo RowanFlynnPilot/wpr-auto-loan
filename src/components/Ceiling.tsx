@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-import { ceilingLevers, maxPayment, purchaseFees, quote, type LoanInputs } from '../lib/loan';
+import { COUNTY_MEDIAN_HOUSEHOLD_INCOME } from '../config/wisconsin';
+import { ceilingLevers, maxPayment, maxPrice, purchaseFees, quote, type LoanInputs } from '../lib/loan';
 import { cents, dollars, percent } from '../lib/format';
 
 // The scenario always lives in the URL hash; this just makes that shareable
@@ -56,6 +57,11 @@ export function Ceiling({ inputs, ceiling, prices }: Props) {
       </p>
       <CopyLink />
       <PriceLine ceiling={ceiling} prices={prices} />
+      <p className="note">
+        For scale: the median Marathon County household earns about{' '}
+        {dollars(COUNTY_MEDIAN_HOUSEHOLD_INCOME / 12)} a month before taxes (Census ACS); shopping your
+        same way, its ceiling is about {dollars(maxPrice({ ...inputs, monthlyIncome: COUNTY_MEDIAN_HOUSEHOLD_INCOME / 12 }))}.
+      </p>
     </section>
   );
 }
