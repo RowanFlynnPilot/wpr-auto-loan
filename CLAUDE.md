@@ -48,7 +48,15 @@ plate $6, Marathon County wheel tax $25. City of Wausau has no wheel tax.
 Plausible custom event `Vehicle click` with props `sponsor, stock, body, price`,
 plus UTM params (`utm_source=wausaupilot`, `utm_medium=tool`,
 `utm_campaign=<sponsor.ts>`, `utm_content=<stock>`) on every outbound VDP link.
-Report = clicks by vehicle, clicks by body type, price band readers land in.
+`Preapproval click` (prop `sponsor`) on the header CTA, same UTM treatment with
+`utm_content=preapproval`. Report = clicks by vehicle, clicks by body type,
+price band readers land in, pre-approval clicks; sample layout at `/report/`.
+
+`Vehicle click` and `Preapproval click` must be added as custom-event goals in
+the Plausible dashboard (Site settings → Goals, names matched exactly) before
+they show up in reports; Plausible does not backfill events sent earlier. The
+loaded `script.outbound-links.js` supports manual `plausible()` calls via the
+queue stub in `index.html` — no script change needed for custom events.
 
 ## Editorial line
 
