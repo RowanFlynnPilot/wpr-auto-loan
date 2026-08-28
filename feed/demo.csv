@@ -1,0 +1,41 @@
+stock_number,vin,year,make,model,trim,body_style,selling_price,mileage,city_mpg,highway_mpg,drivetrain,exterior_color,features,photo_url,vdp_url
+DM4100,G47K7RH67T2W9724N,2021,Toyota,Camry,SE,Sedan,15500,67883,28,39,FWD,Sandstone,Backup camera|Heated seats|One owner|Apple CarPlay|Sunroof,,https://demo-motors.example/inventory/DM4100
+DM4101,6984CVX6G59T5M47E,2025,Honda,CR-V,EX,SUV,30500,11358,27,32,AWD,Midnight Black,Sunroof|Blind-spot monitor|Remote start|Android Auto|Adaptive cruise,,https://demo-motors.example/inventory/DM4101
+DM4102,FNSHCUZKAX8JR7J9V,2025,Subaru,Outback,Premium,Wagon,29100,14051,26,32,AWD,Midnight Black,Adaptive cruise|One owner|Apple CarPlay,,https://demo-motors.example/inventory/DM4102
+DM4103,N1AG1EDZZBB97XW5X,2022,Toyota,Camry,SE,Sedan,15900,46527,28,39,FWD,Midnight Black,Sunroof|Clean title|Heated steering wheel,,https://demo-motors.example/inventory/DM4103
+DM4104,6RE2CNMCD5N7BJPJL,2020,Ford,Explorer,XLT,SUV,18800,70527,20,27,4WD,Lunar Rock,Adaptive cruise|Backup camera|Clean title|Tow package,,https://demo-motors.example/inventory/DM4104
+DM4105,683V6MX75HUGPRAF6,2019,Ford,Bronco Sport,Big Bend,SUV,11800,73216,25,28,4WD,Midnight Black,Adaptive cruise|Tow package|Apple CarPlay|Heated seats|Blind-spot monitor,,https://demo-motors.example/inventory/DM4105
+DM4106,HUPVUJGTG4LGDZMG9,2023,Toyota,RAV4,XLE,SUV,22000,37550,27,34,AWD,Midnight Black,Backup camera|Heated steering wheel|Remote start|Clean title|Blind-spot monitor,,https://demo-motors.example/inventory/DM4106
+DM4107,T3ADGSBWHGZX6C2XP,2022,Subaru,Crosstrek,Premium,SUV,17000,38230,27,34,AWD,Ruby Flare,Adaptive cruise|One owner|Remote start|Blind-spot monitor|Backup camera|Android Auto,,https://demo-motors.example/inventory/DM4107
+DM4108,VYVHW3XBYNDHLHHCJ,2023,Ram,1500,Big Horn,Truck,35000,29328,18,23,4WD,Midnight Black,Heated steering wheel|One owner|Backup camera|Heated seats|Adaptive cruise,,https://demo-motors.example/inventory/DM4108
+DM4109,RJMB2TKRBBU73TXJF,2023,Honda,Civic,Sport,Sedan,17600,33738,30,37,FWD,Cavalry Blue,Tow package|Heated seats|Clean title|Backup camera,,https://demo-motors.example/inventory/DM4109
+DM4110,S7DR9K20RUYN0Z667,2023,Jeep,Wrangler,Sport S,SUV,26500,30056,20,24,4WD,Magnetic Gray,Android Auto|Apple CarPlay|Adaptive cruise|One owner|Sunroof,,https://demo-motors.example/inventory/DM4110
+DM4111,CMFW0TJGBPWC21L9G,2023,Ford,Explorer,XLT,SUV,28800,43657,20,27,4WD,Sandstone,Apple CarPlay|Adaptive cruise|Blind-spot monitor,,https://demo-motors.example/inventory/DM4111
+DM4112,NLVVVZJ1NA74ZLBMX,2022,GMC,Terrain,SLE,SUV,19100,43874,24,29,AWD,Magnetic Gray,Apple CarPlay|Heated seats|Remote start|Tow package,,https://demo-motors.example/inventory/DM4112
+DM4113,SJGX8GE1TWHZ78HSZ,2023,Ford,Escape,SE,SUV,20300,26960,26,31,AWD,Oxford White,Heated steering wheel|Blind-spot monitor|Remote start|Clean title|Tow package|Adaptive cruise,,https://demo-motors.example/inventory/DM4113
+DM4114,49YX82XMN6RZZ31PK,2022,Ram,1500,Big Horn,Truck,27600,42339,18,23,4WD,Super White,Clean title|Heated steering wheel|Apple CarPlay|Adaptive cruise|Backup camera|One owner,,https://demo-motors.example/inventory/DM4114
+DM4115,URYKHUV622BY3YG8P,2023,Toyota,Highlander,XLE,SUV,27700,33996,21,28,AWD,Midnight Black,Blind-spot monitor|One owner|Clean title|Heated seats|Adaptive cruise|Heated steering wheel,,https://demo-motors.example/inventory/DM4115
+DM4116,377YACRHUXBP69U0F,2018,Nissan,Rogue,SV,SUV,9900,81028,28,35,AWD,Cavalry Blue,Tow package|Heated seats|Remote start|Apple CarPlay,,https://demo-motors.example/inventory/DM4116
+DM4117,WF3JGBU3CM9R7YYZX,2021,Ford,F-150,XLT,Truck,26300,69530,19,24,4WD,Oxford White,Backup camera|Sunroof|Blind-spot monitor|Clean title|Heated seats|Heated steering wheel,,https://demo-motors.example/inventory/DM4117
+DM4118,6N0U92WPD3E9W7F9X,2020,Toyota,RAV4,XLE,SUV,13900,53637,27,34,AWD,Sandstone,Blind-spot monitor|One owner|Clean title|Heated steering wheel|Apple CarPlay|Heated seats,,https://demo-motors.example/inventory/DM4118
+DM4119,1GPB6SP49J9PU8JX0,2020,Ford,Maverick,XLT,Truck,13700,81119,22,29,AWD,Sandstone,Tow package|Heated steering wheel|Clean title|Android Auto|Apple CarPlay|Backup camera,,https://demo-motors.example/inventory/DM4119
+DM4120,DCUWMJUZJ6LMDMK38,2020,Chevrolet,Equinox,LT,SUV,14100,75022,24,30,AWD,Cavalry Blue,Backup camera|Android Auto|Tow package,,https://demo-motors.example/inventory/DM4120
+DM4121,XK9C7ADGZTYBL9NF4,2019,Subaru,Impreza,Base,Hatchback,8700,80039,27,34,AWD,Cavalry Blue,Android Auto|Apple CarPlay|Clean title|Heated steering wheel|Sunroof|Remote start,,https://demo-motors.example/inventory/DM4121
+DM4122,60PW57FPNHFZLHMP4,2020,Ford,Maverick,XLT,Truck,13300,72513,22,29,AWD,Ruby Flare,Adaptive cruise|Heated seats|Tow package|Apple CarPlay,,https://demo-motors.example/inventory/DM4122
+DM4123,6UZ8JGKRZ61DXTF66,2022,Hyundai,Elantra,SEL,Sedan,13300,52128,32,41,FWD,Ruby Flare,Tow package|Clean title|One owner|Remote start|Backup camera,,https://demo-motors.example/inventory/DM4123
+DM4124,5G167BKXJBG2FLTBC,2018,Kia,Telluride,S,SUV,13400,68117,18,24,AWD,Cavalry Blue,Heated steering wheel|Tow package|Remote start,,https://demo-motors.example/inventory/DM4124
+DM4125,6S2S9X3C8SM5NH717,2020,Chevrolet,Equinox,LT,SUV,13200,61877,24,30,AWD,Magnetic Gray,Sunroof|Android Auto|Adaptive cruise,,https://demo-motors.example/inventory/DM4125
+DM4126,XU4BZLH0PEL62HG32,2025,Nissan,Rogue,SV,SUV,29000,14475,28,35,AWD,Ruby Flare,Android Auto|Clean title|Heated seats,,https://demo-motors.example/inventory/DM4126
+DM4127,LCPH5CZ69CN7DVFLE,2020,Kia,Forte,LXS,Sedan,8900,72362,30,41,FWD,Ruby Flare,Android Auto|Heated seats|Backup camera|One owner|Sunroof,,https://demo-motors.example/inventory/DM4127
+DM4128,S8DZR26FSCA31F5ML,2019,Chevrolet,Trax,LT,SUV,8700,97561,28,32,FWD,Cavalry Blue,Apple CarPlay|Tow package|Android Auto|One owner,,https://demo-motors.example/inventory/DM4128
+DM4129,FBZEJS7KXM8HJA1F8,2024,Ford,F-150,XLT,Truck,37100,23223,19,24,4WD,Magnetic Gray,One owner|Heated steering wheel|Blind-spot monitor|Tow package|Clean title|Heated seats,,https://demo-motors.example/inventory/DM4129
+DM4130,WMWABYM6GS7L97HEJ,2022,GMC,Sierra 1500,Elevation,Truck,30100,39975,17,21,4WD,Midnight Black,Heated steering wheel|Tow package|Backup camera,,https://demo-motors.example/inventory/DM4130
+DM4131,K1A5HGRX5E1U55WT5,2024,Ford,Bronco Sport,Big Bend,SUV,25100,27405,25,28,4WD,Sandstone,Sunroof|Backup camera|Blind-spot monitor|Apple CarPlay|Remote start|One owner,,https://demo-motors.example/inventory/DM4131
+DM4132,2RXLGR1JY2PW1TZ5S,2018,Hyundai,Santa Fe,SEL,SUV,11700,79753,20,28,AWD,Ruby Flare,Tow package|Backup camera|Heated seats|Android Auto,,https://demo-motors.example/inventory/DM4132
+DM4133,18DWC9YW3R9V9ZZ1R,2020,Toyota,Corolla,LE,Sedan,9800,82538,32,41,FWD,Lunar Rock,Adaptive cruise|Tow package|Clean title,,https://demo-motors.example/inventory/DM4133
+DM4134,1ZBGSPM827L49N0BF,2023,Jeep,Grand Cherokee,Laredo,SUV,27900,44176,19,26,4WD,Super White,Remote start|Android Auto|Adaptive cruise,,https://demo-motors.example/inventory/DM4134
+DM4135,G3SXWAGEYK63GGN8Y,2025,Mazda,CX-5,Preferred,SUV,29900,15424,24,30,AWD,Midnight Black,Remote start|Clean title|Blind-spot monitor|Android Auto,,https://demo-motors.example/inventory/DM4135
+DM4136,4JFB64E58D57ZGD3M,2025,Mazda,Mazda3,Preferred,Hatchback,21900,15926,26,33,FWD,Super White,One owner|Remote start|Backup camera|Tow package|Android Auto|Sunroof,,https://demo-motors.example/inventory/DM4136
+DM4137,WT4GR0E3FTX4WRM3T,2023,Subaru,Impreza,Base,Hatchback,15200,41187,27,34,AWD,Sandstone,Tow package|Heated steering wheel|Backup camera,,https://demo-motors.example/inventory/DM4137
+DM4138,P5LZWTWHSANYXHY24,2025,Jeep,Grand Cherokee,Laredo,SUV,38500,14171,19,26,4WD,Oxford White,Heated steering wheel|Adaptive cruise|Remote start|Blind-spot monitor|One owner|Sunroof,,https://demo-motors.example/inventory/DM4138
+DM4139,1ZT7A036CBVDHY4T1,2023,Toyota,Tacoma,SR5,Truck,27400,36398,19,24,4WD,Magnetic Gray,Clean title|Backup camera|Heated seats|Android Auto|Tow package,,https://demo-motors.example/inventory/DM4139
