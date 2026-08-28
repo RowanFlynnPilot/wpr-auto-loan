@@ -18,7 +18,10 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
   const fits = inventory.vehicles.filter((v) => v.price <= ceiling).sort((a, b) => a.price - b.price);
   const over = inventory.vehicles.length - fits.length;
   const bodies = ['All', ...Array.from(new Set(fits.map((v) => v.body))).sort()];
-  const shown = body === 'All' ? fits : fits.filter((v) => v.body === body);
+  // A chosen body type can drop out when the ceiling falls; treat it as All
+  // rather than showing an empty grid under chips that say vehicles fit.
+  const active = bodies.includes(body) ? body : 'All';
+  const shown = active === 'All' ? fits : fits.filter((v) => v.body === active);
 
   return (
     <section className="inventory">
@@ -50,8 +53,8 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
               <button
                 key={b}
                 role="tab"
-                aria-selected={b === body}
-                className={b === body ? 'chip on' : 'chip'}
+                aria-selected={b === active}
+                className={b === active ? 'chip on' : 'chip'}
                 onClick={() => setBody(b)}
               >
                 {b}
