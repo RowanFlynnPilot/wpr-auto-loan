@@ -67,10 +67,41 @@ export default function App() {
 
   const ceiling = useMemo(() => maxPrice(inputs), [inputs]);
 
+  const today = new Date().toLocaleDateString('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+
   return (
-    <div className="app">
+    <>
+      {/* WPR masthead, same as the paper's other tools (Brewers tracker et al.):
+          typewriter press seal + wordmark, tagline, dateline between slate rules. */}
+      <header className="wpr-masthead">
+        <a href="https://wausaupilotandreview.com/" target="_blank" rel="noopener noreferrer" aria-label="Wausau Pilot & Review home">
+          <img
+            className="badge"
+            src={`${import.meta.env.BASE_URL}wpr-typewriter-badge.png`}
+            alt=""
+            width={42}
+            height={42}
+          />
+          <img
+            className="wordmark"
+            src="https://wausaupilotandreview.com/wp-content/uploads/2024/04/WausauPilotandReviewLogo.png"
+            alt="Wausau Pilot & Review"
+          />
+        </a>
+        <p className="tagline">Where locals look first for news</p>
+        <div className="dateline">
+          <span>{today}</span>
+          <span className="place">Wausau, Wisconsin</span>
+        </div>
+      </header>
+
+      <div className="app">
       <header className="masthead">
-        <p className="eyebrow">A Wausau Pilot &amp; Review tool</p>
         <h1>What can I drive?</h1>
         <p className="lede">
           Enter what you earn and what you can put down. We do the Wisconsin math — sales tax, title,
@@ -96,6 +127,7 @@ export default function App() {
         Estimates only. Your rate, fees and trade-in value are set by the lender and dealer at
         purchase. Not financial advice.
       </footer>
-    </div>
+      </div>
+    </>
   );
 }

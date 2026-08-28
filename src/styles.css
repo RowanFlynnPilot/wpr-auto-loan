@@ -6,6 +6,7 @@
   --ink: #1e2624;
   --ink-soft: #55625e;
   --rule: #ddd6c7;
+  --slate: #32373c; /* WPR masthead text/rule color */
   --display: 'Fraunces', Georgia, serif;
   --body: 'Public Sans', system-ui, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, monospace;
@@ -28,12 +29,30 @@ small { font-size: 0.85em; }
 
 .app { max-width: 1120px; margin: 0 auto; padding: 32px 24px 48px; }
 
+/* WPR masthead — same header as the paper's other tools */
+.wpr-masthead {
+  border-top: 4px solid var(--slate); border-bottom: 1px solid var(--slate);
+  background: var(--paper); text-align: center; padding: 16px 20px 12px;
+}
+.wpr-masthead a {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 12px; max-width: 92%; text-decoration: none;
+}
+.wpr-masthead .badge { flex-shrink: 0; object-fit: contain; }
+.wpr-masthead .wordmark { max-height: 54px; max-width: 100%; height: auto; width: auto; object-fit: contain; min-width: 0; }
+.wpr-masthead .tagline {
+  font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+  font-weight: 600; color: var(--slate); margin-top: 8px;
+}
+.wpr-masthead .dateline {
+  max-width: 880px; margin: 6px auto 0; padding-top: 8px; border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px;
+  font-size: 10.5px; letter-spacing: 0.04em; color: var(--ink-soft);
+}
+.wpr-masthead .place { text-transform: uppercase; letter-spacing: 0.1em; }
+
 /* Masthead */
 .masthead { max-width: 640px; margin-bottom: 36px; }
-.eyebrow {
-  font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--teal-deep); font-weight: 600; margin-bottom: 8px;
-}
 .masthead h1 { font-size: 44px; line-height: 1.05; font-variation-settings: 'opsz' 144; }
 .lede { margin-top: 14px; color: var(--ink-soft); font-size: 16px; }
 
