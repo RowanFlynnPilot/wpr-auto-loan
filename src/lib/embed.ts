@@ -7,6 +7,8 @@
 //     if (e.data?.type === 'wpr-embed-height' && e.data.id === 'wpr-auto-loan')
 //       iframe.style.height = e.data.height + 'px';
 //   });
+// Give the iframe allow="clipboard-write" so the copy-a-link button can use
+// the clipboard inside the embed (it falls back to a prompt without it).
 export function initEmbedHeight(id = 'wpr-auto-loan'): void {
   if (window.parent === window) return; // not embedded
 

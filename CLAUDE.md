@@ -8,9 +8,10 @@ what the reader can actually afford. Built to demo before a dealer is signed.
 
 Demo-complete for the dealer pitch: sponsor pre-approval CTA in the inventory
 header, body-type silhouettes on photoless cards (demo only — real feeds carry
-photos), shareable scenarios in the URL hash, sample sponsor report at
-`/report/`, iframe height messaging for the WordPress embed, clickable term
-rows. Live: https://rowanflynnpilot.github.io/wpr-auto-loan/
+photos), shareable scenarios in the URL hash with a copy-a-link button (applied
+on load and on hashchange), sample sponsor report at `/report/`, iframe height
+messaging for the WordPress embed, clickable term rows, favicon and Open Graph
+tags. Live: https://rowanflynnpilot.github.io/wpr-auto-loan/
 Before real launch: register the two Plausible goals (below), swap sponsor.ts
 and the feed, attorney check on the Reg Z wording.
 
