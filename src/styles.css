@@ -122,8 +122,9 @@ input[type='range']:focus-visible { outline: 2px solid var(--teal); outline-offs
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; }
 .card { background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; }
 .card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
-.photo-blank { aspect-ratio: 16 / 9; background: var(--cream); display: grid; place-items: center; border-bottom: 1px solid var(--rule); }
-.photo-blank span { font-family: var(--display); font-size: 22px; color: var(--rule); font-style: italic; }
+.photo-blank { aspect-ratio: 16 / 9; background: var(--cream); display: grid; place-items: center; align-content: center; gap: 2px; border-bottom: 1px solid var(--rule); }
+.photo-blank svg { width: 56%; color: var(--ink-soft); opacity: 0.45; }
+.photo-blank span { font-family: var(--display); font-size: 15px; color: var(--ink-soft); opacity: 0.6; font-style: italic; }
 .card .body { padding: 14px 16px 16px; display: grid; gap: 8px; }
 .card h3 { font-size: 18px; line-height: 1.2; }
 .card h3 small { font-family: var(--body); font-weight: 500; color: var(--ink-soft); font-size: 13px; }

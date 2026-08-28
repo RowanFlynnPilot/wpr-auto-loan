@@ -1,5 +1,6 @@
 import { SPONSOR } from '../config/sponsor';
 import { count, dollars, percent } from '../lib/format';
+import { BodyIcon } from './BodyIcon';
 import { quote, type LoanInputs } from '../lib/loan';
 import { trackVehicleClick, vdpLink } from '../lib/track';
 import type { Vehicle } from '../types';
@@ -17,6 +18,7 @@ export function VehicleCard({ vehicle: v, inputs }: Props) {
         <img src={v.photoUrl} alt={`${v.year} ${v.make} ${v.model}`} loading="lazy" />
       ) : (
         <div className="photo-blank" aria-hidden="true">
+          <BodyIcon body={v.body} />
           <span>{v.make}</span>
         </div>
       )}
