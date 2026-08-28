@@ -78,6 +78,15 @@ input[type='range']:focus-visible { outline: 2px solid var(--teal); outline-offs
 }
 .ceiling .basis { max-width: 560px; color: var(--ink-soft); }
 
+.copylink {
+  display: block; margin-top: 12px; padding: 0;
+  font: inherit; font-size: 13px; font-weight: 600; color: var(--teal-deep);
+  background: none; border: 0; cursor: pointer;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.copylink:hover { color: var(--teal); }
+.copylink:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+
 .priceline { margin: 24px 0 0; }
 .priceline svg { display: block; width: 100%; overflow: visible; }
 .priceline .axis { stroke: var(--ink-soft); stroke-width: 1; }

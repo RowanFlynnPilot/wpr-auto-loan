@@ -2,6 +2,30 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import { maxPayment, purchaseFees, quote, type LoanInputs } from '../lib/loan';
 import { cents, dollars, percent } from '../lib/format';
 
+// The scenario always lives in the URL hash; this just makes that shareable
+// link discoverable. Clipboard access can be denied inside an embed, so fall
+// back to showing the link for a manual copy.
+function CopyLink() {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button
+      type="button"
+      className="copylink"
+      onClick={() =>
+        navigator.clipboard.writeText(window.location.href).then(
+          () => {
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+          },
+          () => window.prompt('Copy this link:', window.location.href),
+        )
+      }
+    >
+      {copied ? 'Link copied' : 'Copy a link to this scenario'}
+    </button>
+  );
+}
+
 interface Props {
   inputs: LoanInputs;
   ceiling: number;
@@ -19,6 +43,7 @@ export function Ceiling({ inputs, ceiling, prices }: Props) {
         That price carries {cents(q.salesTax)} in sales tax and {cents(purchaseFees())} in title, plate,
         registration and Marathon County wheel tax, so you'd finance {dollars(q.financed)}.
       </p>
+      <CopyLink />
       <PriceLine ceiling={ceiling} prices={prices} />
     </section>
   );
