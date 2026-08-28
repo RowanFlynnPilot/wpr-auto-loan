@@ -94,6 +94,9 @@ input[type='range']:focus-visible { outline: 2px solid var(--teal); outline-offs
 .terms th { text-align: left; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); padding: 8px 10px; border-bottom: 1px solid var(--ink); }
 .terms td { padding: 10px; border-bottom: 1px solid var(--rule); }
 .terms th:not(:first-child), .terms td.num { text-align: right; font-family: var(--mono); }
+.terms tbody tr { cursor: pointer; }
+.terms tbody tr:hover td { background: var(--paper); }
+.terms tbody tr:focus-visible { outline: 2px solid var(--teal); outline-offset: -2px; }
 .terms tr.chosen td { background: var(--paper); font-weight: 500; }
 .terms tr.chosen td:first-child { box-shadow: inset 3px 0 0 var(--teal); }
 .note { margin-top: 10px; font-size: 13px; color: var(--ink-soft); }

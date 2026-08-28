@@ -67,7 +67,11 @@ export default function App() {
         <InputsPanel inputs={inputs} onChange={setInputs} />
         <main className="results">
           <Ceiling inputs={inputs} ceiling={ceiling} prices={inventory?.vehicles.map((v) => v.price) ?? []} />
-          <TermTable inputs={inputs} price={ceiling} />
+          <TermTable
+            inputs={inputs}
+            price={ceiling}
+            onSelectTerm={(termMonths) => setInputs({ ...inputs, termMonths })}
+          />
           {loadError && <p className="error">Inventory failed to load: {loadError}</p>}
           {inventory && <InventoryGrid inventory={inventory} inputs={inputs} ceiling={ceiling} />}
         </main>

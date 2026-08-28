@@ -4,9 +4,10 @@ import { dollars } from '../lib/format';
 interface Props {
   inputs: LoanInputs;
   price: number;
+  onSelectTerm: (termMonths: number) => void;
 }
 
-export function TermTable({ inputs, price }: Props) {
+export function TermTable({ inputs, price, onSelectTerm }: Props) {
   const rows = termComparison(price, inputs);
   const shortest = rows[0];
   return (
@@ -23,7 +24,19 @@ export function TermTable({ inputs, price }: Props) {
         </thead>
         <tbody>
           {rows.map((r) => (
-            <tr key={r.termMonths} className={r.termMonths === inputs.termMonths ? 'chosen' : ''}>
+            <tr
+              key={r.termMonths}
+              className={r.termMonths === inputs.termMonths ? 'chosen' : ''}
+              tabIndex={0}
+              aria-selected={r.termMonths === inputs.termMonths}
+              onClick={() => onSelectTerm(r.termMonths)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onSelectTerm(r.termMonths);
+                }
+              }}
+            >
               <td>{r.termMonths} months</td>
               <td className="num">{dollars(r.payment)}/mo</td>
               <td className="num">{dollars(r.totalInterest)}</td>
