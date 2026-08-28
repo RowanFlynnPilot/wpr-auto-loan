@@ -4,6 +4,7 @@ import { InputsPanel } from './components/InputsPanel';
 import { InventoryGrid } from './components/InventoryGrid';
 import { TermTable } from './components/TermTable';
 import { maxPrice, type LoanInputs } from './lib/loan';
+import { decodeInputs, encodeInputs } from './lib/share';
 import type { Inventory } from './types';
 
 const DEFAULTS: LoanInputs = {
@@ -16,10 +17,28 @@ const DEFAULTS: LoanInputs = {
   termMonths: 60,
 };
 
+// A shared link with a mangled hash falls back to the defaults rather than
+// bricking the tool for the reader; the decode error still lands in the console.
+function initialInputs(): LoanInputs {
+  const hash = window.location.hash.slice(1);
+  if (!hash) return DEFAULTS;
+  try {
+    return decodeInputs(hash);
+  } catch (e) {
+    console.error(e);
+    return DEFAULTS;
+  }
+}
+
 export default function App() {
-  const [inputs, setInputs] = useState<LoanInputs>(DEFAULTS);
+  const [inputs, setInputs] = useState<LoanInputs>(initialInputs);
   const [inventory, setInventory] = useState<Inventory | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
+
+  // Keep the URL shareable: the current scenario always lives in the hash.
+  useEffect(() => {
+    history.replaceState(null, '', `#${encodeInputs(inputs)}`);
+  }, [inputs]);
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}inventory.json`)
