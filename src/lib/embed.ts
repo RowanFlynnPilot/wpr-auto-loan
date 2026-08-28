@@ -12,13 +12,16 @@ export function initEmbedHeight(id = 'wpr-auto-loan'): void {
 
   let last = 0;
   const post = () => {
-    const height = Math.ceil(document.documentElement.scrollHeight);
+    // body.scrollHeight, not documentElement's: the latter is clamped to the
+    // viewport (the iframe could never shrink), and ResizeObserver on the html
+    // element does not fire when content grows it.
+    const height = Math.ceil(document.body.scrollHeight);
     if (height === last) return;
     last = height;
     window.parent.postMessage({ type: 'wpr-embed-height', id, height }, '*');
   };
 
-  new ResizeObserver(post).observe(document.documentElement);
+  new ResizeObserver(post).observe(document.body);
   window.addEventListener('load', post);
   post();
 }
