@@ -1,7 +1,35 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { COUNTY_MEDIAN_HOUSEHOLD_INCOME } from '../config/wisconsin';
 import { ceilingLevers, maxPayment, maxPrice, purchaseFees, quote, type LoanInputs } from '../lib/loan';
 import { cents, dollars, percent } from '../lib/format';
+
+// Eases the displayed figure toward its new value over ~250ms so the number
+// visibly reacts to the inputs. Display-only — every other line uses the real
+// ceiling. Jumps straight to the target under prefers-reduced-motion.
+function useCountUp(target: number): number {
+  const [shown, setShown] = useState(target);
+  const prev = useRef(target);
+  useEffect(() => {
+    const from = prev.current;
+    prev.current = target;
+    if (from === target) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setShown(target);
+      return;
+    }
+    const start = performance.now();
+    let raf: number;
+    const tick = (now: number) => {
+      const p = Math.min((now - start) / 250, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setShown(from + (target - from) * eased);
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target]);
+  return shown;
+}
 
 // The scenario always lives in the URL hash; this just makes that shareable
 // link discoverable. Clipboard access can be denied inside an embed, so fall
@@ -36,10 +64,11 @@ interface Props {
 export function Ceiling({ inputs, ceiling, prices }: Props) {
   const q = quote(ceiling, inputs);
   const levers = ceilingLevers(inputs);
+  const figure = useCountUp(ceiling);
   return (
     <section className="ceiling">
       <p className="label">You can shop up to</p>
-      <p className="figure">{dollars(ceiling)}</p>
+      <p className="figure">{dollars(figure)}</p>
       <p className="basis">
         {dollars(maxPayment(inputs))} a month for {inputs.termMonths} months at {percent(inputs.apr)} APR.
         That price carries {cents(q.salesTax)} in sales tax and {cents(purchaseFees())} in title, plate,
