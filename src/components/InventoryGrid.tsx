@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { SPONSOR } from '../config/sponsor';
 import { dollars } from '../lib/format';
 import type { LoanInputs } from '../lib/loan';
+import { preapprovalLink, trackPreapprovalClick } from '../lib/track';
 import type { Inventory } from '../types';
 import { VehicleCard } from './VehicleCard';
 
@@ -26,6 +27,15 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
         <p className="sponsor">
           {SPONSOR.disclosure} · {SPONSOR.name}
         </p>
+        <a
+          className="preapproval"
+          href={preapprovalLink()}
+          target="_blank"
+          rel="noopener sponsored"
+          onClick={trackPreapprovalClick}
+        >
+          Get pre-approved at {SPONSOR.name} <span aria-hidden="true">→</span>
+        </a>
       </header>
 
       {fits.length === 0 ? (

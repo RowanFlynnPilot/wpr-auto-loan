@@ -21,3 +21,16 @@ export function trackVehicleClick(v: Vehicle): void {
     props: { sponsor: SPONSOR.name, stock: v.stock, body: v.body, price: v.price },
   });
 }
+
+export function preapprovalLink(): string {
+  const url = new URL(SPONSOR.preapprovalUrl);
+  url.searchParams.set('utm_source', SPONSOR.utmSource);
+  url.searchParams.set('utm_medium', 'tool');
+  url.searchParams.set('utm_campaign', SPONSOR.utmCampaign);
+  url.searchParams.set('utm_content', 'preapproval');
+  return url.toString();
+}
+
+export function trackPreapprovalClick(): void {
+  window.plausible('Preapproval click', { props: { sponsor: SPONSOR.name } });
+}
