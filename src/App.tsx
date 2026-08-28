@@ -40,6 +40,21 @@ export default function App() {
     history.replaceState(null, '', `#${encodeInputs(inputs)}`);
   }, [inputs]);
 
+  // A shared link opened while the tool is already loaded changes only the
+  // hash — no reload — so apply it directly. Our own replaceState writes
+  // don't fire hashchange, so this never loops.
+  useEffect(() => {
+    const apply = () => {
+      try {
+        setInputs(decodeInputs(window.location.hash.slice(1)));
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    window.addEventListener('hashchange', apply);
+    return () => window.removeEventListener('hashchange', apply);
+  }, []);
+
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}inventory.json`)
       .then((r) => {
