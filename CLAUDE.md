@@ -12,7 +12,9 @@ photos), shareable scenarios in the URL hash with a copy-a-link button (applied
 on load and on hashchange), sample sponsor report at `/report/`, iframe height
 messaging for the WordPress embed, clickable term rows, favicon and Open Graph
 tags, and the standard WPR masthead (typewriter seal + wordmark, as on the
-Brewers tracker) on the tool and the report.
+Brewers tracker) on the tool and the report. Data perspectives: per-vehicle
+fuel line (feed mpg × Wausau gas price), ceiling levers, the $25-extra payoff
+line, county-income "for scale" context.
 Live: https://rowanflynnpilot.github.io/wpr-auto-loan/
 Before real launch: register the two Plausible goals (below), swap sponsor.ts
 and the feed, attorney check on the Reg Z wording.
