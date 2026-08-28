@@ -119,6 +119,7 @@ export default function App() {
             onSelectTerm={(termMonths) => setInputs({ ...inputs, termMonths })}
           />
           {loadError && <p className="error">Inventory failed to load: {loadError}</p>}
+          {!inventory && !loadError && <p className="loading">Loading the lot…</p>}
           {inventory && <InventoryGrid inventory={inventory} inputs={inputs} ceiling={ceiling} />}
         </main>
       </div>
