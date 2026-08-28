@@ -91,6 +91,26 @@ export function termComparison(price: number, i: LoanInputs): Quote[] {
   return TERMS.map((t) => quote(price, i, t));
 }
 
+// Paying `extra` on top of the required payment: how many months come off the
+// loan and how much interest never accrues. Null when nothing is financed.
+export function extraPayment(
+  price: number,
+  i: LoanInputs,
+  extra: number,
+): { monthsSaved: number; interestSaved: number } | null {
+  if (extra <= 0) throw new Error(`extra must be positive, got ${extra}`);
+  const financed = amountFinanced(price, i);
+  if (financed === 0) return null;
+  const required = monthlyPayment(financed, i.apr, i.termMonths);
+  const paid = required + extra;
+  const r = i.apr / 12;
+  const months = r === 0 ? financed / paid : -Math.log(1 - (financed * r) / paid) / Math.log(1 + r);
+  return {
+    monthsSaved: i.termMonths - months,
+    interestSaved: required * i.termMonths - paid * months,
+  };
+}
+
 // How much each realistic move raises the ceiling. aprPoint is null when the
 // APR is already under a point; nextTerm when the longest term is chosen.
 export function ceilingLevers(i: LoanInputs): {

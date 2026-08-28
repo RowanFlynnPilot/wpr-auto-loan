@@ -1,5 +1,14 @@
 import { describe, expect, it } from 'vitest';
-import { amountFinanced, ceilingLevers, maxPayment, maxPrice, monthlyPayment, quote, termComparison } from './loan';
+import {
+  amountFinanced,
+  ceilingLevers,
+  extraPayment,
+  maxPayment,
+  maxPrice,
+  monthlyPayment,
+  quote,
+  termComparison,
+} from './loan';
 
 const base = {
   monthlyIncome: 5000,
@@ -47,6 +56,23 @@ describe('termComparison', () => {
       expect(rows[k].totalInterest).toBeGreaterThan(rows[k - 1].totalInterest);
       expect(rows[k].payment).toBeLessThan(rows[k - 1].payment);
     }
+  });
+});
+
+describe('extraPayment', () => {
+  it('shortens the loan and saves interest', () => {
+    const e = extraPayment(20000, base, 25)!;
+    expect(e.monthsSaved).toBeGreaterThan(0);
+    expect(e.monthsSaved).toBeLessThan(base.termMonths);
+    expect(e.interestSaved).toBeGreaterThan(0);
+  });
+  it('saves months but no interest at zero APR', () => {
+    const e = extraPayment(20000, { ...base, apr: 0 }, 25)!;
+    expect(e.monthsSaved).toBeGreaterThan(0);
+    expect(e.interestSaved).toBeCloseTo(0, 6);
+  });
+  it('is null when nothing is financed', () => {
+    expect(extraPayment(1000, { ...base, downPayment: 20000 }, 25)).toBeNull();
   });
 });
 
