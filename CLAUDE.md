@@ -52,7 +52,9 @@ plate $6, Marathon County wheel tax $25. City of Wausau has no wheel tax.
 `FUEL` seeds the per-vehicle gas line: Wausau metro regular average (GasBuddy
 via the wpr-gas-prices tracker, dated in the comment) and 1,100 mi/mo (FHWA
 average). Combined economy is the EPA 55/45 blend of the feed's own mpg.
-Refresh the gas price when it drifts; the tracker updates daily.
+`python feed/refresh_gas.py` rewrites the seed from the tracker's published
+JSON (dated); run it by hand when the price drifts and commit. The build
+itself stays network-free.
 
 `COUNTY_MEDIAN_HOUSEHOLD_INCOME` ($77,884, ACS 5-yr 2020-2024 B19013) powers
 the "for scale" line under the price line — the same figure wpr-finance-tools
