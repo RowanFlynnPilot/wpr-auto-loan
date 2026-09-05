@@ -90,7 +90,7 @@ def main() -> None:
         d.text((80, 372 + k * 44), line, font=lede, fill=INK_SOFT)
 
     # Sedan line art, bottom right, in brand teal.
-    sx, sy, sc = 770, 436, 3.4
+    sx, sy, sc = 790, 448, 3.4
     pts = [(sx + x * sc, sy + y * sc) for x, y in SEDAN]
     d.line(pts, fill=TEAL, width=7, joint="curve")
     d.line([(sx + x * sc, sy + y * sc) for x, y in PILLAR], fill=TEAL, width=7)
