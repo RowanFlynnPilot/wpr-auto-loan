@@ -59,7 +59,10 @@ carries, still `verified:false` there. Editor sign-off before real launch.
 ## When a dealer signs
 
 - `src/config/sponsor.ts`: name, disclosure label, UTM campaign.
-- `feed/ingest.py` `FEED_COLUMNS`: map their column names. Nothing else changes.
+- `feed/ingest.py` `FEED_COLUMNS`: map their column names, and `BODY_ALIASES`:
+  map their body labels onto the canonical `BODIES` (which must match
+  `BODIES` in `src/components/BodyIcon.tsx`). Unknown bodies and zero mpg fail
+  the build on purpose — an EV row needs MPGe/fuel handling before it can ship.
 - Workflow: add a step that fetches their feed (SFTP/HTTP) and set `FEED_PATH`.
   Remove the demo feed from the workflow env; leave `generate_demo.py` for the
   next prospect.

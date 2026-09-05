@@ -33,6 +33,24 @@ FEED_COLUMNS = {
 INT_FIELDS = {"year", "price", "mileage", "mpgCity", "mpgHwy"}
 FEATURE_SEPARATOR = "|"
 
+# Canonical body types. Must match BODIES in src/components/BodyIcon.tsx —
+# the app throws on a body it can't draw, so an unknown one fails here, at
+# build time, never on a reader's page.
+BODIES = {"Sedan", "SUV", "Truck", "Hatchback", "Wagon", "Coupe", "Convertible", "Minivan", "Van"}
+# feed body label -> canonical. Extend line-for-line when a real feed arrives.
+BODY_ALIASES = {
+    "Sport Utility": "SUV",
+    "Sport Utility Vehicle": "SUV",
+    "Crossover": "SUV",
+    "Pickup": "Truck",
+    "Pickup Truck": "Truck",
+    "Station Wagon": "Wagon",
+    "Mini-van": "Minivan",
+    "Mini Van": "Minivan",
+    "Cargo Van": "Van",
+    "Passenger Van": "Van",
+}
+
 OUT = Path(__file__).parent.parent / "public" / "inventory.json"
 
 
@@ -46,8 +64,14 @@ def parse_row(raw: dict, line: int) -> dict:
             v[field] = [f.strip() for f in value.split(FEATURE_SEPARATOR) if f.strip()]
         else:
             v[field] = value
+    v["body"] = BODY_ALIASES.get(v["body"], v["body"])
+    if v["body"] not in BODIES:
+        raise ValueError(f"line {line}: unknown body {raw[FEED_COLUMNS['body']]!r} for stock {v['stock']}; add it to BODY_ALIASES")
     if v["price"] <= 0:
         raise ValueError(f"line {line}: non-positive price for stock {v['stock']}")
+    # The fuel line divides by mpg. EVs need MPGe handling before they can ship.
+    if v["mpgCity"] <= 0 or v["mpgHwy"] <= 0:
+        raise ValueError(f"line {line}: mpg must be positive for stock {v['stock']}")
     if not v["vdpUrl"].startswith("https://"):
         raise ValueError(f"line {line}: vdp_url must be https for stock {v['stock']}")
     return v

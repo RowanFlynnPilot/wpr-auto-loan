@@ -1,6 +1,7 @@
-// Demo-only placeholder art for cards without a photo. Real feeds ship
-// photoUrl; these generic side profiles just keep the grid from looking
-// bare in the pitch. Line art on currentColor, no brand shapes.
+// Placeholder art for cards without a photo: generic side profiles in line
+// art on currentColor, no brand shapes. The keys are the canonical body types
+// the feed contract allows — feed/ingest.py BODIES must match this list, so a
+// body this component can't draw fails the build, never a reader's page.
 const PROFILES: Record<string, { outline: string; pillar: string; wheels: [number, number] }> = {
   Sedan: {
     outline: 'M8 36 L6 29 L12 26 L38 24 L50 15 L76 15 L88 24 L108 27 L114 30 L114 36',
@@ -27,7 +28,29 @@ const PROFILES: Record<string, { outline: string; pillar: string; wheels: [numbe
     pillar: 'M64 14 L64 23',
     wheels: [32, 92],
   },
+  Coupe: {
+    outline: 'M8 36 L6 30 L12 27 L40 25 L56 15 L80 15 L96 25 L110 28 L114 31 L114 36',
+    pillar: 'M78 15 L84 24',
+    wheels: [32, 90],
+  },
+  Convertible: {
+    outline: 'M8 36 L6 30 L12 27 L40 25 L48 19 L52 25 L100 25 L110 28 L114 31 L114 36',
+    pillar: 'M56 25 L56 20',
+    wheels: [32, 90],
+  },
+  Minivan: {
+    outline: 'M8 36 L6 27 L12 20 L30 12 L104 12 L110 20 L114 26 L114 36',
+    pillar: 'M50 12 L50 24 M80 12 L80 24',
+    wheels: [30, 92],
+  },
+  Van: {
+    outline: 'M8 36 L6 26 L10 18 L28 10 L112 10 L114 18 L114 36',
+    pillar: 'M40 10 L40 24 M78 10 L78 24',
+    wheels: [30, 94],
+  },
 };
+
+export const BODIES = Object.keys(PROFILES);
 
 export function BodyIcon({ body }: { body: string }) {
   const p = PROFILES[body];
