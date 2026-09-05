@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Ceiling } from './components/Ceiling';
 import { InputsPanel } from './components/InputsPanel';
 import { InventoryGrid } from './components/InventoryGrid';
+import { Methodology } from './components/Methodology';
 import { TermTable } from './components/TermTable';
 import { maxPrice, type LoanInputs } from './lib/loan';
 import { decodeInputs, encodeInputs } from './lib/share';
@@ -133,6 +134,7 @@ export default function App() {
       <footer className="colophon">
         Estimates only. Your rate, fees and trade-in value are set by the lender and dealer at
         purchase. Not financial advice.
+        <Methodology />
       </footer>
       </div>
     </>

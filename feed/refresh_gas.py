@@ -1,5 +1,5 @@
-"""Refresh FUEL.gasPrice in src/config/wisconsin.ts from the WPR gas-prices
-tracker's published JSON (Wausau metro regular average, GasBuddy).
+"""Refresh FUEL.gasPrice and FUEL.gasAsOf in src/config/wisconsin.ts from the
+WPR gas-prices tracker's published JSON (Wausau metro regular average, GasBuddy).
 
     python feed/refresh_gas.py
 
@@ -15,7 +15,8 @@ from pathlib import Path
 
 URL = "https://rowanflynnpilot.github.io/wpr-gas-prices/gas_prices.json"
 CONFIG = Path(__file__).parent.parent / "src" / "config" / "wisconsin.ts"
-LINE = re.compile(r"gasPrice: [\d.]+,\s*// [^\n]*")
+PRICE = re.compile(r"gasPrice: [\d.]+,")
+AS_OF = re.compile(r"gasAsOf: '[^']*',")
 
 
 def main() -> None:
@@ -27,13 +28,10 @@ def main() -> None:
     d = datetime.strptime(data["price_date"], "%m/%d/%y")
     stamp = f"{d:%b} {d.day} {d.year}"
     src = CONFIG.read_text(encoding="utf-8")
-    new, n = LINE.subn(
-        f"gasPrice: {price:.2f},      // $/gal regular, Wausau metro average — "
-        f"GasBuddy via WPR's gas-prices tracker, {stamp}",
-        src,
-    )
-    if n != 1:
-        raise ValueError(f"expected exactly one gasPrice line in {CONFIG}, found {n}")
+    new, n1 = PRICE.subn(f"gasPrice: {price:.2f},", src)
+    new, n2 = AS_OF.subn(f"gasAsOf: '{stamp}',", new)
+    if (n1, n2) != (1, 1):
+        raise ValueError(f"expected one gasPrice and one gasAsOf in {CONFIG}, found {n1} and {n2}")
     CONFIG.write_text(new, encoding="utf-8")
     print(f"gasPrice -> {price:.2f} ({stamp})")
 

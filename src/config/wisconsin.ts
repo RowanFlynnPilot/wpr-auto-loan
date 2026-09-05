@@ -13,7 +13,8 @@ export const WISCONSIN = {
 // Seeds for the per-vehicle fuel line. Combined economy uses the EPA 55/45
 // city/highway blend on the feed's own mpg numbers.
 export const FUEL = {
-  gasPrice: 3.82,      // $/gal regular, Wausau metro average — GasBuddy via WPR's gas-prices tracker, Sep 5 2026
+  gasPrice: 3.82,       // $/gal regular, Wausau metro average — GasBuddy via WPR's gas-prices tracker
+  gasAsOf: 'Sep 5 2026',  // price date; feed/refresh_gas.py rewrites both
   milesPerMonth: 1100, // ~13,200 mi/yr, FHWA average annual miles per driver
 } as const;
 
