@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { SPONSOR } from '../config/sponsor';
 import { dollars } from '../lib/format';
-import type { LoanInputs } from '../lib/loan';
+import { downToReach, type LoanInputs } from '../lib/loan';
 import { preapprovalLink, trackPreapprovalClick } from '../lib/track';
 import type { Inventory } from '../types';
 import { VehicleCard } from './VehicleCard';
@@ -22,6 +22,7 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
   // rather than showing an empty grid under chips that say vehicles fit.
   const active = bodies.includes(body) ? body : 'All';
   const shown = active === 'All' ? fits : fits.filter((v) => v.body === active);
+  const cheapest = inventory.vehicles.reduce((a, b) => (b.price < a.price ? b : a));
 
   return (
     <section className="inventory">
@@ -43,8 +44,10 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
 
       {fits.length === 0 ? (
         <p className="empty">
-          Nothing at {SPONSOR.name} fits under {dollars(ceiling)}. A bigger down payment or a larger share of
-          income raises the ceiling.
+          Nothing at {SPONSOR.name} fits under {dollars(ceiling)}. The closest is the {cheapest.year}{' '}
+          {cheapest.make} {cheapest.model} at {dollars(cheapest.price)} — about{' '}
+          {dollars(downToReach(cheapest.price, inputs))} more down would get you there, or a larger share of
+          income.
         </p>
       ) : (
         <>
