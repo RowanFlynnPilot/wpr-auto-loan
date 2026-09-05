@@ -84,7 +84,9 @@ export function Ceiling({ inputs, ceiling, lot }: Props) {
   return (
     <section className="ceiling">
       <p className="label">You can shop up to</p>
-      <p className="figure">{dollars(figure)}</p>
+      {/* The tweened figure is decoration to a screen reader; the settled value is announced. */}
+      <p className="figure" aria-hidden="true">{dollars(figure)}</p>
+      <p className="sr-only" aria-live="polite">You can shop up to {dollars(ceiling)}</p>
       <p className="basis">
         {dollars(maxPayment(inputs))} a month for {inputs.termMonths} months at {percent(inputs.apr)} APR.
         That price carries {cents(q.salesTax)} in sales tax and {cents(purchaseFees())} in title, plate,
