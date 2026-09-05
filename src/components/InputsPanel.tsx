@@ -3,8 +3,10 @@ import { TERMS, maxPayment, type LoanInputs } from '../lib/loan';
 import { dollars } from '../lib/format';
 
 // Shows the raw text while the field is being edited so backspacing to empty
-// doesn't snap to 0 mid-keystroke; every keystroke still commits its parsed
-// value, and blur restores the canonical number.
+// doesn't snap to 0 mid-keystroke. A keystroke commits its parsed value only
+// when there is one — an empty field (including the browser's "" for a
+// half-typed "6.") keeps the previous value rather than flashing 0 through
+// the math — and blur restores the canonical number.
 function NumericInput({
   canonical,
   commit,
@@ -21,7 +23,7 @@ function NumericInput({
       value={text ?? canonical}
       onChange={(e) => {
         setText(e.target.value);
-        commit(e.target.value);
+        if (e.target.value.trim() !== '') commit(e.target.value);
       }}
       onBlur={() => setText(null)}
     />
