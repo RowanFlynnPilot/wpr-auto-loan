@@ -89,8 +89,10 @@ export default function App() {
           />
           <img
             className="wordmark"
-            src="https://wausaupilotandreview.com/wp-content/uploads/2024/04/WausauPilotandReviewLogo.png"
+            src={`${import.meta.env.BASE_URL}wpr-wordmark.png`}
             alt="Wausau Pilot & Review"
+            width={640}
+            height={82}
           />
         </a>
         <p className="tagline">Where locals look first for news</p>
