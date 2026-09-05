@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { SPONSOR } from '../config/sponsor';
 import { dollars } from '../lib/format';
+import { combinedMpg } from '../lib/fuel';
 import { downToReach, type LoanInputs } from '../lib/loan';
 import { preapprovalLink, trackPreapprovalClick } from '../lib/track';
-import type { Inventory } from '../types';
+import type { Inventory, Vehicle } from '../types';
 import { VehicleCard } from './VehicleCard';
 
 interface Props {
@@ -12,10 +13,22 @@ interface Props {
   ceiling: number;
 }
 
+// All orderings are feed data; ties fall back to price so the list is stable.
+const SORTS: Record<string, { label: string; by: (a: Vehicle, b: Vehicle) => number }> = {
+  price: { label: 'Lowest price', by: (a, b) => a.price - b.price },
+  mileage: { label: 'Fewest miles', by: (a, b) => a.mileage - b.mileage || a.price - b.price },
+  mpg: {
+    label: 'Best mpg',
+    by: (a, b) => combinedMpg(b.mpgCity, b.mpgHwy) - combinedMpg(a.mpgCity, a.mpgHwy) || a.price - b.price,
+  },
+  year: { label: 'Newest', by: (a, b) => b.year - a.year || a.price - b.price },
+};
+
 export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
   const [body, setBody] = useState<string>('All');
+  const [sort, setSort] = useState<string>('price');
 
-  const fits = inventory.vehicles.filter((v) => v.price <= ceiling).sort((a, b) => a.price - b.price);
+  const fits = inventory.vehicles.filter((v) => v.price <= ceiling).sort(SORTS[sort].by);
   const over = inventory.vehicles.length - fits.length;
   const bodies = ['All', ...Array.from(new Set(fits.map((v) => v.body))).sort()];
   // A chosen body type can drop out when the ceiling falls; treat it as All
@@ -63,6 +76,16 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
                 <span>{b === 'All' ? fits.length : fits.filter((v) => v.body === b).length}</span>
               </button>
             ))}
+            <label className="sort">
+              Sort
+              <select value={sort} onChange={(e) => setSort(e.target.value)}>
+                {Object.entries(SORTS).map(([key, o]) => (
+                  <option key={key} value={key}>
+                    {o.label}
+                  </option>
+                ))}
+              </select>
+            </label>
           </div>
           <div className="grid">
             {shown.map((v) => (
