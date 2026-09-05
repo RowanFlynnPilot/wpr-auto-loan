@@ -39,13 +39,13 @@ const PROFILES: Record<string, { outline: string; pillar: string; wheels: [numbe
     wheels: [32, 90],
   },
   Minivan: {
-    outline: 'M8 36 L6 27 L12 20 L30 12 L104 12 L110 20 L114 26 L114 36',
-    pillar: 'M50 12 L50 24 M80 12 L80 24',
+    outline: 'M8 36 L6 27 L12 22 L30 21 L46 11 L104 11 L110 20 L114 26 L114 36',
+    pillar: 'M58 11 L58 24 M84 11 L84 24',
     wheels: [30, 92],
   },
   Van: {
-    outline: 'M8 36 L6 26 L10 18 L28 10 L112 10 L114 18 L114 36',
-    pillar: 'M40 10 L40 24 M78 10 L78 24',
+    outline: 'M8 36 L6 26 L10 19 L24 18 L36 9 L112 9 L114 18 L114 36',
+    pillar: 'M48 9 L48 24 M82 9 L82 24',
     wheels: [30, 94],
   },
 };

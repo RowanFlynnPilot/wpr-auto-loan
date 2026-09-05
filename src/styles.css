@@ -179,6 +179,9 @@ input[type='range']:focus-visible { outline: 2px solid var(--teal); outline-offs
 
 @media (max-width: 760px) {
   .app { padding: 20px 16px 40px; }
+  /* Single-column cards: a 16:9 placeholder would be most of the screen. */
+  .photo-blank { aspect-ratio: 3 / 1; }
+  .photo-blank svg { width: 34%; }
   .masthead h1 { font-size: 34px; }
   .layout { grid-template-columns: 1fr; gap: 28px; }
   .inputs { position: static; }
