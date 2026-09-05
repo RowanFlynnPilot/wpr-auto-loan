@@ -91,6 +91,17 @@ export function termComparison(price: number, i: LoanInputs): Quote[] {
   return TERMS.map((t) => quote(price, i, t));
 }
 
+// Extra cash down that would lift the ceiling to `price` — 0 if it already
+// reaches. Inverse of maxPrice in the down-payment direction.
+export function downToReach(price: number, i: LoanInputs): number {
+  const P = principalForPayment(maxPayment(i), i.apr, i.termMonths);
+  const t = salesTaxRate();
+  const equityAndCash = i.downPayment + i.tradeValue - i.tradeOwed - purchaseFees();
+  const taxable = price >= i.tradeValue;
+  const need = taxable ? price * (1 + t) - t * i.tradeValue - P - equityAndCash : price - P - equityAndCash;
+  return Math.max(need, 0);
+}
+
 // Paying `extra` on top of the required payment: how many months come off the
 // loan and how much interest never accrues. Null when nothing is financed.
 export function extraPayment(

@@ -3,7 +3,7 @@ import { FUEL } from '../config/wisconsin';
 import { count, dollars, percent } from '../lib/format';
 import { fuelPerMonth } from '../lib/fuel';
 import { BodyIcon } from './BodyIcon';
-import { quote, type LoanInputs } from '../lib/loan';
+import { maxPayment, quote, type LoanInputs } from '../lib/loan';
 import { trackVehicleClick, vdpLink } from '../lib/track';
 import type { Vehicle } from '../types';
 
@@ -14,6 +14,8 @@ interface Props {
 
 export function VehicleCard({ vehicle: v, inputs }: Props) {
   const q = quote(v.price, inputs);
+  const budget = maxPayment(inputs);
+  const share = budget > 0 ? q.payment / budget : 0;
   return (
     <article className="card">
       {v.photoUrl ? (
@@ -37,6 +39,14 @@ export function VehicleCard({ vehicle: v, inputs }: Props) {
           </span>
           <span className="price">{dollars(v.price)}</span>
         </div>
+        {budget > 0 && (
+          <p className="budget">
+            <span className="budget-bar" aria-hidden="true">
+              <span style={{ width: `${Math.min(100, share * 100)}%` }} />
+            </span>
+            {Math.round(share * 100)}% of your {dollars(budget)}/mo budget
+          </p>
+        )}
         <p className="fuel">
           + about {dollars(fuelPerMonth(v.mpgCity, v.mpgHwy))}/mo in gas — {count(FUEL.milesPerMonth)} mi
           at Wausau's ${FUEL.gasPrice.toFixed(2)}/gal

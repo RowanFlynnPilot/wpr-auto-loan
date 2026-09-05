@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   amountFinanced,
   ceilingLevers,
+  downToReach,
   extraPayment,
   maxPayment,
   maxPrice,
@@ -56,6 +57,18 @@ describe('termComparison', () => {
       expect(rows[k].totalInterest).toBeGreaterThan(rows[k - 1].totalInterest);
       expect(rows[k].payment).toBeLessThan(rows[k - 1].payment);
     }
+  });
+});
+
+describe('downToReach', () => {
+  it('lifts the ceiling exactly to the price', () => {
+    const price = maxPrice(base) + 6000;
+    const extra = downToReach(price, base);
+    expect(extra).toBeGreaterThan(0);
+    expect(maxPrice({ ...base, downPayment: base.downPayment + extra })).toBeCloseTo(price, 6);
+  });
+  it('is zero when the price already fits', () => {
+    expect(downToReach(maxPrice(base) - 1000, base)).toBe(0);
   });
 });
 
