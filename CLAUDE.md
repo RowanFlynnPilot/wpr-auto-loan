@@ -27,8 +27,10 @@ No speculative abstraction. Let TypeScript catch it.
 ## How it works
 
 1. `feed/ingest.py` reads a dealer inventory CSV (`FEED_PATH`) and writes
-   `public/inventory.json`. Missing columns or a bad row exits non-zero and
-   the build fails. Column mapping lives in `FEED_COLUMNS` at the top of the file.
+   `public/inventory.json`. Missing columns or a bad row (non-positive price,
+   non-https VDP or photo URL, unknown body, zero mpg, duplicate stock) exits
+   non-zero and the build fails. Column mapping lives in `FEED_COLUMNS` at the
+   top of the file; the contract is pinned by `feed/test_ingest.py`.
 2. `feed/generate_demo.py` writes `feed/demo.csv` — 40 synthetic "Demo Motors"
    vehicles in the same column shape as a HomeNet/vAuto export. Deterministic
    (seeded). Committed so the demo builds with no external dependency.
@@ -94,5 +96,6 @@ vehicle; feed data (mpg, drivetrain, features) speaks for itself.
 ## Dev
 
     python feed/generate_demo.py
+    python -m unittest discover -s feed -p "test_*.py"
     $env:FEED_PATH="feed/demo.csv"; python feed/ingest.py
     npm install; npm test; npm run dev

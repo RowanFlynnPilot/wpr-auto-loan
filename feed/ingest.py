@@ -10,6 +10,7 @@ import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urlsplit
 
 # our field -> feed column. Edit this line-for-line when a real feed arrives.
 FEED_COLUMNS = {
@@ -72,13 +73,20 @@ def parse_row(raw: dict, line: int) -> dict:
     # The fuel line divides by mpg. EVs need MPGe handling before they can ship.
     if v["mpgCity"] <= 0 or v["mpgHwy"] <= 0:
         raise ValueError(f"line {line}: mpg must be positive for stock {v['stock']}")
-    if not v["vdpUrl"].startswith("https://"):
-        raise ValueError(f"line {line}: vdp_url must be https for stock {v['stock']}")
+    if not is_https(v["vdpUrl"]):
+        raise ValueError(f"line {line}: vdp_url must be an https URL for stock {v['stock']}")
+    # An http photo is mixed content on the https embed: a broken image, silently.
+    if v["photoUrl"] and not is_https(v["photoUrl"]):
+        raise ValueError(f"line {line}: photo_url must be https or empty for stock {v['stock']}")
     return v
 
 
-def main() -> None:
-    feed_path = Path(os.environ["FEED_PATH"])
+def is_https(url: str) -> bool:
+    parts = urlsplit(url)
+    return parts.scheme == "https" and bool(parts.netloc)
+
+
+def load_feed(feed_path: Path) -> list:
     with feed_path.open(newline="") as f:
         reader = csv.DictReader(f)
         missing = set(FEED_COLUMNS.values()) - set(reader.fieldnames or [])
@@ -87,6 +95,16 @@ def main() -> None:
         vehicles = [parse_row(row, n) for n, row in enumerate(reader, start=2)]
     if not vehicles:
         raise ValueError("feed contained no vehicles")
+    seen = set()
+    for v in vehicles:
+        if v["stock"] in seen:
+            raise ValueError(f"duplicate stock number {v['stock']}")
+        seen.add(v["stock"])
+    return vehicles
+
+
+def main() -> None:
+    vehicles = load_feed(Path(os.environ["FEED_PATH"]))
     OUT.parent.mkdir(exist_ok=True)
     OUT.write_text(json.dumps({
         "generatedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
