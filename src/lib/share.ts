@@ -37,3 +37,18 @@ export function decodeInputs(hash: string): LoanInputs {
   if (inputs.apr > 1) throw new Error(`Bad "apr" in shared link: ${inputs.apr}`);
   return inputs;
 }
+
+// Inside the WordPress embed the tool's own URL means nothing to a reader, so
+// the embed snippet passes the article URL as ?host=… and a shared link is the
+// article plus the scenario hash. Standalone, it's this page. Only the
+// publisher's own domain is accepted as a host.
+const PUBLISHER = /(^|\.)wausaupilotandreview\.com$/;
+
+export function shareUrl(search: string, hash: string, href: string): string {
+  const host = new URLSearchParams(search).get('host');
+  if (host === null) return href;
+  const url = new URL(host);
+  if (url.protocol !== 'https:' || !PUBLISHER.test(url.hostname)) throw new Error(`Refusing share host ${host}`);
+  url.hash = hash;
+  return url.toString();
+}

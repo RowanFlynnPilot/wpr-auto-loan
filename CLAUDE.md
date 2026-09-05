@@ -87,6 +87,35 @@ they show up in reports; Plausible does not backfill events sent earlier. The
 loaded `script.outbound-links.js` supports manual `plausible()` calls via the
 queue stub in `index.html` — no script change needed for custom events.
 
+## WordPress embed
+
+The tool posts `{type: "wpr-embed-height", id: "wpr-auto-loan", height}` to
+its parent whenever its height changes (standard WPR shape). The snippet also
+forwards the article's hash into the iframe so a shared scenario link opens
+on the article, and passes the article URL as `?host=` so "Copy a link"
+produces an article link, not the tool's own URL (only the publisher's domain
+is accepted; anything else falls back to the tool URL with a console error).
+
+```html
+<div id="wpr-auto-loan"></div>
+<script>
+(function () {
+  var f = document.createElement('iframe');
+  f.src = 'https://rowanflynnpilot.github.io/wpr-auto-loan/?host='
+    + encodeURIComponent(location.origin + location.pathname) + location.hash;
+  f.style.cssText = 'width:100%;border:0;min-height:900px';
+  f.allow = 'clipboard-write';
+  f.title = 'What can I drive?';
+  window.addEventListener('message', function (e) {
+    if (e.origin !== 'https://rowanflynnpilot.github.io') return;
+    if (e.data && e.data.type === 'wpr-embed-height' && e.data.id === 'wpr-auto-loan')
+      f.style.height = e.data.height + 'px';
+  });
+  document.getElementById('wpr-auto-loan').appendChild(f);
+})();
+</script>
+```
+
 ## Editorial line
 
 The calculator is neutral and the math is ours. The inventory panel is the

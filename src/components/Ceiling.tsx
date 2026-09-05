@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { COUNTY_MEDIAN_HOUSEHOLD_INCOME } from '../config/wisconsin';
 import { ceilingLevers, maxPayment, maxPrice, purchaseFees, quote, type LoanInputs } from '../lib/loan';
 import { cents, dollars, percent } from '../lib/format';
+import { shareUrl } from '../lib/share';
 
 // Eases the displayed figure toward its new value over ~250ms so the number
 // visibly reacts to the inputs. Display-only — every other line uses the real
@@ -34,21 +35,31 @@ function useCountUp(target: number): number {
 // The scenario always lives in the URL hash; this just makes that shareable
 // link discoverable. Clipboard access can be denied inside an embed, so fall
 // back to showing the link for a manual copy.
+function linkToShare(): string {
+  try {
+    return shareUrl(window.location.search, window.location.hash, window.location.href);
+  } catch (e) {
+    console.error(e); // a bad ?host= is the embed's mistake, not the reader's
+    return window.location.href;
+  }
+}
+
 function CopyLink() {
   const [copied, setCopied] = useState(false);
   return (
     <button
       type="button"
       className="copylink"
-      onClick={() =>
-        navigator.clipboard.writeText(window.location.href).then(
+      onClick={() => {
+        const link = linkToShare();
+        navigator.clipboard.writeText(link).then(
           () => {
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
           },
-          () => window.prompt('Copy this link:', window.location.href),
-        )
-      }
+          () => window.prompt('Copy this link:', link),
+        );
+      }}
     >
       {copied ? 'Link copied' : 'Copy a link to this scenario'}
     </button>

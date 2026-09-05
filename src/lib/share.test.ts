@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { LoanInputs } from './loan';
-import { decodeInputs, encodeInputs } from './share';
+import { decodeInputs, encodeInputs, shareUrl } from './share';
 
 const inputs: LoanInputs = {
   monthlyIncome: 4500,
@@ -29,5 +29,20 @@ describe('share', () => {
   it('throws on a share or APR past 100%', () => {
     expect(() => decodeInputs(encodeInputs({ ...inputs, paymentShare: 3 }))).toThrow(/share/);
     expect(() => decodeInputs(encodeInputs({ ...inputs, apr: 5 }))).toThrow(/apr/);
+  });
+});
+
+describe('shareUrl', () => {
+  const hash = '#income=4500&term=60';
+  it('is the tool itself when standalone', () => {
+    expect(shareUrl('', hash, 'https://tool.example/x' + hash)).toBe('https://tool.example/x' + hash);
+  });
+  it('is the article plus the scenario inside the embed', () => {
+    const host = encodeURIComponent('https://wausaupilotandreview.com/what-can-i-drive/#old');
+    expect(shareUrl(`?host=${host}`, hash, 'ignored')).toBe('https://wausaupilotandreview.com/what-can-i-drive/' + hash);
+  });
+  it('refuses a host that is not the publisher over https', () => {
+    for (const host of ['https://evil.example/', 'http://wausaupilotandreview.com/'])
+      expect(() => shareUrl(`?host=${encodeURIComponent(host)}`, hash, 'x')).toThrow(/Refusing/);
   });
 });

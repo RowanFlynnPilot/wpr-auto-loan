@@ -2,13 +2,9 @@
 // height to the parent page whenever it changes so the WordPress embed can size
 // the iframe — no scrollbar inside a scrollbar. Only the height crosses the
 // frame boundary, so "*" as target origin is fine; the parent checks origin.
-// Host listener:
-//   window.addEventListener('message', (e) => {
-//     if (e.data?.type === 'wpr-embed-height' && e.data.id === 'wpr-auto-loan')
-//       iframe.style.height = e.data.height + 'px';
-//   });
-// Give the iframe allow="clipboard-write" so the copy-a-link button can use
-// the clipboard inside the embed (it falls back to a prompt without it).
+// The WordPress embed snippet (listener, clipboard permission, and the
+// ?host= hand-off that makes shared links point at the article) is in
+// CLAUDE.md under "WordPress embed".
 export function initEmbedHeight(id = 'wpr-auto-loan'): void {
   if (window.parent === window) return; // not embedded
 
