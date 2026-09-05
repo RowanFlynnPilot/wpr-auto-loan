@@ -14,7 +14,12 @@ messaging for the WordPress embed, clickable term rows, favicon and Open Graph
 tags, and the standard WPR masthead (typewriter seal + wordmark, as on the
 Brewers tracker) on the tool and the report. Data perspectives: per-vehicle
 fuel line (feed mpg × Wausau gas price), ceiling levers, the $25-extra payoff
-line, county-income "for scale" context.
+line, county-income "for scale" context, a per-card budget bar, a sort control,
+a nothing-fits state that names the closest vehicle and the down payment to
+reach it, and a "How we figure this" block that reads every constant and
+source from the config. Social share card at `/og-card.png`
+(`scripts/og-card.py`). Feed contract (canonical bodies, positive mpg, https
+URLs, unique stock) is enforced at ingest and pinned by `feed/test_ingest.py`.
 Live: https://rowanflynnpilot.github.io/wpr-auto-loan/
 Before real launch: register the two Plausible goals (below), swap sponsor.ts
 and the feed, attorney check on the Reg Z wording.
