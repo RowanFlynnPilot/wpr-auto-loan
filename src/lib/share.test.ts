@@ -22,7 +22,12 @@ describe('share', () => {
   it('throws on a non-numeric value', () => {
     expect(() => decodeInputs(encodeInputs(inputs).replace('4500', 'lots'))).toThrow(/Bad/);
   });
-  it('throws on a zero term', () => {
+  it('throws on a term the table does not offer', () => {
     expect(() => decodeInputs(encodeInputs({ ...inputs, termMonths: 0 }))).toThrow(/term/);
+    expect(() => decodeInputs(encodeInputs({ ...inputs, termMonths: 66 }))).toThrow(/term/);
+  });
+  it('throws on a share or APR past 100%', () => {
+    expect(() => decodeInputs(encodeInputs({ ...inputs, paymentShare: 3 }))).toThrow(/share/);
+    expect(() => decodeInputs(encodeInputs({ ...inputs, apr: 5 }))).toThrow(/apr/);
   });
 });

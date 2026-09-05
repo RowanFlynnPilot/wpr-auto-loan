@@ -1,4 +1,4 @@
-import type { LoanInputs } from './loan';
+import { TERMS, type LoanInputs } from './loan';
 
 // URL-hash serialization so a reader can share "here's what I can drive"
 // and a prepared scenario can be deep-linked. Keys are short but readable;
@@ -29,6 +29,11 @@ export function decodeInputs(hash: string): LoanInputs {
     if (!Number.isFinite(value) || value < 0) throw new Error(`Bad "${key}" in shared link: ${raw}`);
     inputs[field] = value;
   }
-  if (inputs.termMonths <= 0) throw new Error(`Bad "term" in shared link: ${inputs.termMonths}`);
+  // Bound what the UI can't represent: a term the table doesn't offer, or a
+  // share/APR past 100% that would pin the slider while the math ran wild.
+  if (!(TERMS as readonly number[]).includes(inputs.termMonths))
+    throw new Error(`Bad "term" in shared link: ${inputs.termMonths} (want one of ${TERMS.join(', ')})`);
+  if (inputs.paymentShare > 1) throw new Error(`Bad "share" in shared link: ${inputs.paymentShare}`);
+  if (inputs.apr > 1) throw new Error(`Bad "apr" in shared link: ${inputs.apr}`);
   return inputs;
 }
