@@ -169,6 +169,17 @@ No prospect logo is bundled; the name sets in Fraunces, which is the house
 fallback and avoids shipping art we have no rights to. When a dealer actually
 signs, they move out of `PITCHES` and into `SPONSORED`.
 
+**The lot matches the franchise.** `PROFILES` in `feed/generate_demo.py` writes
+one CSV per profile. A pitch profile draws `house_share` of the lot from the
+prospect's own brands and the rest from `TRADES`; `brickners` is 65% Chrysler,
+Dodge, Jeep, Ram and FIAT. `ingest.py` takes `OUT_PATH`, the workflow ingests
+each CSV, and a pitch loads the file named in `inventoryFile`.
+
+The `demo` profile is **frozen** — it keeps the original draw so `demo.csv`
+never moves, because the sample report at `/report/` cites its stock numbers.
+Adding a profile must not change it; check `git diff feed/demo.csv` is empty
+after regenerating.
+
 ## Editorial line
 
 The calculator is neutral and the math is ours. The inventory panel is the
