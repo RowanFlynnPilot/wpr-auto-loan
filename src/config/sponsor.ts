@@ -27,6 +27,8 @@ const SPONSORED: Sponsor = {
 export interface Pitch {
   /** Who this preview was prepared for, named on the ribbon. */
   prospect: string;
+  /** Built by feed/generate_demo.py from this prospect's own franchise mix. */
+  inventoryFile: string;
   sponsor: Sponsor;
 }
 
@@ -37,6 +39,7 @@ export interface Pitch {
 const PITCHES: Record<string, Pitch> = {
   brickners: {
     prospect: "Brickner's of Wausau",
+    inventoryFile: 'inventory.brickners.json',
     sponsor: {
       name: "Brickner's of Wausau",
       disclosure: 'Sponsored inventory',

@@ -1,4 +1,5 @@
 node_modules/
 dist/
 public/inventory.json
+public/inventory.*.json
 __pycache__/

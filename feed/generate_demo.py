@@ -1,7 +1,12 @@
-"""Generate a synthetic dealer inventory feed for the sales demo.
+"""Generate synthetic dealer inventory feeds for the sales demo.
 
 Column names mirror a typical HomeNet / vAuto export so swapping in a
 real feed is a column-mapping change in ingest.py, not a rebuild.
+
+One CSV per profile in PROFILES. "demo" is the generic Demo Motors lot and
+its output is frozen — the sample report at /report/ cites its stock numbers,
+so its draw must not move. A pitch profile weights the lot toward the
+prospect's own franchise, with the rest as the trade-ins any used lot carries.
 """
 import csv
 import random
@@ -9,7 +14,7 @@ from pathlib import Path
 
 SEED = 2026
 COUNT = 40
-OUT = Path(__file__).parent / "demo.csv"
+HERE = Path(__file__).parent
 
 # make, model, trim, body, drivetrain, mpg city, mpg hwy, new-ish price
 CATALOG = [
@@ -51,6 +56,42 @@ CATALOG = [
     ("Mazda", "Mazda3", "Preferred", "Hatchback", "FWD", 26, 33, 27000),
 ]
 
+# What a Chrysler/Dodge/Jeep/Ram store's own used stock looks like.
+CDJR = [
+    ("Jeep", "Grand Cherokee", "Laredo", "SUV", "4WD", 19, 26, 42500),
+    ("Jeep", "Grand Cherokee", "Limited", "SUV", "4WD", 19, 26, 48000),
+    ("Jeep", "Wrangler", "Sport S", "SUV", "4WD", 20, 24, 40000),
+    ("Jeep", "Wrangler Unlimited", "Sahara", "SUV", "4WD", 19, 24, 47500),
+    ("Jeep", "Cherokee", "Latitude Plus", "SUV", "4WD", 21, 29, 34000),
+    ("Jeep", "Compass", "Latitude", "SUV", "4WD", 24, 32, 30000),
+    ("Jeep", "Renegade", "Latitude", "SUV", "4WD", 23, 29, 27500),
+    ("Jeep", "Gladiator", "Sport", "Truck", "4WD", 17, 22, 43000),
+    ("Ram", "1500", "Big Horn", "Truck", "4WD", 18, 23, 51000),
+    ("Ram", "1500", "Laramie", "Truck", "4WD", 18, 23, 58000),
+    ("Ram", "1500 Classic", "Tradesman", "Truck", "4WD", 17, 23, 39000),
+    ("Ram", "2500", "Tradesman", "Truck", "4WD", 15, 20, 54000),
+    ("Ram", "ProMaster 1500", "Base", "Van", "FWD", 17, 22, 41000),
+    ("Dodge", "Durango", "SXT", "SUV", "AWD", 18, 25, 41000),
+    ("Dodge", "Durango", "GT", "SUV", "AWD", 18, 25, 45000),
+    ("Dodge", "Charger", "SXT", "Sedan", "AWD", 18, 27, 36000),
+    ("Dodge", "Grand Caravan", "SXT", "Minivan", "FWD", 17, 25, 30000),
+    ("Chrysler", "Pacifica", "Touring L", "Minivan", "FWD", 19, 28, 40000),
+    ("Chrysler", "Pacifica", "Limited", "Minivan", "FWD", 19, 28, 46000),
+    ("Chrysler", "300", "Touring", "Sedan", "AWD", 18, 27, 37000),
+    ("FIAT", "500X", "Trekking", "SUV", "AWD", 24, 30, 27000),
+]
+
+# Trade-ins: what gets taken in on a deal in central Wisconsin.
+TRADES = [v for v in CATALOG if v[0] not in {"Jeep", "Ram", "Dodge", "Chrysler", "FIAT"}]
+
+PROFILES = {
+    # Frozen: the sample report cites these stock numbers.
+    "demo": {"out": "demo.csv", "prefix": "DM", "house": None, "house_share": 0.0,
+             "vdp": "https://demo-motors.example/inventory/{stock}"},
+    "brickners": {"out": "brickners.csv", "prefix": "BW", "house": CDJR, "house_share": 0.65,
+                  "vdp": "https://www.bricknersofwausau.net/search/used-wausau-wi/?cy=54403&tp=used"},
+}
+
 COLORS = ["Magnetic Gray", "Super White", "Midnight Black", "Celestial Silver",
           "Ruby Flare", "Cavalry Blue", "Lunar Rock", "Oxford White", "Sandstone"]
 
@@ -61,10 +102,32 @@ FEATURES = ["Heated seats", "Remote start", "Apple CarPlay", "Android Auto",
 VIN_CHARS = "ABCDEFGHJKLMNPRSTUVWXYZ0123456789"
 
 
-def main() -> None:
-    rng = random.Random(SEED)
-    lot = CATALOG * (COUNT // len(CATALOG) + 1)
+def draw(rng, catalog: list, n: int) -> list:
+    """n vehicles from catalog, cycling reshuffled copies so makes spread out."""
+    pool: list = []
+    while len(pool) < n:
+        chunk = list(catalog)
+        rng.shuffle(chunk)
+        pool.extend(chunk)
+    return pool[:n]
+
+
+def build_lot(rng, profile: dict) -> list:
+    if profile["house"] is None:
+        # The original draw, preserved exactly so demo.csv never moves.
+        lot = CATALOG * (COUNT // len(CATALOG) + 1)
+        rng.shuffle(lot)
+        return lot[:COUNT]
+    house = round(COUNT * profile["house_share"])
+    lot = draw(rng, profile["house"], house) + draw(rng, TRADES, COUNT - house)
     rng.shuffle(lot)
+    return lot
+
+
+def generate(name: str, profile: dict) -> None:
+    rng = random.Random(SEED)
+    lot = build_lot(rng, profile)
+    out = HERE / profile["out"]
     rows = []
     for n in range(COUNT):
         make, model, trim, body, drive, city, hwy, base = lot[n]
@@ -72,7 +135,7 @@ def main() -> None:
         age = 2026 - year
         mileage = int(rng.uniform(8_000, 14_000) * age + rng.uniform(0, 6_000))
         price = round(base * (0.87 ** age) * rng.uniform(0.92, 1.06), -2)
-        stock = f"DM{4100 + n}"
+        stock = f"{profile['prefix']}{4100 + n}"
         vin = "".join(rng.choice(VIN_CHARS) for _ in range(17))
         features = "|".join(rng.sample(FEATURES, rng.randint(3, 6)))
         rows.append({
@@ -91,13 +154,22 @@ def main() -> None:
             "exterior_color": rng.choice(COLORS),
             "features": features,
             "photo_url": "",
-            "vdp_url": f"https://demo-motors.example/inventory/{stock}",
+            "vdp_url": profile["vdp"].format(stock=stock),
         })
-    with OUT.open("w", newline="") as f:
+    with out.open("w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
         w.writeheader()
         w.writerows(rows)
-    print(f"wrote {len(rows)} vehicles to {OUT}")
+    makes = {}
+    for r in rows:
+        makes[r["make"]] = makes.get(r["make"], 0) + 1
+    top = ", ".join(f"{m} {c}" for m, c in sorted(makes.items(), key=lambda kv: -kv[1])[:5])
+    print(f"wrote {len(rows)} vehicles to {out} ({top})")
+
+
+def main() -> None:
+    for name, profile in PROFILES.items():
+        generate(name, profile)
 
 
 if __name__ == "__main__":

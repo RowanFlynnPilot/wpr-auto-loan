@@ -6,6 +6,7 @@ import { InventoryGrid } from './components/InventoryGrid';
 import { PitchRibbon } from './components/PitchRibbon';
 import { TermTable } from './components/TermTable';
 import { maxPrice, type LoanInputs } from './lib/loan';
+import { PITCH } from './config/sponsor';
 import { decodeInputs, encodeInputs } from './lib/share';
 import type { Inventory } from './types';
 
@@ -58,7 +59,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}inventory.json`)
+    fetch(`${import.meta.env.BASE_URL}${PITCH?.inventoryFile ?? 'inventory.json'}`)
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json() as Promise<Inventory>;

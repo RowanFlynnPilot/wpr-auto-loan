@@ -52,7 +52,7 @@ BODY_ALIASES = {
     "Passenger Van": "Van",
 }
 
-OUT = Path(__file__).parent.parent / "public" / "inventory.json"
+DEFAULT_OUT = Path(__file__).parent.parent / "public" / "inventory.json"
 
 
 def parse_row(raw: dict, line: int) -> dict:
@@ -105,12 +105,14 @@ def load_feed(feed_path: Path) -> list:
 
 def main() -> None:
     vehicles = load_feed(Path(os.environ["FEED_PATH"]))
-    OUT.parent.mkdir(exist_ok=True)
-    OUT.write_text(json.dumps({
+    # OUT_PATH lets a pitch profile write its own inventory beside the live one.
+    out = Path(os.environ.get("OUT_PATH") or DEFAULT_OUT)
+    out.parent.mkdir(exist_ok=True)
+    out.write_text(json.dumps({
         "generatedAt": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "vehicles": vehicles,
     }, indent=1))
-    print(f"wrote {len(vehicles)} vehicles to {OUT}")
+    print(f"wrote {len(vehicles)} vehicles to {out}")
 
 
 if __name__ == "__main__":
