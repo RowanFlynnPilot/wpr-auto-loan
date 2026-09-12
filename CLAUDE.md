@@ -21,7 +21,7 @@ source from the config. Social share card at `/og-card.png`
 (`scripts/og-card.py`). Feed contract (canonical bodies, positive mpg, https
 URLs, unique stock) is enforced at ingest and pinned by `feed/test_ingest.py`.
 Live: https://rowanflynnpilot.github.io/wpr-auto-loan/
-Before real launch: register the two Plausible goals (below), swap sponsor.ts
+Before real launch: register the three Plausible goals (below), swap sponsor.ts
 and the feed, attorney check on the Reg Z wording and on `SPONSOR_DISCLAIMER`
 (a dealer linking to its own financing is a financial-services sponsor).
 
@@ -90,8 +90,8 @@ plus UTM params (`utm_source=wausaupilot`, `utm_medium=tool`,
 `utm_content=preapproval`. Report = clicks by vehicle, clicks by body type,
 price band readers land in, pre-approval clicks; sample layout at `/report/`.
 
-`Vehicle click` and `Preapproval click` must be added as custom-event goals in
-the Plausible dashboard (Site settings → Goals, names matched exactly) before
+`Vehicle click`, `Preapproval click` and `Mini Click` must be added as
+custom-event goals in the Plausible dashboard (Site settings → Goals, names matched exactly) before
 they show up in reports; Plausible does not backfill events sent earlier. The
 loaded `script.outbound-links.js` supports manual `plausible()` calls via the
 queue stub in `index.html` — no script change needed for custom events.
@@ -196,6 +196,36 @@ The `demo` profile is **frozen** — it keeps the original draw so `demo.csv`
 never moves, because the sample report at `/report/` cites its stock numbers.
 Adding a profile must not change it; check `git diff feed/demo.csv` is empty
 after regenerating.
+
+## Mini — sidebar slideshow
+
+`/mini.html` is a second Vite entry (its own page, so the embed stays light):
+one vehicle at a time from the sponsor's lot — photo, year/make/model, an
+example payment at `DEFAULTS` from `config/scenario.ts` with the terms named
+beside it, the price — with previous/next, a counter, a pause control, and a
+six-second clock that stops on hover or focus and never starts under
+`prefers-reduced-motion`. Newest model years lead. Both links use
+`target="_top"` so they leave the iframe; `?pitch=` carries through and shows
+its own compact ribbon line. Height messaging uses id `wpr-auto-loan-mini`.
+
+`?to=<the tool's page on the news site>` is where "What can you actually
+afford?" lands; without it, the standalone tool. http(s) only. That link is
+tagged `utm_medium=mini` so mini-driven visits show under Sources in Plausible.
+
+```html
+<iframe src="https://rowanflynnpilot.github.io/wpr-auto-loan/mini.html?to=https://wausaupilotandreview.com/what-can-i-drive/"
+        style="width:100%;border:0;height:520px" loading="lazy"
+        title="What can I drive? — a local lot, priced for your budget"></iframe>
+```
+
+(Or size it from the `wpr-embed-height` message, id `wpr-auto-loan-mini`, with
+the listener in the WordPress embed section.)
+
+Plausible: impressions are pageviews of `/wpr-auto-loan/mini.html`; the link
+into the tool fires **`Mini Click`** (prop `sponsor`) — add it as a
+custom-event goal like the other two. Vehicle clicks from the mini fire the
+existing `Vehicle click` with `placement: mini`, so the dealer report can
+split them from the full tool's.
 
 ## Editorial line
 
