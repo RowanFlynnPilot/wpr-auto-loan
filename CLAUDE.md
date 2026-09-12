@@ -169,11 +169,28 @@ No prospect logo is bundled; the name sets in Fraunces, which is the house
 fallback and avoids shipping art we have no rights to. When a dealer actually
 signs, they move out of `PITCHES` and into `SPONSORED`.
 
-**The lot matches the franchise.** `PROFILES` in `feed/generate_demo.py` writes
-one CSV per profile. A pitch profile draws `house_share` of the lot from the
-prospect's own brands and the rest from `TRADES`; `brickners` is 65% Chrysler,
-Dodge, Jeep, Ram and FIAT. `ingest.py` takes `OUT_PATH`, the workflow ingests
-each CSV, and a pitch loads the file named in `inventoryFile`.
+**The lot is the prospect's own.** `brickners` runs on a dated snapshot of
+Brickner's real published listings — `feed/brickners_listings.json`, captured
+from the schema.org `Vehicle` JSON-LD their search pages publish.
+`feed/build_listings.py` converts a snapshot into the ordinary feed shape and
+it goes through `ingest.py` like any other feed, so the same contract applies.
+`ingest.py` takes `OUT_PATH`, the workflow builds and ingests each CSV, and a
+pitch loads the file named in `inventoryFile`.
+
+**A snapshot is not a feed.** Prices and availability move daily. The capture
+date is in the file *and* on the page — `listingsAsOf` drives the ribbon and
+the footer — because a stale snapshot shown as live is the failure mode here.
+Recapture or retire a preview before showing it again.
+
+Two gaps real listings have, and how they are handled. Neither is papered over:
+rows with no published fuel economy are dropped and named at build time rather
+than given an invented number, and a listing that carries one combined MPG
+instead of a city/highway pair is written into both columns — exact, since the
+EPA 55/45 blend of x and x is x — with the card labelling it "combined".
+
+`PROFILES` in `feed/generate_demo.py` still writes synthetic franchise-weighted
+lots (`house_share` from the prospect's brands, the rest from `TRADES`) for a
+prospect whose listings we cannot capture.
 
 The `demo` profile is **frozen** — it keeps the original draw so `demo.csv`
 never moves, because the sample report at `/report/` cites its stock numbers.
