@@ -137,6 +137,7 @@ input[type='range']:focus-visible { outline: 2px solid var(--teal); outline-offs
 .terms table { width: 100%; border-collapse: collapse; }
 .terms th { text-align: left; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); padding: 8px 10px; border-bottom: 1px solid var(--ink); }
 .terms td { padding: 10px; border-bottom: 1px solid var(--rule); }
+.terms td:first-child { white-space: nowrap; }
 .terms th:not(:first-child), .terms td.num { text-align: right; font-family: var(--mono); }
 .terms tbody tr { cursor: pointer; }
 .terms tbody tr:hover td { background: var(--paper); }
@@ -215,7 +216,7 @@ input[type='range']:focus-visible { outline: 2px solid var(--teal); outline-offs
 .vdp:hover, .vdp:focus-visible { color: var(--teal-dark); }
 .vdp:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
 
-.error { padding: 12px 16px; border-top: 3px solid var(--danger); background: #fff; font-family: var(--mono); font-size: 13px; }
+.error { padding: 12px 16px; border-top: 3px solid var(--danger); background: #fff; font-size: 13px; max-width: 62ch; }
 .colophon {
   margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--rule);
   display: flex; align-items: flex-start; gap: 16px;
@@ -233,6 +234,11 @@ input[type='range']:focus-visible { outline: 2px solid var(--teal); outline-offs
 .method summary:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
 .method ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 6px; }
 .method b { color: var(--ink); font-weight: 600; }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 260px 1fr; gap: 28px; }
+  .terms th:last-child, .terms td:last-child { display: none; }
+}
 
 @media (max-width: 760px) {
   .app { padding: 20px 16px 40px; }

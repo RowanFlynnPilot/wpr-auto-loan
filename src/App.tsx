@@ -63,7 +63,10 @@ export default function App() {
         return r.json() as Promise<Inventory>;
       })
       .then(setInventory)
-      .catch((e: Error) => setLoadError(e.message));
+      .catch((e: Error) => {
+        console.error(e); // the status code is for us, not for the reader
+        setLoadError(e.message);
+      });
   }, []);
 
   const ceiling = useMemo(() => maxPrice(inputs), [inputs]);
@@ -126,7 +129,12 @@ export default function App() {
             price={ceiling}
             onSelectTerm={(termMonths) => setInputs({ ...inputs, termMonths })}
           />
-          {loadError && <p className="error">Inventory failed to load: {loadError}</p>}
+          {loadError && (
+            <p className="error">
+              The lot didn&rsquo;t load, so we can&rsquo;t show which vehicles fit. Your ceiling and the
+              payment math above are unaffected — try again in a few minutes.
+            </p>
+          )}
           {!inventory && !loadError && <p className="loading">Loading the lot…</p>}
           {inventory && <InventoryGrid inventory={inventory} inputs={inputs} ceiling={ceiling} />}
         </main>
