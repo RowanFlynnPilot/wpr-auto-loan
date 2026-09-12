@@ -44,9 +44,9 @@ export function Colophon() {
         <p>
           {PITCH ? (
             <>
-              The vehicles in this preview are sample data, not {PITCH.prospect}'s inventory. In the
-              live tool the list comes from the dealer's own feed and is rebuilt daily, and the prices
-              are theirs.
+              The vehicles in this preview are sample data, not real listings from {PITCH.prospect}.
+              In the live tool the list comes from the dealer's own feed and is rebuilt daily, and the
+              prices are theirs.
             </>
           ) : (
             <>
