@@ -33,24 +33,27 @@ export function VehicleCard({ vehicle: v, inputs }: Props) {
         <p className="meta">
           {count(v.mileage)} mi · {v.drivetrain} · {v.mpgCity}/{v.mpgHwy} mpg · {v.exteriorColor}
         </p>
-        <div className="money">
-          <span className="payment">
-            {dollars(q.payment)}<small>/mo</small>
-          </span>
-          <span className="price">{dollars(v.price)}</span>
-        </div>
-        {budget > 0 && (
-          <p className="budget">
-            <span className="budget-bar" aria-hidden="true">
-              <span style={{ width: `${Math.min(100, share * 100)}%` }} />
+        {/* Payment, budget and fuel are one thought — what this costs a month. */}
+        <div className="cost">
+          <div className="money">
+            <span className="payment">
+              {dollars(q.payment)}<small>/mo</small>
             </span>
-            {Math.round(share * 100)}% of your {dollars(budget)}/mo budget
+            <span className="price">{dollars(v.price)}</span>
+          </div>
+          {budget > 0 && (
+            <p className="budget">
+              <span className="budget-bar" aria-hidden="true">
+                <span style={{ width: `${Math.min(100, share * 100)}%` }} />
+              </span>
+              {Math.round(share * 100)}% of your {dollars(budget)}/mo budget
+            </p>
+          )}
+          <p className="fuel">
+            + about {dollars(fuelPerMonth(v.mpgCity, v.mpgHwy))}/mo in gas — {count(FUEL.milesPerMonth)} mi
+            at Wausau's ${FUEL.gasPrice.toFixed(2)}/gal
           </p>
-        )}
-        <p className="fuel">
-          + about {dollars(fuelPerMonth(v.mpgCity, v.mpgHwy))}/mo in gas — {count(FUEL.milesPerMonth)} mi
-          at Wausau's ${FUEL.gasPrice.toFixed(2)}/gal
-        </p>
+        </div>
         {/* Reg Z: payment shown with the terms that produce it. */}
         <p className="disclosure">
           {q.termMonths} months at {percent(inputs.apr)} APR with {dollars(inputs.downPayment)} down

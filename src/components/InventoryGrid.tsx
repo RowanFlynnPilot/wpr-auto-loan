@@ -3,8 +3,8 @@ import { SPONSOR } from '../config/sponsor';
 import { dollars } from '../lib/format';
 import { combinedMpg } from '../lib/fuel';
 import { downToReach, type LoanInputs } from '../lib/loan';
-import { preapprovalLink, trackPreapprovalClick } from '../lib/track';
 import type { Inventory, Vehicle } from '../types';
+import { SponsorLockup } from './SponsorLockup';
 import { VehicleCard } from './VehicleCard';
 
 interface Props {
@@ -41,19 +41,9 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
     <section className="inventory">
       <header>
         <h2>In the lot under {dollars(ceiling)}</h2>
-        <p className="sponsor">
-          {SPONSOR.disclosure} · {SPONSOR.name}
-        </p>
+        <p className="sponsor">{SPONSOR.disclosure}</p>
       </header>
-      <a
-        className="preapproval"
-        href={preapprovalLink()}
-        target="_blank"
-        rel="noopener sponsored"
-        onClick={trackPreapprovalClick}
-      >
-        Get pre-approved at {SPONSOR.name} <span aria-hidden="true">→</span>
-      </a>
+      <SponsorLockup />
 
       {fits.length === 0 ? (
         <p className="empty">

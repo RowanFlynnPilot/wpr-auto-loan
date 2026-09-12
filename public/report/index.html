@@ -28,6 +28,9 @@
         --mono: 'JetBrains Mono', ui-monospace, monospace;
       }
       * { box-sizing: border-box; }
+      /* Surfaces the browser would otherwise style for us. */
+      ::selection { background: #cfe2dc; color: var(--ink); }
+      :root { scrollbar-color: var(--rule) var(--cream); }
       html { background: var(--cream); }
       body { margin: 0; color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.5; }
       h1, h2 { font-family: var(--display); font-weight: 600; margin: 0; }
@@ -43,7 +46,7 @@
       }
       .wpr-masthead a {
         display: inline-flex; align-items: center; justify-content: center;
-        gap: 12px; max-width: 92%; text-decoration: none;
+        gap: 14px; max-width: 94%; text-decoration: none;
       }
       .wpr-masthead .badge { flex-shrink: 0; object-fit: contain; }
       .wpr-masthead .wordmark { max-height: 54px; max-width: 100%; height: auto; width: auto; object-fit: contain; min-width: 0; }
@@ -66,7 +69,7 @@
 
       .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin: 32px 0 8px; }
       .stat { background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px; }
-      .stat b { display: block; font-family: var(--display); font-weight: 700; font-size: 30px; color: var(--teal-deep); line-height: 1.15; }
+      .stat b { display: block; font-family: var(--display); font-weight: 700; font-size: 30px; color: var(--teal-deep); line-height: 1.15; font-variant-numeric: tabular-nums; }
       .stat span { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); }
 
       section { margin-top: 36px; }
@@ -76,7 +79,7 @@
       table { width: 100%; border-collapse: collapse; }
       th { text-align: left; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-soft); padding: 8px 10px; border-bottom: 1px solid var(--ink); }
       td { padding: 9px 10px; border-bottom: 1px solid var(--rule); vertical-align: middle; }
-      td.num, th.num { text-align: right; font-family: var(--mono); white-space: nowrap; }
+      td.num, th.num { text-align: right; font-family: var(--mono); white-space: nowrap; font-variant-numeric: tabular-nums; }
       td.mono { font-family: var(--mono); font-size: 13px; }
       td.bar-cell { width: 40%; }
       .bar { height: 12px; background: var(--teal); border-radius: 2px; min-width: 2px; transform-origin: left; animation: bar-grow 600ms ease-out; }
@@ -92,7 +95,7 @@
   <body>
     <header class="wpr-masthead">
       <a href="https://wausaupilotandreview.com/" target="_blank" rel="noopener noreferrer" aria-label="Wausau Pilot & Review home">
-        <img class="badge" src="../wpr-typewriter-badge.png" alt="" width="42" height="42" />
+        <img class="badge" src="../wpr-typewriter-badge.png" alt="" width="62" height="62" decoding="async" />
         <img class="wordmark" src="../wpr-wordmark.png" alt="Wausau Pilot &amp; Review" width="640" height="82" />
       </a>
       <p class="tagline">Where locals look first for news</p>

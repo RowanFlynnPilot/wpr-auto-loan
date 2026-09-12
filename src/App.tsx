@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Ceiling } from './components/Ceiling';
+import { Colophon } from './components/Colophon';
 import { InputsPanel } from './components/InputsPanel';
 import { InventoryGrid } from './components/InventoryGrid';
-import { Methodology } from './components/Methodology';
 import { TermTable } from './components/TermTable';
 import { maxPrice, type LoanInputs } from './lib/loan';
 import { decodeInputs, encodeInputs } from './lib/share';
@@ -85,8 +85,9 @@ export default function App() {
             className="badge"
             src={`${import.meta.env.BASE_URL}wpr-typewriter-badge.png`}
             alt=""
-            width={42}
-            height={42}
+            width={62}
+            height={62}
+            decoding="async"
           />
           <img
             className="wordmark"
@@ -131,11 +132,7 @@ export default function App() {
         </main>
       </div>
 
-      <footer className="colophon">
-        Estimates only. Your rate, fees and trade-in value are set by the lender and dealer at
-        purchase. Not financial advice.
-        <Methodology />
-      </footer>
+      <Colophon />
       </div>
     </>
   );
