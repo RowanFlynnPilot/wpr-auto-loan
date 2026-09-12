@@ -22,7 +22,8 @@ source from the config. Social share card at `/og-card.png`
 URLs, unique stock) is enforced at ingest and pinned by `feed/test_ingest.py`.
 Live: https://rowanflynnpilot.github.io/wpr-auto-loan/
 Before real launch: register the two Plausible goals (below), swap sponsor.ts
-and the feed, attorney check on the Reg Z wording.
+and the feed, attorney check on the Reg Z wording and on `SPONSOR_DISCLAIMER`
+(a dealer linking to its own financing is a financial-services sponsor).
 
 ## Principles (Rowan's, apply everywhere)
 
@@ -123,6 +124,27 @@ is accepted; anything else falls back to the tool URL with a console error).
 })();
 </script>
 ```
+
+## Brand — Follow the Money
+
+WPR's house system for sponsorable data tools: Fraunces display, Public Sans
+body, JetBrains Mono for every number. Warm ground, teal from the typewriter in
+WPR's press seal. Do not mix in another pairing. Invariants this tool carries:
+the seal-plus-wordmark flag at 62px between a 4px-over-1px slate rule, the
+pinned tagline, the dateline, and a footer that names the paper and its phone.
+
+`--teal-dark` exists because hover must darken: `--teal` is 4.2:1 on paper, so
+brightening a link on hover dropped it under AA. Every hover uses the dark step.
+
+The sponsor lockup is the house pattern — white card ruled on its top edge in
+the accent, `PRESENTED BY` eyebrow, logo at 50px falling back to the name in
+Fraunces, a tagline splitting at the em-dash, the paid action on the right.
+`SPONSOR.logo` and `SPONSOR.tagline` in `sponsor.ts` are what a real dealer
+fills in. Paid outbound links carry `rel="noopener noreferrer sponsored"`;
+`sponsored` is a disclosure requirement, not a technical one.
+
+Sales contact for the placement is `SPONSOR_INQUIRY`
+(weber.chris@wausaupilotandreview.com), shown in the footer.
 
 ## Editorial line
 
