@@ -3,6 +3,7 @@ import { Ceiling } from './components/Ceiling';
 import { Colophon } from './components/Colophon';
 import { InputsPanel } from './components/InputsPanel';
 import { InventoryGrid } from './components/InventoryGrid';
+import { PitchRibbon } from './components/PitchRibbon';
 import { TermTable } from './components/TermTable';
 import { maxPrice, type LoanInputs } from './lib/loan';
 import { decodeInputs, encodeInputs } from './lib/share';
@@ -80,6 +81,7 @@ export default function App() {
 
   return (
     <>
+      <PitchRibbon />
       {/* WPR masthead, same as the paper's other tools (Brewers tracker et al.):
           typewriter press seal + wordmark, tagline, dateline between slate rules. */}
       <header className="wpr-masthead">

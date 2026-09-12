@@ -40,6 +40,18 @@ small { font-size: 0.85em; }
 
 .app { max-width: 1120px; margin: 0 auto; padding: 32px 24px 48px; }
 
+/* Pitch preview ribbon — deliberately outside the tool's palette so it never
+   reads as part of the product. */
+.pitch {
+  background: #f2c14e; border-bottom: 1px solid #8a6d00; color: var(--ink);
+  padding: 10px 24px; font-size: 12.5px; line-height: 1.5;
+  display: flex; align-items: baseline; justify-content: center; gap: 8px 20px; flex-wrap: wrap;
+}
+.pitch p { max-width: 78ch; }
+.pitch b { font-weight: 600; }
+.pitch a { color: #5c4600; font-weight: 600; white-space: nowrap; text-underline-offset: 2px; }
+.pitch a:hover { color: var(--ink); }
+
 /* WPR masthead — same header as the paper's other tools */
 .wpr-masthead {
   border-top: 4px solid var(--slate); border-bottom: 1px solid var(--slate);

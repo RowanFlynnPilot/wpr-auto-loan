@@ -8,7 +8,9 @@ declare global {
 }
 
 export function vdpLink(v: Vehicle): string {
-  const url = new URL(v.vdpUrl);
+  // A pitch preview has no per-vehicle URLs on the prospect's site, so every
+  // card points at their own used-inventory search instead of a fake VDP.
+  const url = new URL(SPONSOR.inventoryUrl ?? v.vdpUrl);
   url.searchParams.set('utm_source', SPONSOR.utmSource);
   url.searchParams.set('utm_medium', 'tool');
   url.searchParams.set('utm_campaign', SPONSOR.utmCampaign);
