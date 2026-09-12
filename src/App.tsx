@@ -6,19 +6,10 @@ import { InventoryGrid } from './components/InventoryGrid';
 import { PitchRibbon } from './components/PitchRibbon';
 import { TermTable } from './components/TermTable';
 import { maxPrice, type LoanInputs } from './lib/loan';
+import { DEFAULTS } from './config/scenario';
 import { PITCH } from './config/sponsor';
 import { decodeInputs, encodeInputs } from './lib/share';
 import type { Inventory } from './types';
-
-const DEFAULTS: LoanInputs = {
-  monthlyIncome: 5000,
-  paymentShare: 0.1,
-  downPayment: 2000,
-  tradeValue: 0,
-  tradeOwed: 0,
-  apr: 0.069,
-  termMonths: 60,
-};
 
 // A shared link with a mangled hash falls back to the defaults rather than
 // bricking the tool for the reader; the decode error still lands in the console.

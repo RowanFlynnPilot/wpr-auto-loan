@@ -18,10 +18,15 @@ export function vdpLink(v: Vehicle): string {
   return url.toString();
 }
 
-export function trackVehicleClick(v: Vehicle): void {
+export function trackVehicleClick(v: Vehicle, placement: 'tool' | 'mini' = 'tool'): void {
   window.plausible('Vehicle click', {
-    props: { sponsor: SPONSOR.name, stock: v.stock, body: v.body, price: v.price },
+    props: { sponsor: SPONSOR.name, stock: v.stock, body: v.body, price: v.price, placement },
   });
+}
+
+// The mini's job is sending readers into the full tool; this is how it's scored.
+export function trackMiniClick(target: 'tool'): void {
+  window.plausible('Mini Click', { props: { sponsor: SPONSOR.name, target } });
 }
 
 export function preapprovalLink(): string {

@@ -277,3 +277,50 @@ input[type='range']:focus-visible { outline: 2px solid var(--teal); outline-offs
   .card { transition: border-color 120ms ease, box-shadow 120ms ease; }
   .budget-bar span { transition: transform 200ms ease; }
 }
+
+/* Mini — the sidebar slideshow (mini.html). Marked on its top edge like the
+   lockup: it is a sponsored surface. */
+.mini-page { padding: 8px; }
+.mini {
+  max-width: 420px; margin: 0 auto; background: var(--paper);
+  border: 1px solid var(--rule); border-top: 3px solid var(--teal);
+}
+.mini-pitch {
+  padding: 6px 12px; background: #f2c14e; border-bottom: 1px solid #8a6d00;
+  font-size: 11px; font-weight: 600; color: var(--ink);
+}
+.mini-slide img { display: block; width: 100%; aspect-ratio: 4 / 3; height: auto; object-fit: cover; }
+.mini .photo-blank { aspect-ratio: 4 / 3; }
+.mini .photo-blank svg { width: 48%; }
+.mini-body { padding: 12px 14px 10px; }
+.mini h2 { font-size: 19px; line-height: 1.15; }
+.mini h2 small { font-family: var(--body); font-weight: 500; font-size: 13px; color: var(--ink-soft); }
+.mini-money { display: flex; justify-content: space-between; align-items: baseline; margin-top: 6px; font-variant-numeric: tabular-nums; }
+.mini-pay { font-family: var(--mono); font-size: 24px; font-weight: 500; color: var(--teal-deep); }
+.mini-pay small { font-size: 13px; color: var(--ink-soft); }
+.mini-price { font-family: var(--mono); font-size: 14px; color: var(--ink-soft); }
+.mini-terms { margin-top: 4px; font-size: 10.5px; line-height: 1.45; color: var(--ink-soft); }
+.mini-controls {
+  display: flex; align-items: center; gap: 6px; padding: 0 10px 8px;
+  font-family: var(--mono); font-size: 11px; color: var(--ink-soft);
+}
+.mini-controls button {
+  font: inherit; color: var(--teal-deep); background: transparent; border: 1px solid var(--rule);
+  border-radius: 999px; min-width: 28px; height: 28px; padding: 0 8px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.mini-controls button:hover { border-color: var(--teal); color: var(--teal-dark); }
+.mini-controls button:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.mini-count { min-width: 5.5ch; text-align: center; }
+.mini-play { margin-left: auto; font-family: var(--body); font-size: 11px; font-weight: 600; }
+.mini-foot { border-top: 1px solid var(--rule); padding: 10px 14px 12px; display: grid; gap: 6px; }
+.mini-cta {
+  display: block; text-align: center; padding: 9px 12px; border-radius: 4px;
+  background: var(--teal-deep); color: var(--cream); font-weight: 600; text-decoration: none;
+}
+.mini-cta:hover { background: var(--teal-dark); }
+.mini-cta:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.mini-vdp { font-size: 12px; font-weight: 600; color: var(--teal-deep); text-decoration: none; }
+.mini-vdp:hover, .mini-vdp:focus-visible { color: var(--teal-dark); }
+.mini-sponsor { font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; color: var(--ink-soft); }
+.mini .error, .mini .loading { margin: 0; border: 0; }
