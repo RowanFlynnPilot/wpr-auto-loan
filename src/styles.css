@@ -53,7 +53,7 @@ small { font-size: 0.85em; }
 .wpr-masthead .badge { flex-shrink: 0; object-fit: contain; }
 .wpr-masthead .wordmark { max-height: 54px; max-width: 100%; height: auto; width: auto; object-fit: contain; min-width: 0; }
 .wpr-masthead .tagline {
-  font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+  font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
   font-weight: 600; color: var(--slate); margin-top: 8px;
 }
 .wpr-masthead .dateline {
@@ -153,7 +153,7 @@ input[type='range']:focus-visible { outline: 2px solid var(--teal); outline-offs
    identity left, offer centre, the paid action right. */
 .lockup {
   background: #fff; border: 1px solid var(--rule); border-top: 3px solid var(--teal);
-  border-radius: 4px; padding: 14px 18px; margin-bottom: 18px;
+  padding: 14px 18px; margin-bottom: 18px;
   display: flex; align-items: center; gap: 12px 28px; flex-wrap: wrap;
 }
 .lockup-eyebrow {
@@ -205,7 +205,7 @@ input[type='range']:focus-visible { outline: 2px solid var(--teal); outline-offs
 .price { font-family: var(--mono); font-size: 14px; color: var(--ink-soft); }
 .budget { font-size: 11px; color: var(--ink-soft); }
 .budget-bar { display: block; height: 4px; margin-bottom: 4px; background: var(--rule); border-radius: 2px; overflow: hidden; }
-.budget-bar span { display: block; height: 100%; background: var(--teal-deep); border-radius: 2px; }
+.budget-bar span { display: block; height: 100%; width: 100%; background: var(--teal-deep); border-radius: 2px; transform-origin: left; }
 .fuel { font-size: 12px; color: var(--ink-soft); }
 .payment, .price { font-variant-numeric: tabular-nums; }
 .disclosure { font-size: 10.5px; color: var(--ink-soft); line-height: 1.45; }
@@ -236,6 +236,7 @@ input[type='range']:focus-visible { outline: 2px solid var(--teal); outline-offs
 
 @media (max-width: 760px) {
   .app { padding: 20px 16px 40px; }
+  .lockup .preapproval { margin-left: 0; width: 100%; text-align: center; }
   /* Single-column cards: a 16:9 placeholder would be most of the screen. */
   .photo-blank { aspect-ratio: 3 / 1; }
   .photo-blank svg { width: 34%; }
@@ -249,5 +250,5 @@ input[type='range']:focus-visible { outline: 2px solid var(--teal); outline-offs
 @media (prefers-reduced-motion: no-preference) {
   .ceiling .figure { transition: color 120ms ease; }
   .card { transition: border-color 120ms ease, box-shadow 120ms ease; }
-  .budget-bar span { transition: width 200ms ease; }
+  .budget-bar span { transition: transform 200ms ease; }
 }

@@ -44,7 +44,7 @@ export function VehicleCard({ vehicle: v, inputs }: Props) {
           {budget > 0 && (
             <p className="budget">
               <span className="budget-bar" aria-hidden="true">
-                <span style={{ width: `${Math.min(100, share * 100)}%` }} />
+                <span style={{ transform: `scaleX(${Math.min(1, share)})` }} />
               </span>
               {Math.round(share * 100)}% of your {dollars(budget)}/mo budget
             </p>
