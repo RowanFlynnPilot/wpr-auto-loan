@@ -10,7 +10,13 @@ describe('resolvePitch', () => {
     const pitch = resolvePitch('?pitch=brickners')!;
     expect(pitch.prospect).toBe("Brickner's of Wausau");
     expect(pitch.sponsor.preapprovalUrl).toContain('bricknersofwausau.net');
-    expect(pitch.sponsor.inventoryUrl).toContain('bricknersofwausau.net');
+    expect(pitch.inventoryFile).toBe('inventory.brickners.json');
+    expect(pitch.listingsAsOf).toMatch(/\d{4}/);
+  });
+  it('links each card to its own vehicle page when the listings carry one', () => {
+    // inventoryUrl is the fallback for a prospect with no per-vehicle pages;
+    // these listings have real ones, so it stays null.
+    expect(resolvePitch('?pitch=brickners')!.sponsor.inventoryUrl).toBeNull();
   });
   it('falls back to the live sponsor on an unknown name', () => {
     expect(resolvePitch('?pitch=nobody')).toBeNull();

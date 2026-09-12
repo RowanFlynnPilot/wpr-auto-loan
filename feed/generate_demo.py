@@ -81,15 +81,14 @@ CDJR = [
     ("FIAT", "500X", "Trekking", "SUV", "AWD", 24, 30, 27000),
 ]
 
-# Trade-ins: what gets taken in on a deal in central Wisconsin.
+# Trade-ins: what gets taken in on a deal in central Wisconsin. Kept for the
+# next prospect who needs a franchise-weighted synthetic lot.
 TRADES = [v for v in CATALOG if v[0] not in {"Jeep", "Ram", "Dodge", "Chrysler", "FIAT"}]
 
 PROFILES = {
     # Frozen: the sample report cites these stock numbers.
     "demo": {"out": "demo.csv", "prefix": "DM", "house": None, "house_share": 0.0,
              "vdp": "https://demo-motors.example/inventory/{stock}"},
-    "brickners": {"out": "brickners.csv", "prefix": "BW", "house": CDJR, "house_share": 0.65,
-                  "vdp": "https://www.bricknersofwausau.net/search/used-wausau-wi/?cy=54403&tp=used"},
 }
 
 COLORS = ["Magnetic Gray", "Super White", "Midnight Black", "Celestial Silver",

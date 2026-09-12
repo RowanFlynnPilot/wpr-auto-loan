@@ -31,6 +31,7 @@ jobs:
       - run: python -m unittest discover -s feed -p 'test_*.py'
       - run: python feed/ingest.py
       # Pitch-preview inventory, loaded only by ?pitch=brickners.
+      - run: python feed/build_listings.py feed/brickners_listings.json feed/brickners.csv
       - run: python feed/ingest.py
         env:
           FEED_PATH: feed/brickners.csv

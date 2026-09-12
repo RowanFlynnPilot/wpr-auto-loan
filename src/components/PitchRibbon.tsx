@@ -11,8 +11,9 @@ export function PitchRibbon() {
     <aside className="pitch">
       <p>
         <b>Preview prepared for {PITCH.prospect}.</b> This is a proposal from Wausau Pilot &amp;
-        Review, not a live sponsorship. The vehicles below are sample data — not real listings, and
-        not real prices.
+        Review, not a live sponsorship. The vehicles below are {PITCH.prospect}&rsquo;s own published
+        listings as of {PITCH.listingsAsOf} — a snapshot, not a live feed. Prices and availability
+        change; confirm with the dealer.
       </p>
       <a href={`mailto:${SPONSOR_INQUIRY}?subject=${SUBJECT}`}>Talk to us about this placement</a>
     </aside>

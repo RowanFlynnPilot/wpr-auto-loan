@@ -12,6 +12,13 @@ interface Props {
   inputs: LoanInputs;
 }
 
+// Real feeds have gaps, and some publish one combined rating rather than a
+// city/highway pair — say which, and drop what the dealer didn't supply.
+function meta(v: Vehicle): string[] {
+  const mpg = v.mpgCity === v.mpgHwy ? `${v.mpgCity} mpg combined` : `${v.mpgCity}/${v.mpgHwy} mpg`;
+  return [`${count(v.mileage)} mi`, v.drivetrain, mpg, v.exteriorColor].filter((p) => p !== '');
+}
+
 export function VehicleCard({ vehicle: v, inputs }: Props) {
   const q = quote(v.price, inputs);
   const budget = maxPayment(inputs);
@@ -30,9 +37,7 @@ export function VehicleCard({ vehicle: v, inputs }: Props) {
         <h3>
           {v.year} {v.make} {v.model} <small>{v.trim}</small>
         </h3>
-        <p className="meta">
-          {count(v.mileage)} mi · {v.drivetrain} · {v.mpgCity}/{v.mpgHwy} mpg · {v.exteriorColor}
-        </p>
+        <p className="meta">{meta(v).join(' · ')}</p>
         {/* Payment, budget and fuel are one thought — what this costs a month. */}
         <div className="cost">
           <div className="money">

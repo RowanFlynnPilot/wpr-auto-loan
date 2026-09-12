@@ -27,8 +27,10 @@ const SPONSORED: Sponsor = {
 export interface Pitch {
   /** Who this preview was prepared for, named on the ribbon. */
   prospect: string;
-  /** Built by feed/generate_demo.py from this prospect's own franchise mix. */
+  /** Built from the prospect's own published listings. */
   inventoryFile: string;
+  /** When those listings were captured. Shown to the reader; prices move. */
+  listingsAsOf: string;
   sponsor: Sponsor;
 }
 
@@ -40,13 +42,15 @@ const PITCHES: Record<string, Pitch> = {
   brickners: {
     prospect: "Brickner's of Wausau",
     inventoryFile: 'inventory.brickners.json',
+    listingsAsOf: 'September 12, 2026',
     sponsor: {
       name: "Brickner's of Wausau",
       disclosure: 'Sponsored inventory',
       logo: null,
       tagline: 'Chrysler, Dodge, Jeep, Ram and FIAT — 2525 Grand Ave, Wausau',
       preapprovalUrl: 'https://www.bricknersofwausau.net/finance-application/',
-      inventoryUrl: 'https://www.bricknersofwausau.net/search/used-wausau-wi/?cy=54403&tp=used',
+      // Real listings carry their own vehicle pages, so cards link to the car.
+      inventoryUrl: null,
       utmSource: 'wausaupilot',
       utmCampaign: 'what-can-i-drive',
     },
