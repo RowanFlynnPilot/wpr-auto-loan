@@ -146,6 +146,29 @@ fills in. Paid outbound links carry `rel="noopener noreferrer sponsored"`;
 Sales contact for the placement is `SPONSOR_INQUIRY`
 (weber.chris@wausaupilotandreview.com), shown in the footer.
 
+## Pitch previews
+
+`?pitch=<key>` puts a prospect's own name on the live tool for a sales call —
+the house demo-mode pattern. Keys live in `PITCHES` in `sponsor.ts`; the first
+is `brickners` (Brickner's of Wausau). A preview swaps the lockup, the
+pre-approval link and every card's outbound link to the prospect's real pages.
+Where a prospect has no per-vehicle URLs, set `inventoryUrl` and the cards
+point at their used-inventory search instead of a fabricated VDP.
+
+Two rules, because the tool is deployed publicly:
+
+- **A preview is never the default.** No parameter means the signed sponsor.
+  A reader who lands on the tool must never see a prospect's name.
+- **A preview says what it is.** `PitchRibbon` names who it was prepared for,
+  states that it is a proposal and not a live sponsorship, and says the
+  vehicles are sample data rather than real listings or prices. The footer's
+  provenance line tells the same truth. Do not remove either to make a
+  screenshot look cleaner — a forwarded link has to explain itself.
+
+No prospect logo is bundled; the name sets in Fraunces, which is the house
+fallback and avoids shipping art we have no rights to. When a dealer actually
+signs, they move out of `PITCHES` and into `SPONSORED`.
+
 ## Editorial line
 
 The calculator is neutral and the math is ours. The inventory panel is the
