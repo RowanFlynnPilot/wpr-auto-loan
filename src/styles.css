@@ -240,6 +240,13 @@ input[type='range']:focus-visible { outline: 2px solid var(--teal); outline-offs
   .terms th:last-child, .terms td:last-child { display: none; }
 }
 
+/* In the narrow rail two fields side by side leave ~118px each, which wraps
+   "Trade-in worth" and "Still owed on it". Full width below the phone layout,
+   where the rail is the whole page and there is room again. */
+@media (min-width: 761px) and (max-width: 900px) {
+  .pair { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 760px) {
   .app { padding: 20px 16px 40px; }
   .lockup .preapproval { margin-left: 0; width: 100%; text-align: center; }
