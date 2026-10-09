@@ -48,8 +48,8 @@ export function VehicleCard({ vehicle: v, inputs }: Props) {
             </p>
           )}
           <p className="fuel">
-            + about {dollars(fuelPerMonth(v.mpgCity, v.mpgHwy))}/mo in gas — {count(FUEL.milesPerMonth)} mi
-            at Wausau’s ${FUEL.gasPrice.toFixed(2)}/gal
+            + about {dollars(fuelPerMonth(v.mpgCity, v.mpgHwy))}/mo in gas ({count(FUEL.milesPerMonth)} mi/mo at
+            Wausau’s ${FUEL.gasPrice.toFixed(2)}/gal)
           </p>
         </div>
         {/* Reg Z: payment shown with the terms that produce it. */}

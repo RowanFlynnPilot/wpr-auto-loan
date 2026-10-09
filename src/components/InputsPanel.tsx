@@ -67,7 +67,7 @@ export function InputsPanel({ inputs, onChange }: Props) {
             is also the bound a shared link accepts; with no income there is no
             share to derive, so the field waits. */}
         <label className="pay">
-          <span>Or a monthly payment</span>
+          <span>Or a payment</span>
           <Money
             name="payment"
             value={Math.round(maxPayment(inputs))}

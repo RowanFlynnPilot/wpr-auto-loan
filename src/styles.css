@@ -311,7 +311,8 @@ input[type='range']:focus-visible { outline: 2px solid var(--teal); outline-offs
    "Trade-in worth" and "Still owed on it". Full width below the phone layout,
    where the rail is the whole page and there is room again. */
 @media (min-width: 761px) and (max-width: 900px) {
-  .pair { grid-template-columns: 1fr; }
+  .pair, .inputs .pay { grid-template-columns: 1fr; }
+  .inputs .pay .field { width: 100%; }
 }
 
 @media (max-width: 760px) {
