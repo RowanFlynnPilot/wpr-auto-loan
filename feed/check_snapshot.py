@@ -46,13 +46,15 @@ def main() -> int:
         codes = list(pool.map(lambda c: status(c[2]), checks))
 
     gone = {"photo": 0, "page": 0}
+    unjudged: dict[tuple, int] = {}
     for (v, kind, url), code in zip(checks, codes):
-        name = f"{v['sku']} {v['yr']} {v['mk']} {v['md']}"
         if code in GONE:
             gone[kind] += 1
-            print(f"{kind} gone ({code}): {name} — {url}")
+            print(f"{kind} gone ({code}): {v['sku']} {v['yr']} {v['mk']} {v['md']} - {url}")
         elif code != 200:
-            print(f"{kind} {code}, not judged: {name}")
+            unjudged[(kind, code)] = unjudged.get((kind, code), 0) + 1
+    for (kind, code), n in sorted(unjudged.items(), key=str):
+        print(f"{n} {kind} URLs answered {code}: not judged")
     print(f"{len(listings)} listings captured {data['capturedAt']}: "
           f"{gone['photo']} photos gone, {gone['page']} pages gone")
     return 1 if gone["photo"] or gone["page"] else 0
