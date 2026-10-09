@@ -16,9 +16,11 @@ describe('destination', () => {
     expect(u.origin + u.pathname).toBe(to);
     expect(u.searchParams.get('utm_source')).toBe('wausaupilotandreview');
   });
-  it('refuses a destination that is not http(s)', () => {
-    const u = new URL(destination('?to=javascript:alert(1)', origin, base));
-    expect(u.origin + u.pathname).toBe(origin + base);
+  it('refuses a destination that is not the publisher over https', () => {
+    for (const to of ['javascript:alert(1)', 'https://evil.example/', 'http://wausaupilotandreview.com/x/', 'not a url']) {
+      const u = new URL(destination(`?to=${encodeURIComponent(to)}`, origin, base));
+      expect(u.origin + u.pathname).toBe(origin + base);
+    }
   });
   it('carries a pitch preview through to the full tool', () => {
     const u = new URL(destination('?pitch=brickners', origin, base));

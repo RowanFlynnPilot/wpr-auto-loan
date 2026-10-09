@@ -51,6 +51,11 @@ export function decodeInputs(hash: string): LoanInputs {
 // Only the publisher's own domain is accepted as a host.
 const PUBLISHER = /(^|\.)wausaupilotandreview\.com$/;
 
+// Only the publisher's own pages, over https, may stand in for the tool.
+export function isPublisher(url: URL): boolean {
+  return url.protocol === 'https:' && PUBLISHER.test(url.hostname);
+}
+
 export function shareUrl(search: string, hash: string, href: string): string {
   const host = new URLSearchParams(search).get('host');
   if (host === null) {
@@ -59,7 +64,7 @@ export function shareUrl(search: string, hash: string, href: string): string {
     return url.toString();
   }
   const url = new URL(host);
-  if (url.protocol !== 'https:' || !PUBLISHER.test(url.hostname)) throw new Error(`Refusing share host ${host}`);
+  if (!isPublisher(url)) throw new Error(`Refusing share host ${host}`);
   url.hash = hash;
   return url.toString();
 }

@@ -12,7 +12,7 @@ import { Photo } from './Photo';
 const DWELL_MS = 6000;
 
 // Newest model years first; the reader sees the lot's best foot.
-function order(vehicles: Vehicle[]): Vehicle[] {
+export function order(vehicles: Vehicle[]): Vehicle[] {
   return [...vehicles].sort((a, b) => b.year - a.year || a.price - b.price);
 }
 
