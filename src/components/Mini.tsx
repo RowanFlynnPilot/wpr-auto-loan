@@ -65,7 +65,9 @@ export function Mini() {
     img.src = next.photoUrl;
   }, [index, lot, n]);
 
-  const tool = destination(window.location.search, window.location.origin, import.meta.env.BASE_URL);
+  // Resolved once: a refused ?to= logs its error, and it should log once, not
+  // on every slide.
+  const tool = useMemo(() => destination(window.location.search, window.location.origin, import.meta.env.BASE_URL), []);
 
   if (loadError) {
     return (
