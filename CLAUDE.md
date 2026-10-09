@@ -152,7 +152,10 @@ Fraunces, a tagline splitting at the em-dash, the paid action on the right.
 `SPONSOR.logo` (src plus natural width and height, so the card reserves the
 room before it loads) and `SPONSOR.tagline` in `sponsor.ts` are what a real
 dealer fills in. Hover styles live behind `@media (hover: hover) and (pointer:
-fine)`; form controls are 16px so iOS never zooms into them. Paid outbound links carry `rel="noopener noreferrer sponsored"`;
+fine)`; form controls are 16px so iOS never zooms into them. Under 480px a
+vehicle card is a list row (photo left, name and cost beside it, the rest
+beneath) at about half the stacked card's height; the price strip is a
+beeswarm (`src/lib/swarm.ts`). Paid outbound links carry `rel="noopener noreferrer sponsored"`;
 `sponsored` is a disclosure requirement, not a technical one.
 
 Sales contact for the placement is `SPONSOR_INQUIRY`
@@ -234,7 +237,8 @@ one vehicle at a time from the sponsor's lot — photo, year/make/model, an
 example payment at `DEFAULTS` from `config/scenario.ts` with the terms named
 beside it, the price — with previous/next, a counter, a pause control, and a
 six-second clock that stops on hover or focus and never starts under
-`prefers-reduced-motion`. Newest model years lead. Both links use
+`prefers-reduced-motion`. A sideways swipe steps it on touch. Newest model
+years lead. Both links use
 `target="_top"` so they leave the iframe; `?pitch=` carries through and shows
 its own compact ribbon line. Height messaging uses id `wpr-auto-loan-mini`.
 
