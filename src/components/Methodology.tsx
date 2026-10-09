@@ -18,7 +18,7 @@ export function Methodology() {
         </li>
         <li>
           <b>Wisconsin sales tax.</b> {percent(w.stateSalesTax)} state plus {percent(w.countySalesTax)}{' '}
-          Marathon County. A trade-in's full value is credited against the taxable price.
+          Marathon County. A trade-in’s full value is credited against the taxable price.
         </li>
         <li>
           <b>Fees.</b> Title {cents(w.titleFee)} (effective Oct 1, 2025), lien {cents(w.lienFee)}, registration{' '}
@@ -27,12 +27,12 @@ export function Methodology() {
         </li>
         <li>
           <b>Payments.</b> Standard amortization at the APR you enter, computed by us for every vehicle —
-          never the dealer's number.
+          never the dealer’s number.
         </li>
         <li>
           <b>Gas.</b> {count(FUEL.milesPerMonth)} miles a month (the FHWA average) at ${FUEL.gasPrice.toFixed(2)}
           /gal, the Wausau metro regular average reported by GasBuddy as of {FUEL.gasAsOf}. Combined economy
-          is the EPA 55/45 city/highway blend of each vehicle's rated mpg.
+          is the EPA 55/45 city/highway blend of each vehicle’s rated mpg.
         </li>
         <li>
           <b>County income.</b> Median Marathon County household income of{' '}
@@ -40,7 +40,7 @@ export function Methodology() {
           table B19013.
         </li>
         <li>
-          <b>Inventory.</b> From {SPONSOR.name}'s listing feed. The prices are theirs; every other number is
+          <b>Inventory.</b> From {SPONSOR.name}’s listing feed. The prices are theirs; every other number is
           ours.
         </li>
       </ul>

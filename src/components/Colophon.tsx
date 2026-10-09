@@ -45,13 +45,13 @@ export function Colophon() {
         <p>
           {PITCH ? (
             <>
-              The vehicles in this preview were captured from {PITCH.prospect}'s own published
+              The vehicles in this preview were captured from {PITCH.prospect}’s own published
               listings on {capturedOn(PITCH.capturedOn)} ({capturedAgo(PITCH.capturedOn)}) and are a
-              one-time snapshot. In the live tool the list comes from the dealer's feed and is rebuilt daily.
+              one-time snapshot. In the live tool the list comes from the dealer’s feed and is rebuilt daily.
             </>
           ) : (
             <>
-              Inventory comes from {SPONSOR.name}'s own listing feed and is rebuilt daily; the prices
+              Inventory comes from {SPONSOR.name}’s own listing feed and is rebuilt daily; the prices
               are theirs.
             </>
           )}{' '}

@@ -104,7 +104,7 @@ export function Ceiling({ inputs, ceiling, lot }: Props) {
       <p className="basis">
         {dollars(maxPayment(inputs))} a month for {inputs.termMonths} months at {percent(inputs.apr)} APR.
         That price carries {cents(q.salesTax)} in sales tax and {cents(purchaseFees())} in title, plate,
-        registration and Marathon County wheel tax, so you'd finance {dollars(q.financed)}.
+        registration and Marathon County wheel tax, so you’d finance {dollars(q.financed)}.
       </p>
       <p className="levers">
         To raise it: another $500 down adds {dollars(levers.down500)}
