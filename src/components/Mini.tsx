@@ -6,7 +6,7 @@ import { quote } from '../lib/loan';
 import { destination } from '../lib/mini';
 import { trackMiniClick, trackVehicleClick, vdpLink } from '../lib/track';
 import type { Inventory, Vehicle } from '../types';
-import { BodyIcon } from './BodyIcon';
+import { Photo } from './Photo';
 
 const DWELL_MS = 6000;
 
@@ -90,13 +90,7 @@ export function Mini() {
 
       {/* Announce slides only when the clock is stopped; a rotating live region is noise. */}
       <div className="mini-slide" aria-live={playing && !held ? 'off' : 'polite'} aria-atomic="true">
-        {v.photoUrl ? (
-          <img src={v.photoUrl} alt={`${v.year} ${v.make} ${v.model}`} width={640} height={480} />
-        ) : (
-          <div className="photo-blank" aria-hidden="true">
-            <BodyIcon body={v.body} />
-          </div>
-        )}
+        <Photo key={v.stock} vehicle={v} width={640} height={480} />
         <div className="mini-body">
           <h2>
             {v.year} {v.make} {v.model} <small>{v.trim}</small>

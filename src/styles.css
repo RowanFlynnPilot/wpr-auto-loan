@@ -203,7 +203,7 @@ input[type='range']:focus-visible { outline: 2px solid var(--teal); outline-offs
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; }
 .card { background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; }
 .card:hover { border-color: var(--teal); box-shadow: 0 2px 10px rgba(30, 38, 36, 0.08); }
-.card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+.card img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
 .photo-blank { aspect-ratio: 16 / 9; background: var(--cream); display: grid; place-items: center; align-content: center; gap: 2px; border-bottom: 1px solid var(--rule); }
 .photo-blank svg { width: 56%; color: var(--ink-soft); opacity: 0.4; }
 .photo-blank span { font-family: var(--display); font-size: 13px; color: var(--ink-soft); font-style: italic; letter-spacing: 0.01em; }

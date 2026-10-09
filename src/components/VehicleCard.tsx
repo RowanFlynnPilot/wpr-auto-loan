@@ -2,7 +2,7 @@ import { SPONSOR } from '../config/sponsor';
 import { FUEL } from '../config/wisconsin';
 import { count, dollars, percent } from '../lib/format';
 import { fuelPerMonth } from '../lib/fuel';
-import { BodyIcon } from './BodyIcon';
+import { Photo } from './Photo';
 import { maxPayment, quote, type LoanInputs } from '../lib/loan';
 import { trackVehicleClick, vdpLink } from '../lib/track';
 import type { Vehicle } from '../types';
@@ -25,14 +25,7 @@ export function VehicleCard({ vehicle: v, inputs }: Props) {
   const share = budget > 0 ? q.payment / budget : 0;
   return (
     <article className="card">
-      {v.photoUrl ? (
-        <img src={v.photoUrl} alt={`${v.year} ${v.make} ${v.model}`} loading="lazy" />
-      ) : (
-        <div className="photo-blank" aria-hidden="true">
-          <BodyIcon body={v.body} />
-          <span>{v.make}</span>
-        </div>
-      )}
+      <Photo vehicle={v} width={640} height={480} loading="lazy" />
       <div className="body">
         <h3>
           {v.year} {v.make} {v.model} <small>{v.trim}</small>

@@ -30,6 +30,10 @@ COLUMNS = [
 ]
 
 
+def page_url(v: dict) -> str:
+    return v["url"] if v["url"].startswith("https://") else SITE + v["url"]
+
+
 def to_row(v: dict) -> dict:
     mpg = v["mpg"]
     return {
@@ -49,7 +53,7 @@ def to_row(v: dict) -> dict:
         "exterior_color": v["col"],
         "features": "|".join(v["ft"]),
         "photo_url": v["img"],
-        "vdp_url": v["url"] if v["url"].startswith("https://") else SITE + v["url"],
+        "vdp_url": page_url(v),
     }
 
 
