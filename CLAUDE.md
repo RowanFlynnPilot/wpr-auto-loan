@@ -188,6 +188,18 @@ it goes through `ingest.py` like any other feed, so the same contract applies.
 `ingest.py` takes `OUT_PATH`, the workflow builds and ingests each CSV, and a
 pitch loads the file named in `inventoryFile`.
 
+**Recapturing.** The dealer's site sits behind a Cloudflare challenge, so the
+capture is done in a real browser, not a script. Their search page publishes
+one `Vehicle` JSON-LD block per result (price, mileage, VIN, stock, photo,
+page, one combined mpg); body style appears only as the search facet
+(`/search/used/?bd=<id>&tp=used&ct=48&p=N`), so the capture runs one pass per
+facet and records the facet label as `bd`; drivetrain comes from the result
+card's details table; features are matched from the dealer's description
+text. `build_listings.py` maps `bd` onto the canonical bodies (`BODIES` —
+re-check the odd labels against their vehicles each time) and drops, by name,
+rows with no price, no mpg, or an electric drivetrain. The snapshot keeps the
+facet counts and the method in its header. Oct 9 2026: 194 captured, 169 shown.
+
 **A snapshot is not a feed.** Prices and availability move daily. The capture
 date is in the file *and* on the page — `capturedOn` (YYYY-MM-DD) drives the
 ribbon, the lot footer, the colophon and the mini, each saying the date and
