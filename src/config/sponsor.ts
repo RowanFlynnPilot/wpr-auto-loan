@@ -33,6 +33,8 @@ export interface Pitch {
   inventoryFile: string;
   /** When those listings were captured, YYYY-MM-DD. Shown to the reader with its age; prices move. */
   capturedOn: string;
+  /** How many vehicles the dealer listed that day. The feed shows those with a price and fuel economy. */
+  listed: number;
   sponsor: Sponsor;
 }
 
@@ -45,6 +47,7 @@ const PITCHES: Record<string, Pitch> = {
     prospect: "Brickner's of Wausau",
     inventoryFile: 'inventory.brickners.json',
     capturedOn: '2026-10-09',
+    listed: 194,
     sponsor: {
       name: "Brickner's of Wausau",
       disclosure: 'Sponsored inventory',

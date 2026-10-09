@@ -168,6 +168,9 @@ function PriceLine({ ceiling, lot }: { ceiling: number; lot: LotDot[] }) {
   const x = (price: number) => PAD + (price / domain) * (W - PAD * 2);
   const ticks = Array.from({ length: domain / 10_000 + 1 }, (_, k) => k * 10_000);
   const under = lot.filter((d) => d.price <= ceiling).length;
+  // A real lot is a couple of hundred dots: smaller, in more rows, so the
+  // strip reads as density rather than a smear.
+  const [r, rows, step] = lot.length > 80 ? [3, 7, 4] : [4, 5, 4.5];
 
   return (
     <figure className="priceline" ref={ref}>
@@ -185,8 +188,8 @@ function PriceLine({ ceiling, lot }: { ceiling: number; lot: LotDot[] }) {
           <circle
             key={k}
             cx={x(d.price)}
-            cy={36 + ((k % 5) - 2) * 4.5}
-            r={4}
+            cy={36 + ((k % rows) - Math.floor(rows / 2)) * step}
+            r={r}
             className={d.price <= ceiling ? 'dot in' : 'dot out'}
           >
             <title>{`${d.label} — ${dollars(d.price)}`}</title>

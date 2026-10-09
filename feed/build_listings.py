@@ -57,6 +57,21 @@ BODIES = {
 }
 
 
+# The card shows a vehicle's first four features. Matched from the dealer's
+# text, almost every car has Bluetooth and CarPlay; what sets one apart goes
+# first. Anything not listed here keeps its place after these.
+RANK = [
+    "One owner", "Clean CARFAX", "Third row", "Tow package", "Sunroof", "Leather seats",
+    "Heated seats", "Heated steering wheel", "Navigation", "Adaptive cruise",
+    "Blind-spot monitor", "Remote start", "Backup camera", "Keyless start",
+    "Apple CarPlay", "Android Auto", "Bluetooth",
+]
+
+
+def ordered(features: list) -> list:
+    return sorted(features, key=lambda f: RANK.index(f) if f in RANK else len(RANK))
+
+
 def page_url(v: dict) -> str:
     return v["url"] if v["url"].startswith("https://") else SITE + v["url"]
 
@@ -95,7 +110,7 @@ def to_row(v: dict) -> dict:
         "highway_mpg": mpg,
         "drivetrain": v["dr"],
         "exterior_color": v["col"],
-        "features": "|".join(v["ft"]),
+        "features": "|".join(ordered(v["ft"])),
         "photo_url": v["img"],
         "vdp_url": page_url(v),
     }

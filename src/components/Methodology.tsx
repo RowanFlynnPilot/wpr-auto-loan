@@ -1,4 +1,5 @@
-import { SPONSOR } from '../config/sponsor';
+import { PITCH, SPONSOR } from '../config/sponsor';
+import { capturedOn } from '../lib/snapshot';
 import { COUNTY_MEDIAN_HOUSEHOLD_INCOME, FUEL, WISCONSIN } from '../config/wisconsin';
 import { cents, count, dollars, percent } from '../lib/format';
 import { purchaseFees } from '../lib/loan';
@@ -40,8 +41,13 @@ export function Methodology() {
           table B19013.
         </li>
         <li>
-          <b>Inventory.</b> From {SPONSOR.name}’s listing feed. The prices are theirs; every other number is
-          ours.
+          <b>Inventory.</b>{' '}
+          {PITCH ? (
+            <>From {PITCH.prospect}’s own published listings, captured {capturedOn(PITCH.capturedOn)}.</>
+          ) : (
+            <>From {SPONSOR.name}’s listing feed.</>
+          )}{' '}
+          The prices are theirs; every other number is ours.
         </li>
       </ul>
     </details>

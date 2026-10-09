@@ -7,7 +7,7 @@ invented number is dropped with its reason, and the row shape holds.
 """
 import unittest
 
-from build_listings import BODIES, body, page_url, reason_to_drop, to_row
+from build_listings import BODIES, body, ordered, page_url, reason_to_drop, to_row
 from ingest import BODIES as CANONICAL
 
 V = {
@@ -36,6 +36,11 @@ class BuildListingsTest(unittest.TestCase):
         self.assertIn("price", reason_to_drop({**V, "px": None}))
         self.assertIn("fuel economy", reason_to_drop({**V, "mpg": None}))
         self.assertIn("electric", reason_to_drop({**V, "fuel": "Electric", "mpg": 100}))
+
+    def test_features_lead_with_the_distinctive_ones(self):
+        self.assertEqual(ordered(["Bluetooth", "Apple CarPlay", "Sunroof", "One owner"]),
+                         ["One owner", "Sunroof", "Apple CarPlay", "Bluetooth"])
+        self.assertEqual(ordered(["Bluetooth", "Massage seats"]), ["Bluetooth", "Massage seats"])
 
     def test_row_carries_combined_mpg_twice_and_an_absolute_page(self):
         row = to_row(V)

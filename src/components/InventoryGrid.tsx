@@ -25,9 +25,14 @@ const SORTS: Record<string, { label: string; by: (a: Vehicle, b: Vehicle) => num
   year: { label: 'Newest', by: (a, b) => b.year - a.year || a.price - b.price },
 };
 
+// A real lot is a couple of hundred vehicles; 24 at a time keeps the page
+// (and the embed) a readable length, and the button says what is left.
+const PAGE = 24;
+
 export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
   const [body, setBody] = useState<string>('All');
   const [sort, setSort] = useState<string>('price');
+  const [visible, setVisible] = useState(PAGE);
 
   const fits = inventory.vehicles.filter((v) => v.price <= ceiling).sort(SORTS[sort].by);
   const over = inventory.vehicles.length - fits.length;
@@ -61,7 +66,10 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
                 key={b}
                 aria-pressed={b === active}
                 className={b === active ? 'chip on' : 'chip'}
-                onClick={() => setBody(b)}
+                onClick={() => {
+                  setBody(b);
+                  setVisible(PAGE);
+                }}
               >
                 {b}
                 <span>{b === 'All' ? fits.length : fits.filter((v) => v.body === b).length}</span>
@@ -69,7 +77,13 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
             ))}
             <label className="sort">
               Sort
-              <select value={sort} onChange={(e) => setSort(e.target.value)}>
+              <select
+                value={sort}
+                onChange={(e) => {
+                  setSort(e.target.value);
+                  setVisible(PAGE);
+                }}
+              >
                 {Object.entries(SORTS).map(([key, o]) => (
                   <option key={key} value={key}>
                     {o.label}
@@ -79,10 +93,16 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
             </label>
           </div>
           <div className="grid">
-            {shown.map((v) => (
+            {shown.slice(0, visible).map((v) => (
               <VehicleCard key={v.stock} vehicle={v} inputs={inputs} />
             ))}
           </div>
+          {shown.length > visible && (
+            <button type="button" className="more" onClick={() => setVisible((n) => n + PAGE)}>
+              Show {Math.min(PAGE, shown.length - visible)} more
+              <small>{visible} of {shown.length} shown</small>
+            </button>
+          )}
         </>
       )}
 
@@ -91,7 +111,7 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
       <p className="note">
         {over > 0 && `${over} more ${over === 1 ? 'vehicle is' : 'vehicles are'} above your ceiling. `}
         {PITCH
-          ? `Listings captured ${capturedOn(PITCH.capturedOn)} (${capturedAgo(PITCH.capturedOn)}).`
+          ? `Listings captured ${capturedOn(PITCH.capturedOn)} (${capturedAgo(PITCH.capturedOn)}): ${inventory.vehicles.length} of the ${PITCH.listed} they listed; the rest publish no price or no fuel economy.`
           : `Inventory updated ${new Date(inventory.generatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}.`}
       </p>
     </section>
