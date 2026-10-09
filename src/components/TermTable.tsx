@@ -25,19 +25,25 @@ export function TermTable({ inputs, price, onSelectTerm }: Props) {
         </thead>
         <tbody>
           {rows.map((r) => (
+            // The button in the first cell is the control a keyboard or screen
+            // reader reaches; clicking anywhere on the row does the same.
             <tr
               key={r.termMonths}
               className={r.termMonths === inputs.termMonths ? 'chosen' : ''}
-              tabIndex={0}
               onClick={() => onSelectTerm(r.termMonths)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  onSelectTerm(r.termMonths);
-                }
-              }}
             >
-              <td>{r.termMonths} months</td>
+              <td>
+                <button
+                  type="button"
+                  aria-pressed={r.termMonths === inputs.termMonths}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onSelectTerm(r.termMonths);
+                  }}
+                >
+                  {r.termMonths} months
+                </button>
+              </td>
               <td className="num">{dollars(r.payment)}/mo</td>
               <td className="num">{dollars(r.totalInterest)}</td>
               <td className="num">{r === shortest ? '—' : `+${dollars(r.totalInterest - shortest.totalInterest)}`}</td>

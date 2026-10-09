@@ -43,7 +43,7 @@ export function InputsPanel({ inputs, onChange }: Props) {
     <aside className="inputs">
       <label>
         <span>Monthly income, before taxes</span>
-        <Money value={inputs.monthlyIncome} onChange={(v) => set('monthlyIncome', v)} />
+        <Money name="income" value={inputs.monthlyIncome} onChange={(v) => set('monthlyIncome', v)} />
       </label>
 
       <label>
@@ -52,10 +52,12 @@ export function InputsPanel({ inputs, onChange }: Props) {
         </span>
         <input
           type="range"
+          name="share"
           min={5}
           max={20}
           step={1}
           value={Math.round(inputs.paymentShare * 100)}
+          aria-valuetext={`${Math.round(inputs.paymentShare * 100)}% of income, ${dollars(maxPayment(inputs))} a month`}
           onChange={(e) => set('paymentShare', Number(e.target.value) / 100)}
         />
         <small>10% of gross income is a common ceiling for the payment alone.</small>
@@ -63,17 +65,17 @@ export function InputsPanel({ inputs, onChange }: Props) {
 
       <label>
         <span>Cash down</span>
-        <Money value={inputs.downPayment} onChange={(v) => set('downPayment', v)} />
+        <Money name="down" value={inputs.downPayment} onChange={(v) => set('downPayment', v)} />
       </label>
 
       <div className="pair">
         <label>
           <span>Trade-in worth</span>
-          <Money value={inputs.tradeValue} onChange={(v) => set('tradeValue', v)} />
+          <Money name="trade" value={inputs.tradeValue} onChange={(v) => set('tradeValue', v)} />
         </label>
         <label>
           <span>Still owed on it</span>
-          <Money value={inputs.tradeOwed} onChange={(v) => set('tradeOwed', v)} />
+          <Money name="owed" value={inputs.tradeOwed} onChange={(v) => set('tradeOwed', v)} />
         </label>
       </div>
 
@@ -82,6 +84,8 @@ export function InputsPanel({ inputs, onChange }: Props) {
           <span>APR</span>
           <span className="field">
             <NumericInput
+              name="apr"
+              autoComplete="off"
               inputMode="decimal"
               min={0}
               max={30}
@@ -94,7 +98,7 @@ export function InputsPanel({ inputs, onChange }: Props) {
         </label>
         <label>
           <span>Term</span>
-          <select value={inputs.termMonths} onChange={(e) => set('termMonths', Number(e.target.value))}>
+          <select name="term" value={inputs.termMonths} onChange={(e) => set('termMonths', Number(e.target.value))}>
             {TERMS.map((t) => (
               <option key={t} value={t}>
                 {t} months
@@ -107,11 +111,13 @@ export function InputsPanel({ inputs, onChange }: Props) {
   );
 }
 
-function Money({ value, onChange }: { value: number; onChange: (v: number) => void }) {
+function Money({ name, value, onChange }: { name: string; value: number; onChange: (v: number) => void }) {
   return (
     <span className="field">
       <b>$</b>
       <NumericInput
+        name={name}
+        autoComplete="off"
         inputMode="numeric"
         min={0}
         step={100}

@@ -77,6 +77,19 @@ export default function App() {
 
   return (
     <>
+      {/* The hash is the scenario's, so this focuses the results instead of navigating. */}
+      <a
+        className="skip"
+        href="#results"
+        onClick={(e) => {
+          e.preventDefault();
+          const results = document.getElementById('results');
+          results?.focus();
+          results?.scrollIntoView();
+        }}
+      >
+        Skip to your ceiling
+      </a>
       <PitchRibbon />
       {/* WPR masthead, same as the paper's other tools (Brewers tracker et al.):
           typewriter press seal + wordmark, tagline, dateline between slate rules. */}
@@ -116,7 +129,7 @@ export default function App() {
 
       <div className="layout">
         <InputsPanel inputs={inputs} onChange={setInputs} />
-        <main className="results">
+        <main className="results" id="results" tabIndex={-1}>
           <Ceiling
             inputs={inputs}
             ceiling={ceiling}
