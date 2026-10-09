@@ -11,7 +11,9 @@ initEmbedHeight('wpr-auto-loan-mini');
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ErrorBoundary>
-      <Mini />
+      <main>
+        <Mini />
+      </main>
     </ErrorBoundary>
   </React.StrictMode>,
 );

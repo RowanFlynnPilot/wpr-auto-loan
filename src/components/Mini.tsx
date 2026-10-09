@@ -89,8 +89,10 @@ export function Mini() {
         </p>
       )}
 
-      {/* Announce slides only when the clock is stopped; a rotating live region is noise. */}
-      <div className="mini-slide" aria-live={playing && !held ? 'off' : 'polite'} aria-atomic="true">
+      {/* W3C carousel pattern: the slide is a named group, announced only
+          when the clock is stopped, since a rotating live region is noise. */}
+      <div className="mini-slides" aria-live={playing && !held ? 'off' : 'polite'} aria-atomic="true">
+        <div className="mini-slide" role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${n}`}>
         <Photo key={v.stock} vehicle={v} width={640} height={480} />
         <div className="mini-body">
           <h2>
@@ -108,15 +110,18 @@ export function Mini() {
             Wisconsin tax and fees included. Your own numbers in the full tool.
           </p>
         </div>
+        </div>
       </div>
 
       <div className="mini-controls">
+        {/* The rotation control comes first in reading order and its label
+            carries the state, so it needs no pressed attribute. */}
+        <button type="button" className="mini-play" onClick={() => setPlaying((p) => !p)}>
+          {playing ? 'Pause' : 'Play'}
+        </button>
         <button type="button" onClick={() => step(-1)} aria-label="Previous vehicle"><Chevron flip /></button>
         <span className="mini-count">{index + 1} of {n}</span>
         <button type="button" onClick={() => step(1)} aria-label="Next vehicle"><Chevron /></button>
-        <button type="button" className="mini-play" onClick={() => setPlaying((p) => !p)} aria-pressed={!playing}>
-          {playing ? 'Pause' : 'Play'}
-        </button>
       </div>
 
       <footer className="mini-foot">
