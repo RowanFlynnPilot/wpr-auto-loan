@@ -110,9 +110,11 @@ interface Props {
   inputs: LoanInputs;
   ceiling: number;
   lot: LotDot[];
+  onUseIncome: (monthlyIncome: number) => void;
 }
 
-export function Ceiling({ inputs, ceiling, lot }: Props) {
+export function Ceiling({ inputs, ceiling, lot, onUseIncome }: Props) {
+  const median = Math.round(COUNTY_MEDIAN_HOUSEHOLD_INCOME / 12);
   const q = quote(ceiling, inputs);
   const levers = ceilingLevers(inputs);
   const figure = useCountUp(ceiling);
@@ -143,10 +145,19 @@ export function Ceiling({ inputs, ceiling, lot }: Props) {
         <HowWeFigure />
       </div>
       <PriceLine ceiling={ceiling} lot={lot} />
+      {/* The fact, and one tap to make it the scenario. */}
       <p className="note">
-        For scale: the median Marathon County household earns about{' '}
-        {dollars(COUNTY_MEDIAN_HOUSEHOLD_INCOME / 12)} a month before taxes (Census ACS); shopping your
-        same way, its ceiling is about {dollars(maxPrice({ ...inputs, monthlyIncome: COUNTY_MEDIAN_HOUSEHOLD_INCOME / 12 }))}.
+        For scale: the median Marathon County household earns about {dollars(median)} a month before
+        taxes (Census ACS); shopping your same way, its ceiling is about{' '}
+        {dollars(maxPrice({ ...inputs, monthlyIncome: median }))}.
+        {inputs.monthlyIncome !== median && (
+          <>
+            {' '}
+            <button type="button" className="copylink" onClick={() => onUseIncome(median)}>
+              Try that income
+            </button>
+          </>
+        )}
       </p>
     </section>
   );

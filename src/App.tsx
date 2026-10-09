@@ -134,6 +134,7 @@ export default function App() {
             inputs={inputs}
             ceiling={ceiling}
             lot={inventory?.vehicles.map((v) => ({ label: `${v.year} ${v.make} ${v.model}`, price: v.price })) ?? []}
+            onUseIncome={(monthlyIncome) => setInputs({ ...inputs, monthlyIncome })}
           />
           <TermTable
             inputs={inputs}

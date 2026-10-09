@@ -14,7 +14,8 @@ messaging for the WordPress embed, clickable term rows, favicon and Open Graph
 tags, and the standard WPR masthead (typewriter seal + wordmark, as on the
 Brewers tracker) on the tool and the report. Data perspectives: per-vehicle
 fuel line (feed mpg × Wausau gas price), ceiling levers, the $25-extra payoff
-line, county-income "for scale" context, a per-card budget bar, a sort control,
+line, county-income "for scale" context, a per-card budget bar, an all-in monthly line (payment plus gas) with a
+sort for it, a sort control,
 a nothing-fits state that names the closest vehicle and the down payment to
 reach it, and a "How we figure this" block that reads every constant and
 source from the config. Social share card at `/og-card.png`
