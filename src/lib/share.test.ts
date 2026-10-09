@@ -34,8 +34,8 @@ describe('share', () => {
 
 describe('shareUrl', () => {
   const hash = '#income=4500&term=60';
-  it('is the tool itself when standalone', () => {
-    expect(shareUrl('', hash, 'https://tool.example/x' + hash)).toBe('https://tool.example/x' + hash);
+  it('is the tool itself when standalone, with the encoded scenario rather than the address bar', () => {
+    expect(shareUrl('', hash, 'https://tool.example/x#stale=1')).toBe('https://tool.example/x' + hash);
   });
   it('is the article plus the scenario inside the embed', () => {
     const host = encodeURIComponent('https://wausaupilotandreview.com/what-can-i-drive/#old');

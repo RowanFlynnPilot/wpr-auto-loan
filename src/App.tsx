@@ -8,7 +8,7 @@ import { TermTable } from './components/TermTable';
 import { maxPrice, type LoanInputs } from './lib/loan';
 import { DEFAULTS } from './config/scenario';
 import { PITCH } from './config/sponsor';
-import { decodeInputs, encodeInputs } from './lib/share';
+import { SETTLE_MS, decodeInputs, encodeInputs } from './lib/share';
 import type { Inventory } from './types';
 
 // A shared link with a mangled hash falls back to the defaults rather than
@@ -29,9 +29,13 @@ export default function App() {
   const [inventory, setInventory] = useState<Inventory | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
 
-  // Keep the URL shareable: the current scenario always lives in the hash.
+  // Keep the URL shareable: the current scenario always lives in the hash,
+  // written once the inputs have rested (see SETTLE_MS) rather than per
+  // keystroke. Copy-a-link encodes the live inputs itself, so it never reads
+  // a hash that is still pending.
   useEffect(() => {
-    history.replaceState(null, '', `#${encodeInputs(inputs)}`);
+    const t = setTimeout(() => history.replaceState(null, '', `#${encodeInputs(inputs)}`), SETTLE_MS);
+    return () => clearTimeout(t);
   }, [inputs]);
 
   // A shared link opened while the tool is already loaded changes only the

@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { COUNTY_MEDIAN_HOUSEHOLD_INCOME } from '../config/wisconsin';
 import { ceilingLevers, maxPayment, maxPrice, purchaseFees, quote, type LoanInputs } from '../lib/loan';
 import { cents, dollars, percent } from '../lib/format';
-import { shareUrl } from '../lib/share';
+import { SETTLE_MS, encodeInputs, shareUrl } from '../lib/share';
 
 // Eases the displayed figure toward its new value over ~250ms so the number
 // visibly reacts to the inputs. Display-only — every other line uses the real
@@ -32,26 +32,39 @@ function useCountUp(target: number): number {
   return shown;
 }
 
+// A live region that re-announces on every keystroke talks over the reader;
+// this hands back the value once it has rested for a beat.
+function useSettled<T>(value: T, ms: number): T {
+  const [settled, setSettled] = useState(value);
+  useEffect(() => {
+    const t = setTimeout(() => setSettled(value), ms);
+    return () => clearTimeout(t);
+  }, [value, ms]);
+  return settled;
+}
+
 // The scenario always lives in the URL hash; this just makes that shareable
-// link discoverable. Clipboard access can be denied inside an embed, so fall
-// back to showing the link for a manual copy.
-function linkToShare(): string {
+// link discoverable. It encodes the live inputs rather than reading the
+// address bar, which is rewritten after a pause. Clipboard access can be
+// denied inside an embed, so fall back to showing the link for a manual copy.
+function linkToShare(inputs: LoanInputs): string {
+  const hash = `#${encodeInputs(inputs)}`;
   try {
-    return shareUrl(window.location.search, window.location.hash, window.location.href);
+    return shareUrl(window.location.search, hash, window.location.href);
   } catch (e) {
     console.error(e); // a bad ?host= is the embed's mistake, not the reader's
-    return window.location.href;
+    return shareUrl('', hash, window.location.href);
   }
 }
 
-function CopyLink() {
+function CopyLink({ inputs }: { inputs: LoanInputs }) {
   const [copied, setCopied] = useState(false);
   return (
     <button
       type="button"
       className="copylink"
       onClick={() => {
-        const link = linkToShare();
+        const link = linkToShare(inputs);
         navigator.clipboard.writeText(link).then(
           () => {
             setCopied(true);
@@ -81,12 +94,13 @@ export function Ceiling({ inputs, ceiling, lot }: Props) {
   const q = quote(ceiling, inputs);
   const levers = ceilingLevers(inputs);
   const figure = useCountUp(ceiling);
+  const settled = useSettled(ceiling, SETTLE_MS);
   return (
     <section className="ceiling">
       <p className="label">You can shop up to</p>
       {/* The tweened figure is decoration to a screen reader; the settled value is announced. */}
       <p className="figure" aria-hidden="true">{dollars(figure)}</p>
-      <p className="sr-only" aria-live="polite">You can shop up to {dollars(ceiling)}</p>
+      <p className="sr-only" aria-live="polite">You can shop up to {dollars(settled)}</p>
       <p className="basis">
         {dollars(maxPayment(inputs))} a month for {inputs.termMonths} months at {percent(inputs.apr)} APR.
         That price carries {cents(q.salesTax)} in sales tax and {cents(purchaseFees())} in title, plate,
@@ -102,7 +116,7 @@ export function Ceiling({ inputs, ceiling, lot }: Props) {
         )}
         .
       </p>
-      <CopyLink />
+      <CopyLink inputs={inputs} />
       <PriceLine ceiling={ceiling} lot={lot} />
       <p className="note">
         For scale: the median Marathon County household earns about{' '}

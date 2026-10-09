@@ -1,5 +1,11 @@
 import { TERMS, type LoanInputs } from './loan';
 
+// How long the inputs rest before the URL hash is rewritten (and the ceiling
+// is announced to a screen reader). WebKit throws a SecurityError past ~100
+// history writes in 30 seconds, and holding an arrow key on a money field
+// gets there in about four; a reader typing never notices a 300ms pause.
+export const SETTLE_MS = 300;
+
 // URL-hash serialization so a reader can share "here's what I can drive"
 // and a prepared scenario can be deep-linked. Keys are short but readable;
 // values are plain decimals (share and apr as fractions, same as LoanInputs).
@@ -40,13 +46,18 @@ export function decodeInputs(hash: string): LoanInputs {
 
 // Inside the WordPress embed the tool's own URL means nothing to a reader, so
 // the embed snippet passes the article URL as ?host=… and a shared link is the
-// article plus the scenario hash. Standalone, it's this page. Only the
-// publisher's own domain is accepted as a host.
+// article plus the scenario hash. Standalone, it's this page — with the hash
+// the caller encoded, not the address bar's, which is written after a pause.
+// Only the publisher's own domain is accepted as a host.
 const PUBLISHER = /(^|\.)wausaupilotandreview\.com$/;
 
 export function shareUrl(search: string, hash: string, href: string): string {
   const host = new URLSearchParams(search).get('host');
-  if (host === null) return href;
+  if (host === null) {
+    const url = new URL(href);
+    url.hash = hash;
+    return url.toString();
+  }
   const url = new URL(host);
   if (url.protocol !== 'https:' || !PUBLISHER.test(url.hostname)) throw new Error(`Refusing share host ${host}`);
   url.hash = hash;
