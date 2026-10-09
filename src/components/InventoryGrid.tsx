@@ -42,6 +42,8 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
   const active = bodies.includes(body) ? body : 'All';
   const shown = active === 'All' ? fits : fits.filter((v) => v.body === active);
   const cheapest = inventory.vehicles.reduce((a, b) => (b.price < a.price ? b : a));
+  // A button for the last handful is sillier than the handful; show them.
+  const cut = shown.length - visible < 8 ? shown.length : visible;
 
   return (
     <section className="inventory">
@@ -93,14 +95,14 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
             </label>
           </div>
           <div className="grid">
-            {shown.slice(0, visible).map((v) => (
+            {shown.slice(0, cut).map((v) => (
               <VehicleCard key={v.stock} vehicle={v} inputs={inputs} />
             ))}
           </div>
-          {shown.length > visible && (
+          {shown.length > cut && (
             <button type="button" className="more" onClick={() => setVisible((n) => n + PAGE)}>
-              Show {Math.min(PAGE, shown.length - visible)} more
-              <small>{visible} of {shown.length} shown</small>
+              Show {Math.min(PAGE, shown.length - cut)} more
+              <small>{cut} of {shown.length} shown</small>
             </button>
           )}
         </>
