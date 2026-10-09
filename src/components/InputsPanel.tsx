@@ -46,22 +46,37 @@ export function InputsPanel({ inputs, onChange }: Props) {
         <Money name="income" value={inputs.monthlyIncome} onChange={(v) => set('monthlyIncome', v)} />
       </label>
 
-      <label>
-        <span>
-          Share for a car payment <em>{Math.round(inputs.paymentShare * 100)}% · {dollars(maxPayment(inputs))}/mo</em>
-        </span>
-        <input
-          type="range"
-          name="share"
-          min={5}
-          max={20}
-          step={1}
-          value={Math.round(inputs.paymentShare * 100)}
-          aria-valuetext={`${Math.round(inputs.paymentShare * 100)}% of income, ${dollars(maxPayment(inputs))} a month`}
-          onChange={(e) => set('paymentShare', Number(e.target.value) / 100)}
-        />
+      <div className="share">
+        <label>
+          <span>
+            Share of income for the payment <em>{Math.round(inputs.paymentShare * 100)}%</em>
+          </span>
+          <input
+            type="range"
+            name="share"
+            min={5}
+            max={20}
+            step={1}
+            value={Math.round(inputs.paymentShare * 100)}
+            aria-valuetext={`${Math.round(inputs.paymentShare * 100)}% of income, ${dollars(maxPayment(inputs))} a month`}
+            onChange={(e) => set('paymentShare', Number(e.target.value) / 100)}
+          />
+        </label>
+        {/* The same number from the other side: a reader who thinks in payments
+            types one and the share follows. Bounded at the whole income, which
+            is also the bound a shared link accepts; with no income there is no
+            share to derive, so the field waits. */}
+        <label className="pay">
+          <span>Or a monthly payment</span>
+          <Money
+            name="payment"
+            value={Math.round(maxPayment(inputs))}
+            disabled={inputs.monthlyIncome <= 0}
+            onChange={(v) => set('paymentShare', Math.min(v / inputs.monthlyIncome, 1))}
+          />
+        </label>
         <small>10% of gross income is a common ceiling for the payment alone.</small>
-      </label>
+      </div>
 
       <label>
         <span>Cash down</span>
@@ -111,13 +126,24 @@ export function InputsPanel({ inputs, onChange }: Props) {
   );
 }
 
-function Money({ name, value, onChange }: { name: string; value: number; onChange: (v: number) => void }) {
+function Money({
+  name,
+  value,
+  disabled,
+  onChange,
+}: {
+  name: string;
+  value: number;
+  disabled?: boolean;
+  onChange: (v: number) => void;
+}) {
   return (
     <span className="field">
       <b>$</b>
       <NumericInput
         name={name}
         autoComplete="off"
+        disabled={disabled}
         inputMode="numeric"
         min={0}
         step={100}

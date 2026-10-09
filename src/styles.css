@@ -135,6 +135,10 @@ small { font-size: 0.85em; }
 .inputs label > span:first-child em { font-style: normal; font-family: var(--mono); text-transform: none; letter-spacing: 0; color: var(--teal-deep); white-space: nowrap; }
 .inputs small { color: var(--ink-soft); font-size: 12px; }
 .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.inputs .share { display: grid; gap: 8px; }
+.inputs .pay { grid-template-columns: 1fr auto; align-items: center; column-gap: 10px; }
+.inputs .pay .field { width: 132px; }
+.field input:disabled { color: var(--ink-soft); }
 
 .field { display: flex; align-items: center; border: 1px solid var(--rule); border-radius: 4px; background: #fff; }
 .field b { padding: 0 8px; color: var(--ink-soft); font-weight: 500; font-family: var(--mono); }
