@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { PITCH, SPONSOR } from '../config/sponsor';
 import { dollars } from '../lib/format';
-import { combinedMpg } from '../lib/fuel';
+import { allInMonthly, combinedMpg } from '../lib/fuel';
 import { downToReach, type LoanInputs } from '../lib/loan';
 import { capturedAgo, capturedOn } from '../lib/snapshot';
 import type { Inventory, Vehicle } from '../types';
@@ -14,9 +14,12 @@ interface Props {
   ceiling: number;
 }
 
-// All orderings are feed data; ties fall back to price so the list is stable.
-const SORTS: Record<string, { label: string; by: (a: Vehicle, b: Vehicle) => number }> = {
-  price: { label: 'Lowest price', by: (a, b) => a.price - b.price },
+// Every ordering is feed data, or our math on it; ties fall back to price so
+// the list is stable. Payment order is price order, so it is named for what
+// the reader is looking at.
+const SORTS: Record<string, { label: string; by: (a: Vehicle, b: Vehicle, i: LoanInputs) => number }> = {
+  price: { label: 'Lowest payment', by: (a, b) => a.price - b.price },
+  allin: { label: 'Lowest with gas', by: (a, b, i) => allInMonthly(a, i) - allInMonthly(b, i) || a.price - b.price },
   mileage: { label: 'Fewest miles', by: (a, b) => a.mileage - b.mileage || a.price - b.price },
   mpg: {
     label: 'Best mpg',
@@ -34,7 +37,7 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
   const [sort, setSort] = useState<string>('price');
   const [visible, setVisible] = useState(PAGE);
 
-  const fits = inventory.vehicles.filter((v) => v.price <= ceiling).sort(SORTS[sort].by);
+  const fits = inventory.vehicles.filter((v) => v.price <= ceiling).sort((a, b) => SORTS[sort].by(a, b, inputs));
   const over = inventory.vehicles.length - fits.length;
   const bodies = ['All', ...Array.from(new Set(fits.map((v) => v.body))).sort()];
   // A chosen body type can drop out when the ceiling falls; treat it as All

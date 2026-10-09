@@ -21,6 +21,7 @@ function meta(v: Vehicle): string[] {
 
 export function VehicleCard({ vehicle: v, inputs }: Props) {
   const q = quote(v.price, inputs);
+  const fuel = fuelPerMonth(v.mpgCity, v.mpgHwy);
   const budget = maxPayment(inputs);
   const share = budget > 0 ? q.payment / budget : 0;
   return (
@@ -48,9 +49,11 @@ export function VehicleCard({ vehicle: v, inputs }: Props) {
             </p>
           )}
           <p className="fuel">
-            + about {dollars(fuelPerMonth(v.mpgCity, v.mpgHwy))}/mo in gas ({count(FUEL.milesPerMonth)} mi/mo at
-            Wausau’s ${FUEL.gasPrice.toFixed(2)}/gal)
+            + about {dollars(fuel)}/mo in gas ({count(FUEL.milesPerMonth)} mi/mo at Wausau’s $
+            {FUEL.gasPrice.toFixed(2)}/gal)
           </p>
+          {/* The number the fuel line exists for. */}
+          <p className="allin">≈ {dollars(q.payment + fuel)}/mo with gas</p>
         </div>
         {/* Reg Z: payment shown with the terms that produce it. */}
         <p className="disclosure">

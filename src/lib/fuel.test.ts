@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { FUEL } from '../config/wisconsin';
-import { combinedMpg, fuelPerMonth } from './fuel';
+import { allInMonthly, combinedMpg, fuelPerMonth } from './fuel';
+import { quote } from './loan';
 
 describe('combinedMpg', () => {
   it('is the EPA 55/45 harmonic blend', () => {
@@ -22,5 +23,13 @@ describe('fuelPerMonth', () => {
   });
   it('thirstier vehicles cost more', () => {
     expect(fuelPerMonth(17, 23)).toBeGreaterThan(fuelPerMonth(28, 39));
+  });
+});
+
+describe('allInMonthly', () => {
+  it('is the payment plus the gas', () => {
+    const i = { monthlyIncome: 5000, paymentShare: 0.1, downPayment: 2000, tradeValue: 0, tradeOwed: 0, apr: 0.069, termMonths: 60 };
+    const v = { price: 20000, mpgCity: 20, mpgHwy: 28 };
+    expect(allInMonthly(v, i)).toBeCloseTo(quote(20000, i).payment + fuelPerMonth(20, 28), 6);
   });
 });
