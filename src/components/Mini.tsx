@@ -55,6 +55,16 @@ export function Mini() {
     return () => clearInterval(t);
   }, [playing, held, n]);
 
+  // The next photo is fetched while this one shows, so advancing never
+  // paints a blank first.
+  useEffect(() => {
+    if (n < 2) return;
+    const next = lot[(index + 1) % n];
+    if (next.photoUrl === '') return;
+    const img = new Image();
+    img.src = next.photoUrl;
+  }, [index, lot, n]);
+
   const tool = destination(window.location.search, window.location.origin, import.meta.env.BASE_URL);
 
   if (loadError) {
