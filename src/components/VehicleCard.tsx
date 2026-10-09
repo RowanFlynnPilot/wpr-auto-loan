@@ -67,7 +67,7 @@ export function VehicleCard({ vehicle: v, inputs }: Props) {
           className="vdp"
           href={vdpLink(v)}
           target="_blank"
-          rel="noopener sponsored"
+          rel="noopener noreferrer sponsored"
           onClick={() => trackVehicleClick(v)}
         >
           See it at {SPONSOR.name} <span aria-hidden="true">→</span>

@@ -14,7 +14,7 @@ describe('destination', () => {
     const to = 'https://wausaupilotandreview.com/what-can-i-drive/';
     const u = new URL(destination(`?to=${encodeURIComponent(to)}`, origin, base));
     expect(u.origin + u.pathname).toBe(to);
-    expect(u.searchParams.get('utm_source')).toBe('wausaupilot');
+    expect(u.searchParams.get('utm_source')).toBe('wausaupilotandreview');
   });
   it('refuses a destination that is not http(s)', () => {
     const u = new URL(destination('?to=javascript:alert(1)', origin, base));

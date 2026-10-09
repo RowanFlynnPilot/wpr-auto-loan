@@ -8,6 +8,7 @@ export interface Sponsor {
   preapprovalUrl: string;
   /** Set when we have no per-vehicle URLs: every card links to their lot instead. */
   inventoryUrl: string | null;
+  /** The fleet-wide source, so a dealer who sponsors two WPR tools sees one WPR in their analytics. */
   utmSource: string;
   utmCampaign: string;
 }
@@ -20,7 +21,7 @@ const SPONSORED: Sponsor = {
   tagline: 'Used cars, trucks and SUVs — Wausau, WI',
   preapprovalUrl: 'https://demo-motors.example/financing/get-preapproved',
   inventoryUrl: null,
-  utmSource: 'wausaupilot',
+  utmSource: 'wausaupilotandreview',
   utmCampaign: 'what-can-i-drive',
 };
 
@@ -51,7 +52,7 @@ const PITCHES: Record<string, Pitch> = {
       preapprovalUrl: 'https://www.bricknersofwausau.net/finance-application/',
       // Real listings carry their own vehicle pages, so cards link to the car.
       inventoryUrl: null,
-      utmSource: 'wausaupilot',
+      utmSource: 'wausaupilotandreview',
       utmCampaign: 'what-can-i-drive',
     },
   },
