@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { SPONSOR } from '../config/sponsor';
+import { PITCH, SPONSOR } from '../config/sponsor';
 import { dollars } from '../lib/format';
 import { combinedMpg } from '../lib/fuel';
 import { downToReach, type LoanInputs } from '../lib/loan';
+import { capturedAgo, capturedOn } from '../lib/snapshot';
 import type { Inventory, Vehicle } from '../types';
 import { SponsorLockup } from './SponsorLockup';
 import { VehicleCard } from './VehicleCard';
@@ -85,9 +86,13 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
         </>
       )}
 
+      {/* generatedAt is when the nightly build ran. For a preview that is not
+          when the lot was true; the snapshot's capture date is. */}
       <p className="note">
         {over > 0 && `${over} more ${over === 1 ? 'vehicle is' : 'vehicles are'} above your ceiling. `}
-        Inventory updated {new Date(inventory.generatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}.
+        {PITCH
+          ? `Listings captured ${capturedOn(PITCH.capturedOn)}, ${capturedAgo(PITCH.capturedOn)}.`
+          : `Inventory updated ${new Date(inventory.generatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}.`}
       </p>
     </section>
   );

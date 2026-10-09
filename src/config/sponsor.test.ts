@@ -11,7 +11,7 @@ describe('resolvePitch', () => {
     expect(pitch.prospect).toBe("Brickner's of Wausau");
     expect(pitch.sponsor.preapprovalUrl).toContain('bricknersofwausau.net');
     expect(pitch.inventoryFile).toBe('inventory.brickners.json');
-    expect(pitch.listingsAsOf).toMatch(/\d{4}/);
+    expect(pitch.capturedOn).toMatch(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/);
   });
   it('links each card to its own vehicle page when the listings carry one', () => {
     // inventoryUrl is the fallback for a prospect with no per-vehicle pages;

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { PITCH, SPONSOR, SPONSOR_DISCLAIMER, SPONSOR_INQUIRY } from '../config/sponsor';
+import { capturedAgo, capturedOn } from '../lib/snapshot';
 import { Methodology } from './Methodology';
 
 const SUBJECT = encodeURIComponent('Sponsoring "What can I drive?"');
@@ -45,8 +46,8 @@ export function Colophon() {
           {PITCH ? (
             <>
               The vehicles in this preview were captured from {PITCH.prospect}'s own published
-              listings on {PITCH.listingsAsOf} and are a one-time snapshot. In the live tool the list
-              comes from the dealer's feed and is rebuilt daily.
+              listings on {capturedOn(PITCH.capturedOn)} ({capturedAgo(PITCH.capturedOn)}) and are a
+              one-time snapshot. In the live tool the list comes from the dealer's feed and is rebuilt daily.
             </>
           ) : (
             <>

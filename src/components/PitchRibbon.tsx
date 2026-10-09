@@ -1,4 +1,5 @@
 import { PITCH, SPONSOR_INQUIRY } from '../config/sponsor';
+import { capturedAgo, capturedOn } from '../lib/snapshot';
 
 const SUBJECT = encodeURIComponent('"What can I drive?" — sponsorship');
 
@@ -12,8 +13,8 @@ export function PitchRibbon() {
       <p>
         <b>Preview prepared for {PITCH.prospect}.</b> This is a proposal from Wausau Pilot &amp;
         Review, not a live sponsorship. The vehicles below are {PITCH.prospect}&rsquo;s own published
-        listings as of {PITCH.listingsAsOf} — a snapshot, not a live feed. Prices and availability
-        change; confirm with the dealer.
+        listings as of {capturedOn(PITCH.capturedOn)} ({capturedAgo(PITCH.capturedOn)}) — a snapshot,
+        not a live feed. Prices and availability change; confirm with the dealer.
       </p>
       <a href={`mailto:${SPONSOR_INQUIRY}?subject=${SUBJECT}`}>Talk to us about this placement</a>
     </aside>

@@ -4,6 +4,7 @@ import { PITCH, SPONSOR } from '../config/sponsor';
 import { dollars, percent } from '../lib/format';
 import { quote } from '../lib/loan';
 import { destination } from '../lib/mini';
+import { capturedAgo, capturedOn } from '../lib/snapshot';
 import { trackMiniClick, trackVehicleClick, vdpLink } from '../lib/track';
 import type { Inventory, Vehicle } from '../types';
 import { Photo } from './Photo';
@@ -84,7 +85,7 @@ export function Mini() {
     >
       {PITCH && (
         <p className="mini-pitch">
-          Preview for {PITCH.prospect} · listings as of {PITCH.listingsAsOf}
+          Preview for {PITCH.prospect} · listings as of {capturedOn(PITCH.capturedOn)} ({capturedAgo(PITCH.capturedOn)})
         </p>
       )}
 

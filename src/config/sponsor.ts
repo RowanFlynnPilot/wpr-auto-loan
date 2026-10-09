@@ -29,8 +29,8 @@ export interface Pitch {
   prospect: string;
   /** Built from the prospect's own published listings. */
   inventoryFile: string;
-  /** When those listings were captured. Shown to the reader; prices move. */
-  listingsAsOf: string;
+  /** When those listings were captured, YYYY-MM-DD. Shown to the reader with its age; prices move. */
+  capturedOn: string;
   sponsor: Sponsor;
 }
 
@@ -42,7 +42,7 @@ const PITCHES: Record<string, Pitch> = {
   brickners: {
     prospect: "Brickner's of Wausau",
     inventoryFile: 'inventory.brickners.json',
-    listingsAsOf: 'September 12, 2026',
+    capturedOn: '2026-09-12',
     sponsor: {
       name: "Brickner's of Wausau",
       disclosure: 'Sponsored inventory',
