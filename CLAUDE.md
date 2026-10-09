@@ -41,9 +41,12 @@ No speculative abstraction. Let TypeScript catch it.
    vehicles in the same column shape as a HomeNet/vAuto export. Deterministic
    (seeded). Committed so the demo builds with no external dependency.
 3. React/Vite app (`src/`) does all loan math client-side in `src/lib/loan.ts`
-   (tested in `loan.test.ts`). Reader enters income, share of income, cash
-   down, trade-in worth/owed, APR, term → `maxPrice()` back-solves the sticker
-   price whose financed amount hits the payment ceiling.
+   (tested in `loan.test.ts`). Reader enters income, share of income (or types
+   a monthly payment and the share follows), cash down, trade-in worth/owed,
+   APR, term → `maxPrice()` back-solves the sticker price whose financed amount
+   hits the payment ceiling. The scenario lives in the URL hash, written after
+   the inputs rest (`SETTLE_MS` in `src/lib/share.ts`): WebKit throws past
+   ~100 history writes in 30 seconds, and a held arrow key got there.
 4. `InventoryGrid` shows vehicles under the ceiling, sorted by price, each with
    its own payment computed by our math (never the dealer's number), a Reg Z
    disclosure line, and a tracked link to the dealer's VDP.
@@ -83,9 +86,11 @@ carries, still `verified:false` there. Editor sign-off before real launch.
 
 ## Sponsor report
 
-Plausible custom event `Vehicle click` with props `sponsor, stock, body, price`,
-plus UTM params (`utm_source=wausaupilot`, `utm_medium=tool`,
-`utm_campaign=<sponsor.ts>`, `utm_content=<stock>`) on every outbound VDP link.
+Plausible custom event `Vehicle click` with props `sponsor, stock, body, price,
+placement`, plus UTM params (`utm_source=wausaupilotandreview` — the fleet-wide
+source, so a dealer on two WPR tools sees one WPR in their analytics —
+`utm_medium=tool`, `utm_campaign=<sponsor.ts>`, `utm_content=<stock>`) on every
+outbound VDP link. `src/lib/track.test.ts` pins the tags.
 `Preapproval click` (prop `sponsor`) on the header CTA, same UTM treatment with
 `utm_content=preapproval`. Report = clicks by vehicle, clicks by body type,
 price band readers land in, pre-approval clicks; sample layout at `/report/`.
@@ -129,7 +134,11 @@ is accepted; anything else falls back to the tool URL with a console error).
 
 WPR's house system for sponsorable data tools: Fraunces display, Public Sans
 body, JetBrains Mono for every number. Warm ground, teal from the typewriter in
-WPR's press seal. Do not mix in another pairing. Invariants this tool carries:
+WPR's press seal. Do not mix in another pairing. The three faces are
+self-hosted in `public/fonts` (latin subsets of the variable fonts, SIL OFL;
+`python scripts/fetch_fonts.py` refreshes them) and declared at the top of
+`src/styles.css`, so nothing render-blocking leaves the origin. Invariants this
+tool carries:
 the seal-plus-wordmark flag at 62px between a 4px-over-1px slate rule, the
 pinned tagline, the dateline, and a footer that names the paper and its phone.
 
@@ -139,8 +148,10 @@ brightening a link on hover dropped it under AA. Every hover uses the dark step.
 The sponsor lockup is the house pattern — white card ruled on its top edge in
 the accent, `PRESENTED BY` eyebrow, logo at 50px falling back to the name in
 Fraunces, a tagline splitting at the em-dash, the paid action on the right.
-`SPONSOR.logo` and `SPONSOR.tagline` in `sponsor.ts` are what a real dealer
-fills in. Paid outbound links carry `rel="noopener noreferrer sponsored"`;
+`SPONSOR.logo` (src plus natural width and height, so the card reserves the
+room before it loads) and `SPONSOR.tagline` in `sponsor.ts` are what a real
+dealer fills in. Hover styles live behind `@media (hover: hover) and (pointer:
+fine)`; form controls are 16px so iOS never zooms into them. Paid outbound links carry `rel="noopener noreferrer sponsored"`;
 `sponsored` is a disclosure requirement, not a technical one.
 
 Sales contact for the placement is `SPONSOR_INQUIRY`
@@ -178,9 +189,15 @@ it goes through `ingest.py` like any other feed, so the same contract applies.
 pitch loads the file named in `inventoryFile`.
 
 **A snapshot is not a feed.** Prices and availability move daily. The capture
-date is in the file *and* on the page — `listingsAsOf` drives the ribbon and
-the footer — because a stale snapshot shown as live is the failure mode here.
-Recapture or retire a preview before showing it again.
+date is in the file *and* on the page — `capturedOn` (YYYY-MM-DD) drives the
+ribbon, the lot footer, the colophon and the mini, each saying the date and
+its age in words — because a stale snapshot shown as live is the failure mode
+here. Photos die faster than listings (a sold car's images are deleted from
+the dealer's CDN): a photo that fails to load falls back to the silhouette
+(`Photo.tsx`), and `python feed/check_snapshot.py feed/brickners_listings.json`
+reports what has gone 404 and exits non-zero. Run it, then recapture or retire
+a preview before showing it again. The dealer's site answers 403 to scripts,
+so vehicle pages can only be judged gone on 404/410.
 
 Two gaps real listings have, and how they are handled. Neither is papered over:
 rows with no published fuel economy are dropped and named at build time rather
@@ -208,9 +225,12 @@ six-second clock that stops on hover or focus and never starts under
 `target="_top"` so they leave the iframe; `?pitch=` carries through and shows
 its own compact ribbon line. Height messaging uses id `wpr-auto-loan-mini`.
 
-`?to=<the tool's page on the news site>` is where "What can you actually
-afford?" lands; without it, the standalone tool. http(s) only. That link is
-tagged `utm_medium=mini` so mini-driven visits show under Sources in Plausible.
+`?to=<the tool's page on the news site>` is where "See what you can afford"
+lands; without it, the standalone tool. Only the publisher's own https pages
+are accepted (the same rule as `?host=`); anything else is refused with a
+console error and readers go to the tool. That link is tagged
+`utm_medium=mini` so mini-driven visits show under Sources in Plausible. The
+next vehicle's photo is fetched while the current one shows.
 
 ```html
 <iframe src="https://rowanflynnpilot.github.io/wpr-auto-loan/mini.html?to=https://wausaupilotandreview.com/what-can-i-drive/"
@@ -239,3 +259,5 @@ vehicle; feed data (mpg, drivetrain, features) speaks for itself.
     python -m unittest discover -s feed -p "test_*.py"
     $env:FEED_PATH="feed/demo.csv"; python feed/ingest.py
     npm install; npm test; npm run dev
+    python feed/check_snapshot.py feed/brickners_listings.json   # before a pitch showing
+    python scripts/fetch_fonts.py                               # refresh public/fonts
