@@ -8,7 +8,7 @@ import { purchaseFees } from '../lib/loan';
 export function Methodology() {
   const w = WISCONSIN;
   return (
-    <details className="method">
+    <details className="method" id="method">
       <summary>How we figure this</summary>
       <ul>
         <li>

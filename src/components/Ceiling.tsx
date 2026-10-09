@@ -79,6 +79,27 @@ function CopyLink({ inputs }: { inputs: LoanInputs }) {
   );
 }
 
+// The methodology sits in the footer, a long way below the figure it explains
+// on a phone; this opens it and goes there. Not a hash link: the hash is the
+// scenario's.
+function HowWeFigure() {
+  return (
+    <button
+      type="button"
+      className="copylink"
+      onClick={() => {
+        const details = document.getElementById('method') as HTMLDetailsElement | null;
+        if (details === null) throw new Error('Methodology block not found');
+        details.open = true;
+        details.scrollIntoView({ block: 'start' });
+        details.querySelector('summary')?.focus();
+      }}
+    >
+      How we figure this
+    </button>
+  );
+}
+
 export interface LotDot {
   label: string;
   price: number;
@@ -116,7 +137,10 @@ export function Ceiling({ inputs, ceiling, lot }: Props) {
         )}
         .
       </p>
-      <CopyLink inputs={inputs} />
+      <div className="actions">
+        <CopyLink inputs={inputs} />
+        <HowWeFigure />
+      </div>
       <PriceLine ceiling={ceiling} lot={lot} />
       <p className="note">
         For scale: the median Marathon County household earns about{' '}
