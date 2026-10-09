@@ -11,7 +11,12 @@ export function SponsorLockup() {
       <div className="lockup-id">
         <p className="lockup-eyebrow">Presented by</p>
         {SPONSOR.logo ? (
-          <img src={SPONSOR.logo} alt={SPONSOR.name} height={50} />
+          <img
+            src={SPONSOR.logo.src}
+            alt={SPONSOR.name}
+            height={50}
+            width={Math.round((SPONSOR.logo.width * 50) / SPONSOR.logo.height)}
+          />
         ) : (
           <p className="lockup-name">{SPONSOR.name}</p>
         )}

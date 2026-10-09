@@ -1,8 +1,9 @@
 export interface Sponsor {
   name: string;
   disclosure: string;
-  /** Logo drawn for white, ~50px tall. null falls back to the name in Fraunces. */
-  logo: string | null;
+  /** Logo drawn for white, shown 50px tall; its natural size reserves the width
+   *  before it loads so the row never shifts. null falls back to the name in Fraunces. */
+  logo: { src: string; width: number; height: number } | null;
   /** Splits at the em-dash: what they offer large, where they are small beneath. */
   tagline: string;
   preapprovalUrl: string;

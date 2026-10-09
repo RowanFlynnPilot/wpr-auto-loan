@@ -13,6 +13,8 @@ export default defineConfig({
         // Sidebar slideshow — its own page so the embed stays light.
         mini: fileURLToPath(new URL('mini.html', import.meta.url)),
       },
+      // React in its own chunk, named for what it is, shared by both pages.
+      output: { manualChunks: { vendor: ['react', 'react-dom'] } },
     },
   },
 });
