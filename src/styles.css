@@ -353,6 +353,7 @@ input[type='range']:focus-visible { outline: 2px solid var(--teal); outline-offs
   max-width: 420px; margin: 0 auto; background: var(--paper);
   border: 1px solid var(--rule); border-top: 3px solid var(--teal);
 }
+.mini-slides { touch-action: pan-y; }
 .mini-pitch {
   padding: 6px 12px; background: #f2c14e; border-bottom: 1px solid #8a6d00;
   font-size: 11px; font-weight: 600; color: var(--ink);

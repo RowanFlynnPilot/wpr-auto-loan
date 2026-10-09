@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { DEFAULTS } from '../config/scenario';
 import { PITCH, SPONSOR } from '../config/sponsor';
 import { dollars, percent } from '../lib/format';
@@ -32,6 +32,7 @@ export function Mini() {
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(() => !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   const [held, setHeld] = useState(false); // hover or focus pauses the clock
+  const swipe = useRef<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}${PITCH?.inventoryFile ?? 'inventory.json'}`)
@@ -103,7 +104,27 @@ export function Mini() {
 
       {/* W3C carousel pattern: the slide is a named group, announced only
           when the clock is stopped, since a rotating live region is noise. */}
-      <div className="mini-slides" aria-live={playing && !held ? 'off' : 'polite'} aria-atomic="true">
+      {/* A phone reader swipes a slideshow: a finger that moves more sideways
+          than down, by 40px, steps it. Vertical scrolling stays the browser's
+          (touch-action: pan-y). */}
+      <div
+        className="mini-slides"
+        aria-live={playing && !held ? 'off' : 'polite'}
+        aria-atomic="true"
+        onPointerDown={(e) => {
+          if (e.pointerType !== 'mouse') swipe.current = { x: e.clientX, y: e.clientY };
+        }}
+        onPointerUp={(e) => {
+          const from = swipe.current;
+          swipe.current = null;
+          if (from === null) return;
+          const dx = e.clientX - from.x;
+          if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(e.clientY - from.y)) step(dx < 0 ? 1 : -1);
+        }}
+        onPointerCancel={() => {
+          swipe.current = null;
+        }}
+      >
         <div className="mini-slide" role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${n}`}>
         <Photo key={v.stock} vehicle={v} width={640} height={480} />
         <div className="mini-body">
