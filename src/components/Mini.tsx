@@ -25,7 +25,7 @@ const Chevron = ({ flip }: { flip?: boolean }) => (
 // A sidebar-sized slideshow of the sponsor's lot. Every payment it quotes is
 // an example at the tool's default terms, named beside the figure; the whole
 // point of the card is the link into the full tool, where the reader's own
-// numbers take over.
+// numbers take over. Both links are verb-first, as house CTAs are.
 export function Mini() {
   const [inventory, setInventory] = useState<Inventory | null>(null);
   const [loadError, setLoadError] = useState(false);
@@ -72,7 +72,7 @@ export function Mini() {
       <section className="mini">
         <p className="error">The lot didn&rsquo;t load. The full tool still works.</p>
         <a className="mini-cta" href={tool} target="_top" onClick={() => trackMiniClick('tool')}>
-          What can you actually afford? <span aria-hidden="true">→</span>
+          See what you can afford <span aria-hidden="true">→</span>
         </a>
       </section>
     );
@@ -136,7 +136,7 @@ export function Mini() {
 
       <footer className="mini-foot">
         <a className="mini-cta" href={tool} target="_top" onClick={() => trackMiniClick('tool')}>
-          What can you actually afford? <span aria-hidden="true">→</span>
+          See what you can afford <span aria-hidden="true">→</span>
         </a>
         <a
           className="mini-vdp"
@@ -145,7 +145,7 @@ export function Mini() {
           rel="noopener noreferrer sponsored"
           onClick={() => trackVehicleClick(v, 'mini')}
         >
-          This one at {SPONSOR.name} <span aria-hidden="true">→</span>
+          See this one at {SPONSOR.name} <span aria-hidden="true">→</span>
         </a>
         <p className="mini-sponsor">{SPONSOR.disclosure} · Wausau Pilot &amp; Review</p>
       </footer>
