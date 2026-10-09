@@ -3,6 +3,7 @@ import { COUNTY_MEDIAN_HOUSEHOLD_INCOME } from '../config/wisconsin';
 import { ceilingLevers, maxPayment, maxPrice, purchaseFees, quote, type LoanInputs } from '../lib/loan';
 import { cents, dollars, percent } from '../lib/format';
 import { SETTLE_MS, encodeInputs, shareUrl } from '../lib/share';
+import { swarmRows } from '../lib/swarm';
 
 // Eases the displayed figure toward its new value over ~250ms so the number
 // visibly reacts to the inputs. Display-only — every other line uses the real
@@ -161,25 +162,31 @@ function PriceLine({ ceiling, lot }: { ceiling: number; lot: LotDot[] }) {
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
-  const H = 84;
+  const H = 90;
   const PAD = 24;
+  const AXIS = 60;
+  const BAND = 34; // centre line of the dots
   const top = Math.max(ceiling, ...lot.map((d) => d.price), 10_000);
   const domain = Math.ceil(top / 10_000) * 10_000;
   const x = (price: number) => PAD + (price / domain) * (W - PAD * 2);
   const ticks = Array.from({ length: domain / 10_000 + 1 }, (_, k) => k * 10_000);
   const under = lot.filter((d) => d.price <= ceiling).length;
-  // A real lot is a couple of hundred dots: smaller, in more rows, so the
-  // strip reads as density rather than a smear.
-  const [r, rows, step] = lot.length > 80 ? [3, 7, 4] : [4, 5, 4.5];
+  // A beeswarm: dots stack where the lot is dense and sit on one line where
+  // it is sparse. A real lot is a couple of hundred dots, so smaller ones in
+  // more rows past 80 vehicles.
+  const [r, rows] = lot.length > 80 ? [3, 7] : [4, 5];
+  const step = 2 * r + 1;
+  const row = swarmRows(lot.map((d) => x(d.price)), step, rows);
+  const mid = Math.floor(rows / 2);
 
   return (
     <figure className="priceline" ref={ref}>
       <svg viewBox={`0 0 ${W} ${H}`} height={H} role="img" aria-label={`${under} of ${lot.length} vehicles under your ceiling`}>
-        <line x1={PAD} y1={52} x2={W - PAD} y2={52} className="axis" />
+        <line x1={PAD} y1={AXIS} x2={W - PAD} y2={AXIS} className="axis" />
         {ticks.map((t) => (
           <g key={t}>
-            <line x1={x(t)} y1={48} x2={x(t)} y2={56} className="axis" />
-            <text x={x(t)} y={74} textAnchor="middle" className="tick">
+            <line x1={x(t)} y1={AXIS - 4} x2={x(t)} y2={AXIS + 4} className="axis" />
+            <text x={x(t)} y={AXIS + 22} textAnchor="middle" className="tick">
               {t === 0 ? '$0' : `$${t / 1000}k`}
             </text>
           </g>
@@ -188,14 +195,14 @@ function PriceLine({ ceiling, lot }: { ceiling: number; lot: LotDot[] }) {
           <circle
             key={k}
             cx={x(d.price)}
-            cy={36 + ((k % rows) - Math.floor(rows / 2)) * step}
+            cy={BAND + (row[k] - mid) * step}
             r={r}
             className={d.price <= ceiling ? 'dot in' : 'dot out'}
           >
             <title>{`${d.label} — ${dollars(d.price)}`}</title>
           </circle>
         ))}
-        <line x1={x(ceiling)} y1={8} x2={x(ceiling)} y2={58} className="marker" />
+        <line x1={x(ceiling)} y1={8} x2={x(ceiling)} y2={AXIS + 6} className="marker" />
         <text x={x(ceiling)} y={0} dy={6} textAnchor={ceiling / domain > 0.85 ? 'end' : 'middle'} className="marker-label">
           your ceiling
         </text>
