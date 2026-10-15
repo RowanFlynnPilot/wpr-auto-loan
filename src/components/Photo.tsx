@@ -30,7 +30,10 @@ export function Photo({ vehicle: v, width, height, loading }: Props) {
   }
   return (
     <div className={`photo ${state}`}>
-      <BodyIcon body={v.body} />
+      {/* The ground under the photo is decoration; the photo carries the name. */}
+      <span className="ground" aria-hidden="true">
+        <BodyIcon body={v.body} />
+      </span>
       <img
         src={v.photoUrl}
         alt={`${v.year} ${v.make} ${v.model}`}
