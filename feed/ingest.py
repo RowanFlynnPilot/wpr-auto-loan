@@ -70,6 +70,11 @@ def parse_row(raw: dict, line: int) -> dict:
         raise ValueError(f"line {line}: unknown body {raw[FEED_COLUMNS['body']]!r} for stock {v['stock']}; add it to BODY_ALIASES")
     if v["price"] <= 0:
         raise ValueError(f"line {line}: non-positive price for stock {v['stock']}")
+    if v["mileage"] < 0:
+        raise ValueError(f"line {line}: negative mileage for stock {v['stock']}")
+    # A model year outside anything a lot sells is a mis-mapped column.
+    if not 1950 <= v["year"] <= datetime.now().year + 1:
+        raise ValueError(f"line {line}: implausible year {v['year']} for stock {v['stock']}")
     # The fuel line divides by mpg. EVs need MPGe handling before they can ship.
     if v["mpgCity"] <= 0 or v["mpgHwy"] <= 0:
         raise ValueError(f"line {line}: mpg must be positive for stock {v['stock']}")

@@ -54,6 +54,15 @@ class IngestTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "non-positive price"):
             load_feed(self.feed({**GOOD, "selling_price": "0"}))
 
+    def test_negative_mileage_fails(self):
+        with self.assertRaisesRegex(ValueError, "negative mileage"):
+            load_feed(self.feed({**GOOD, "mileage": "-1"}))
+
+    def test_implausible_year_fails(self):
+        for bad in ("1899", "2099"):
+            with self.subTest(bad=bad), self.assertRaisesRegex(ValueError, "implausible year"):
+                load_feed(self.feed({**GOOD, "year": bad}))
+
     def test_vdp_must_be_https_url(self):
         for bad in ("http://dealer.example/x", "https://", "dealer.example/x"):
             with self.subTest(bad=bad), self.assertRaisesRegex(ValueError, "vdp_url"):
