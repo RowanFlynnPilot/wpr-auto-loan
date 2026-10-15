@@ -3,7 +3,7 @@ import { PITCH, SPONSOR } from '../config/sponsor';
 import { dollars } from '../lib/format';
 import { allInMonthly, combinedMpg } from '../lib/fuel';
 import { downToReach, type LoanInputs } from '../lib/loan';
-import { capturedAgo, capturedOn } from '../lib/snapshot';
+import { capturedLine } from '../lib/snapshot';
 import type { Inventory, Vehicle } from '../types';
 import { SponsorLockup } from './SponsorLockup';
 import { VehicleCard } from './VehicleCard';
@@ -116,7 +116,7 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
       <p className="note">
         {over > 0 && `${over} more ${over === 1 ? 'vehicle is' : 'vehicles are'} above your ceiling. `}
         {PITCH
-          ? `Listings captured ${capturedOn(PITCH.capturedOn)} (${capturedAgo(PITCH.capturedOn)}): ${inventory.vehicles.length} of the ${PITCH.listed} they listed; the rest publish no price or no gas mileage.`
+          ? `Listings captured ${capturedLine(PITCH.capturedOn)}: ${inventory.vehicles.length} of the ${PITCH.listed} they listed; the rest publish no price or no gas mileage.`
           : `Inventory updated ${new Date(inventory.generatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}.`}
       </p>
     </section>
