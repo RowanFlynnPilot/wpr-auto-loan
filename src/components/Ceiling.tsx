@@ -129,6 +129,12 @@ export function Ceiling({ inputs, ceiling, lot, onUseIncome }: Props) {
         {dollars(maxPayment(inputs))} a month for {inputs.termMonths} months at {percent(inputs.apr)} APR.
         That price carries {cents(q.salesTax)} in sales tax and {cents(purchaseFees())} in title, plate,
         registration and Marathon County wheel tax, so you’d finance {dollars(q.financed)}.
+        {inputs.tradeOwed > inputs.tradeValue && (
+          <>
+            {' '}You owe {dollars(inputs.tradeOwed - inputs.tradeValue)} more on your trade than it’s worth;
+            that rolls into the loan and lowers the ceiling.
+          </>
+        )}
       </p>
       <p className="levers">
         To raise it: another $500 down adds {dollars(levers.down500)}
