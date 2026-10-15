@@ -1,0 +1,42 @@
+name: Snapshot health
+
+# A pitch preview runs on a dated snapshot of a prospect's listings, and the
+# dealer deletes a sold car's photos within weeks. This runs the same check an
+# operator runs before a showing and opens (or adds to) one issue when photos
+# have gone, so the rot is found in week two rather than on the call. The
+# daily build stays network-free; this is the only workflow that looks out.
+
+on:
+  schedule:
+    - cron: '0 12 * * 1' # Mondays, 07:00 Central
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - id: check
+        run: |
+          set +e
+          python feed/check_snapshot.py feed/brickners_listings.json | tee report.txt
+          echo "status=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+      - if: steps.check.outputs.status != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="Brickner's snapshot has rotted: recapture before a showing"
+          body="$(printf 'feed/check_snapshot.py on %s:\n\n```\n%s\n```\n\nRecapture per CLAUDE.md (Pitch previews > Recapturing), or retire the preview.' "$(date -u +%F)" "$(cat report.txt)")"
+          existing="$(gh issue list --state open --search "snapshot has rotted in:title" --json number --jq '.[0].number')"
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "$body"
+          else
+            gh issue create --title "$title" --body "$body"
+          fi
