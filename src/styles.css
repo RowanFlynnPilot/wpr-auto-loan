@@ -367,6 +367,23 @@ input[type='range']:focus-visible { outline: 2px solid var(--teal); outline-offs
   .photo img { transition: opacity 250ms ease-out; }
 }
 
+/* Print: the scenario and the lot, to take to the dealership. Controls go,
+   photos go (a lazy one below the fold would print as a blank), cards keep
+   together, and the page is one column. */
+@media print {
+  html { background: #fff; }
+  .skip, .actions, .more, .preapproval, .pitch a, .copied, .mini-controls { display: none; }
+  .app { max-width: none; padding: 0; }
+  .layout { grid-template-columns: 1fr; gap: 24px; }
+  .inputs { position: static; break-inside: avoid; }
+  .card { break-inside: avoid; }
+  .photo { display: none; }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .inventory > header, .terms, .ceiling { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+  .vdp::after, .mini-vdp::after { content: none; }
+}
+
 /* Mini — the sidebar slideshow (mini.html). Marked on its top edge like the
    lockup: it is a sponsored surface. */
 .mini-page { padding: 8px; }
