@@ -43,6 +43,14 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+      # What a reader would notice if it broke, checked on the built site at
+      # desktop and phone widths, and a Lighthouse floor under the built page.
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test
+      - run: |
+          npm run preview -- --port 4173 --strictPort &
+          sleep 3
+          node scripts/lighthouse_budget.mjs
       - uses: actions/upload-pages-artifact@v5
         with:
           path: dist

@@ -3,3 +3,8 @@ dist/
 public/inventory.json
 public/inventory.*.json
 __pycache__/
+
+# smoke test and Lighthouse output
+test-results/
+playwright-report/
+lighthouse.json
