@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="only light" />
+    <title>Sponsor “What can I drive?” — Wausau Pilot &amp; Review</title>
+    <meta
+      name="description"
+      content="One dealership's lot inside a Wisconsin auto-loan affordability tool from Wausau Pilot & Review: what the sponsor gets, who sees it, and who to talk to."
+    />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="preload" as="font" type="font/woff2" href="../fonts/fraunces.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="../fonts/public-sans.woff2" crossorigin />
+    <style>
+      @font-face {
+        font-family: 'Fraunces'; font-style: normal; font-weight: 400 700; font-display: swap;
+        src: url('../fonts/fraunces.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Public Sans'; font-style: normal; font-weight: 400 600; font-display: swap;
+        src: url('../fonts/public-sans.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400 500; font-display: swap;
+        src: url('../fonts/jetbrains-mono.woff2') format('woff2');
+      }
+      /* Same tokens as src/styles.css — keep in sync by hand. */
+      :root {
+        --teal: #3a867c; --teal-deep: #2b665e; --teal-dark: #24564e;
+        --cream: #f6f2e9; --paper: #fffdf8; --ink: #1e2624; --ink-soft: #55625e; --rule: #ddd6c7; --slate: #32373c;
+        --display: 'Fraunces', Georgia, serif; --body: 'Public Sans', system-ui, sans-serif; --mono: 'JetBrains Mono', ui-monospace, monospace;
+      }
+      * { box-sizing: border-box; }
+      html { background: var(--cream); -webkit-text-size-adjust: 100%; }
+      body { margin: 0; color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+      h1, h2, h3 { font-family: var(--display); font-weight: 600; margin: 0; text-wrap: balance; }
+      p { margin: 0; text-wrap: pretty; }
+      a { color: var(--teal-deep); text-underline-offset: 2px; }
+      a:hover { color: var(--teal-dark); }
+
+      .wpr-masthead {
+        border-top: 4px solid var(--slate); border-bottom: 1px solid var(--slate);
+        background: #fff; text-align: center; padding: 16px 20px 12px;
+      }
+      .wpr-masthead a { display: inline-flex; align-items: center; justify-content: center; gap: 14px; max-width: 94%; text-decoration: none; }
+      .wpr-masthead .badge { flex-shrink: 0; object-fit: contain; }
+      .wpr-masthead .wordmark { max-height: 54px; max-width: 100%; height: auto; width: auto; object-fit: contain; min-width: 0; }
+      .wpr-masthead .tagline { font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; font-weight: 600; color: var(--slate); margin-top: 8px; }
+
+      .page { max-width: 1040px; margin: 0 auto; padding: 36px 24px 56px; }
+      .kicker { font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal-deep); }
+      h1 { font-size: 44px; line-height: 1.05; margin-top: 8px; font-variation-settings: 'opsz' 144; max-width: 16ch; }
+      .lede { margin-top: 16px; font-size: 18px; color: var(--ink-soft); max-width: 60ch; }
+      .lede b { color: var(--ink); font-weight: 600; }
+      section { margin-top: 44px; }
+      h2 { font-size: 26px; margin-bottom: 12px; }
+      .sub { color: var(--ink-soft); max-width: 62ch; }
+
+      .shots { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-top: 18px; }
+      .shot { background: #fff; border: 1px solid var(--rule); border-top: 3px solid var(--teal); padding: 10px; }
+      .shot img { display: block; width: 100%; height: auto; }
+      .shot figcaption { margin-top: 8px; font-size: 12px; color: var(--ink-soft); }
+      .shot.phone { display: grid; grid-template-rows: auto 1fr auto; }
+      .mini-row { display: grid; grid-template-columns: 1fr 2fr; gap: 16px; margin-top: 16px; align-items: start; }
+      .mini-row .shot { max-width: 360px; }
+      .label { display: inline-block; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.04em; color: #5c4600; background: #f2c14e; padding: 2px 8px; margin-bottom: 8px; }
+
+      .gets { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+      .gets li { background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px; }
+      .gets b { display: block; font-family: var(--display); font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+      .gets p { font-size: 14px; color: var(--ink-soft); }
+
+      .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin-top: 16px; }
+      .stat { background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px; }
+      .stat b { display: block; font-family: var(--display); font-weight: 700; font-size: 32px; color: var(--teal-deep); line-height: 1.1; font-variant-numeric: tabular-nums; }
+      .stat span { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); }
+      .source { margin-top: 10px; font-size: 12px; color: var(--ink-soft); }
+
+      .honest { max-width: 68ch; }
+      .honest li { margin-top: 6px; }
+      .links { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; }
+      .links a { font-weight: 600; }
+      .links small { color: var(--ink-soft); font-weight: 400; }
+
+      .next { background: #fff; border: 1px solid var(--rule); border-top: 3px solid var(--teal); padding: 22px 24px; margin-top: 44px; display: grid; gap: 8px; }
+      .next h2 { margin: 0; }
+      .next .who { font-size: 18px; }
+      .next .who b { font-weight: 600; }
+      .next .contact { font-family: var(--mono); font-size: 15px; }
+      .next .ask { color: var(--ink-soft); max-width: 60ch; }
+      .copied { color: var(--teal-deep); font-weight: 600; font-family: var(--body); font-size: 13px; }
+
+      .colophon { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--ink-soft); line-height: 1.6; max-width: 70ch; }
+
+      @media (max-width: 760px) {
+        .page { padding: 24px 16px 40px; }
+        h1 { font-size: 34px; }
+        .shots, .mini-row { grid-template-columns: 1fr; }
+        .mini-row .shot { max-width: none; }
+      }
+      @media (hover: hover) and (pointer: fine) { .gets li:hover { border-color: var(--teal); } }
+    </style>
+  </head>
+  <body>
+    <header class="wpr-masthead">
+      <a href="https://wausaupilotandreview.com/" target="_blank" rel="noopener noreferrer" aria-label="Wausau Pilot & Review home">
+        <img class="badge" src="../wpr-typewriter-badge.png" alt="" width="62" height="62" decoding="async" />
+        <img class="wordmark" src="../wpr-wordmark.png" alt="Wausau Pilot &amp; Review" width="640" height="82" />
+      </a>
+      <p class="tagline">Where locals look first for news</p>
+    </header>
+
+    <main class="page">
+      <p class="kicker">Sponsorship · sole sponsor</p>
+      <h1>Your lot, inside the question every car buyer asks first.</h1>
+      <p class="lede">
+        <b>What can I drive?</b> is a Wausau Pilot &amp; Review reader tool. A reader enters what they earn and what
+        they can put down; the tool does the Wisconsin math — sales tax, title, plates, the Marathon County
+        wheel tax — and shows which vehicles on one dealer’s lot actually fit, each with its own monthly payment.
+        That lot is the sponsor’s, rebuilt from their inventory feed every day.
+      </p>
+
+      <section>
+        <h2>Two placements, one sponsor</h2>
+        <p class="sub">
+          The full tool lives on its own page and inside articles. A compact slideshow of the lot sits in the
+          sidebar on article pages and sends readers into it.
+        </p>
+        <div class="shots">
+          <figure class="shot">
+            <span class="label">PREVIEW — a proposal, not a live sponsorship</span>
+            <img src="../media/tool-desktop.webp" alt="The tool on a desktop: a reader's ceiling of $25,565, the price strip of the lot, the term table, and the first row of vehicles under the ceiling with their payments" width="1280" height="2080" loading="lazy" />
+            <figcaption>The full tool, built on Brickner’s of Wausau’s own published listings as of October 14, 2026.</figcaption>
+          </figure>
+          <figure class="shot phone">
+            <span class="label">PREVIEW — a proposal, not a live sponsorship</span>
+            <img src="../media/tool-phone-lot.webp" alt="The tool on a phone: the sponsor lockup with its Get pre-approved button, body-type chips, and vehicle cards with payment, gas cost and a link to the dealer" width="780" height="1700" loading="lazy" />
+            <figcaption>On a phone, where most readers are. Every card’s link goes to that vehicle on the sponsor’s site.</figcaption>
+          </figure>
+        </div>
+        <div class="mini-row">
+          <figure class="shot">
+            <span class="label">PREVIEW — a proposal, not a live sponsorship</span>
+            <img src="../media/mini.webp" alt="The sidebar slideshow: one vehicle at a time with an example payment, previous and next controls, and a button into the full tool" width="720" height="1400" loading="lazy" />
+            <figcaption>The sidebar slideshow on article pages.</figcaption>
+          </figure>
+          <ul class="gets" aria-label="What the sponsor gets">
+            <li><b>The lockup</b><p>Logo, name and tagline on the inventory panel, and a “Get pre-approved” button to the sponsor’s own financing page.</p></li>
+            <li><b>Every card links to the car</b><p>Each vehicle under a reader’s ceiling links to that vehicle’s page on the sponsor’s site, tagged so the visits show in the sponsor’s own analytics.</p></li>
+            <li><b>The sidebar slideshow</b><p>Newest vehicles first, with an example payment, on article pages across the site. Its button opens the full tool.</p></li>
+            <li><b>A monthly report</b><p>Clicks by vehicle and body type, the price bands readers arrive in, pre-approval clicks, and what the sidebar sent in. <a href="../report/">See the sample</a>.</p></li>
+            <li><b>A live lot</b><p>The sponsor’s inventory feed is ingested and the page rebuilt every day; sold vehicles leave, new ones arrive.</p></li>
+            <li><b>Sole sponsor</b><p>One dealership on the tool. The placement is not shared and not rotated.</p></li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Who sees it</h2>
+        <p class="sub">Wausau Pilot &amp; Review is Marathon County’s independent nonprofit newsroom, published in English, Spanish, Hmong and Vietnamese. Readers build it into their routine and come back: a daily habit, not a drive-by click.</p>
+        <div class="stats">
+          <div class="stat"><b>1.4M+</b><span>Monthly page views</span></div>
+          <div class="stat"><b>354K+</b><span>Unique monthly visitors</span></div>
+          <div class="stat"><b>20K+</b><span>Email subscribers</span></div>
+          <div class="stat"><b>36K+</b><span>Social likes and follows</span></div>
+        </div>
+        <p class="source">Source: Wausau Pilot &amp; Review 2026–2027 media kit.</p>
+      </section>
+
+      <section>
+        <h2>How it stays honest</h2>
+        <ul class="honest">
+          <li>The calculator is neutral and the math is the newsroom’s. The sponsor’s prices are the sponsor’s; every other number — the ceiling, each payment, Wisconsin tax and fees, fuel — is computed by Wausau Pilot &amp; Review.</li>
+          <li>Every payment shown carries the terms that produce it, as Regulation Z asks of a payment in an advertisement.</li>
+          <li>The inventory panel is the only sponsored surface, and it is labeled. The newsroom writes no copy praising a vehicle; the feed’s own data speaks.</li>
+          <li>Sponsorship buys the placement, not coverage. Wausau Pilot &amp; Review’s reporting is independent of its sponsors.</li>
+          <li>A preview for a prospect runs on a dated snapshot of their published listings and says so on the page; a live sponsorship runs on their feed.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>See it</h2>
+        <ul class="links">
+          <li><a href="../?pitch=brickners">The preview on Brickner’s of Wausau’s lot</a> <small>— 170 of their 197 listings as of October 14, 2026</small></li>
+          <li><a href="../">The tool on the demo lot</a> <small>— what a reader sees with no sponsor named</small></li>
+          <li><a href="../mini.html?pitch=brickners">The sidebar slideshow</a></li>
+          <li><a href="../report/">The sample monthly report</a> <small>— illustrative numbers, the shape of the real one</small></li>
+        </ul>
+      </section>
+
+      <aside class="next">
+        <h2>Next step</h2>
+        <p class="who"><b>Chris Weber</b>, Wausau Pilot &amp; Review</p>
+        <p class="contact">
+          <a id="mail" href="mailto:weber.chris@wausaupilotandreview.com?subject=Sponsoring%20%22What%20can%20I%20drive%3F%22">weber.chris@wausaupilotandreview.com</a>
+          <span id="copied" class="copied" hidden> ✓ Address copied</span>
+          <br />715-301-5539
+        </p>
+        <p class="ask">Send Chris the name of your dealership and a link to your inventory, and he will bring back a preview built on your own lot, with pricing for the placement.</p>
+      </aside>
+
+      <p class="colophon">
+        Wausau Pilot &amp; Review may accept or decline any advertisement or sponsorship. The previews above were
+        built from Brickner’s of Wausau’s own published listings on October 14, 2026 as a proposal to them; the
+        tool itself runs on a demo lot until a dealer signs. Wausau Pilot &amp; Review · 715-301-5539.
+      </p>
+    </main>
+    <script>
+      // A desktop with no mail handler does nothing when a mailto is clicked
+      // and the reader concludes the link is broken, so the address is copied too.
+      document.getElementById('mail').addEventListener('click', function () {
+        if (!navigator.clipboard) return;
+        navigator.clipboard.writeText('weber.chris@wausaupilotandreview.com').then(function () {
+          var c = document.getElementById('copied');
+          c.hidden = false;
+          setTimeout(function () { c.hidden = true; }, 3000);
+        }, function () {});
+      });
+    </script>
+  </body>
+</html>
