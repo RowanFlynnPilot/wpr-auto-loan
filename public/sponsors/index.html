@@ -58,11 +58,10 @@
       h2 { font-size: 26px; margin-bottom: 12px; }
       .sub { color: var(--ink-soft); max-width: 62ch; }
 
-      .shots { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-top: 18px; }
+      .shots { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-top: 18px; align-items: start; }
       .shot { background: #fff; border: 1px solid var(--rule); border-top: 3px solid var(--teal); padding: 10px; }
       .shot img { display: block; width: 100%; height: auto; }
       .shot figcaption { margin-top: 8px; font-size: 12px; color: var(--ink-soft); }
-      .shot.phone { display: grid; grid-template-rows: auto 1fr auto; }
       .mini-row { display: grid; grid-template-columns: 1fr 2fr; gap: 16px; margin-top: 16px; align-items: start; }
       .mini-row .shot { max-width: 360px; }
       .label { display: inline-block; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.04em; color: #5c4600; background: #f2c14e; padding: 2px 8px; margin-bottom: 8px; }
@@ -143,7 +142,7 @@
         <div class="mini-row">
           <figure class="shot">
             <span class="label">PREVIEW — a proposal, not a live sponsorship</span>
-            <img src="../media/mini.webp" alt="The sidebar slideshow: one vehicle at a time with an example payment, previous and next controls, and a button into the full tool" width="720" height="1400" loading="lazy" />
+            <img src="../media/mini.webp" alt="The sidebar slideshow: one vehicle at a time with an example payment, previous and next controls, and a button into the full tool" width="688" height="1204" loading="lazy" />
             <figcaption>The sidebar slideshow on article pages.</figcaption>
           </figure>
           <ul class="gets" aria-label="What the sponsor gets">
