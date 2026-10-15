@@ -47,10 +47,17 @@ No speculative abstraction. Let TypeScript catch it.
    APR, term → `maxPrice()` back-solves the sticker price whose financed amount
    hits the payment ceiling. The scenario lives in the URL hash, written after
    the inputs rest (`SETTLE_MS` in `src/lib/share.ts`): WebKit throws past
-   ~100 history writes in 30 seconds, and a held arrow key got there.
-4. `InventoryGrid` shows vehicles under the ceiling, sorted by price, each with
-   its own payment computed by our math (never the dealer's number), a Reg Z
-   disclosure line, and a tracked link to the dealer's VDP.
+   ~100 history writes in 30 seconds, and a held arrow key got there. The
+   lot's body filter and sort ride in the same hash (`body=`, `sort=`), only
+   when they are not the defaults, so a shared view opens as it was seen.
+   `index.html` paints the masthead and title before React loads; that
+   markup mirrors `App.tsx`, and a change to one is a change to both.
+4. `InventoryGrid` shows vehicles under the ceiling, 24 at a time, ordered by
+   one of the keys in `src/lib/sorts.ts` (payment, payment plus gas, miles,
+   mpg, year), each with its own payment computed by our math (never the
+   dealer's number), a Reg Z disclosure line, and a tracked link to the
+   dealer's VDP. A car the cash covers outright says so instead of quoting
+   loan terms on $0.
 5. GitHub Actions runs ingest → test → build → Pages daily and on push.
 
 ## Wisconsin seeding — `src/config/wisconsin.ts`
@@ -213,7 +220,11 @@ the dealer's CDN): a photo that fails to load falls back to the silhouette
 (`Photo.tsx`), and `python feed/check_snapshot.py feed/brickners_listings.json`
 reports what has gone 404 and exits non-zero. Run it, then recapture or retire
 a preview before showing it again. The dealer's site answers 403 to scripts,
-so vehicle pages can only be judged gone on 404/410.
+so vehicle pages can only be judged gone on 404/410. The same check runs every
+Monday in `.github/workflows/snapshot-health.yml` and opens (or adds to) one
+issue when photos have gone; the daily build itself stays network-free.
+`src/config/sponsor.test.ts` pins the pitch's `listed` count and `capturedOn`
+to the snapshot's own header, so a recapture cannot forget `sponsor.ts`.
 
 Two gaps real listings have, and how they are handled. Neither is papered over:
 rows with no published fuel economy are dropped and named at build time rather
