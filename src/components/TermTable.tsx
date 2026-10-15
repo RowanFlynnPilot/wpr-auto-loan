@@ -9,6 +9,20 @@ interface Props {
 
 export function TermTable({ inputs, price, onSelectTerm }: Props) {
   const rows = termComparison(price, inputs);
+  // With no monthly payment the ceiling is cash: four rows of $0/mo would
+  // compare nothing.
+  if (rows[0].financed < 1) {
+    return (
+      <section className="terms">
+        <h2>Nothing to finance</h2>
+        <p className="note">
+          With no monthly payment there is no loan to compare: the ceiling is what your cash down and
+          trade-in equity cover after Wisconsin tax and fees. Enter an income or a payment to see the same
+          car four ways.
+        </p>
+      </section>
+    );
+  }
   const shortest = rows[0];
   const boost = extraPayment(price, inputs, 25);
   return (
