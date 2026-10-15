@@ -92,7 +92,9 @@ export default function App() {
       </a>
       <PitchRibbon />
       {/* WPR masthead, same as the paper's other tools (Brewers tracker et al.):
-          typewriter press seal + wordmark, tagline, dateline between slate rules. */}
+          typewriter press seal + wordmark, tagline, dateline between slate rules.
+          index.html paints a copy of this and the title before React loads;
+          a change here is a change there. */}
       <header className="wpr-masthead">
         <a href="https://wausaupilotandreview.com/" target="_blank" rel="noopener noreferrer" aria-label="Wausau Pilot & Review home">
           <img

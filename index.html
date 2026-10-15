@@ -33,7 +33,34 @@
     <script>window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- The top of the page, painted before React arrives: the masthead and
+           the title cost no JavaScript, so first paint does not wait on the
+           bundle. React replaces this with the same markup — keep it in step
+           with App.tsx. -->
+      <header class="wpr-masthead">
+        <a href="https://wausaupilotandreview.com/" target="_blank" rel="noopener noreferrer" aria-label="Wausau Pilot & Review home">
+          <img class="badge" src="/wpr-typewriter-badge.png" alt="" width="62" height="62" decoding="async" />
+          <img class="wordmark" src="/wpr-wordmark.png" alt="Wausau Pilot & Review" width="640" height="82" />
+        </a>
+        <p class="tagline">Where locals look first for news</p>
+        <div class="dateline"><span id="shell-date"></span><span class="place">Wausau, Wisconsin</span></div>
+      </header>
+      <div class="app">
+        <header class="masthead">
+          <h1>What can I drive?</h1>
+          <p class="lede">
+            Enter what you earn and what you can put down. We do the Wisconsin math — sales tax, title,
+            plates, the Marathon County wheel tax — and show you what actually fits.
+          </p>
+        </header>
+      </div>
+    </div>
+    <script>
+      document.getElementById('shell-date').textContent = new Date().toLocaleDateString('en-US', {
+        weekday: 'long', month: 'long', day: 'numeric', year: 'numeric',
+      });
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
