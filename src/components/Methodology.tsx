@@ -2,6 +2,7 @@ import { PITCH, SPONSOR } from '../config/sponsor';
 import { capturedOn } from '../lib/snapshot';
 import { COUNTY_MEDIAN_HOUSEHOLD_INCOME, FUEL, WISCONSIN } from '../config/wisconsin';
 import { cents, count, dollars, percent } from '../lib/format';
+import { KWH_PER_GALLON } from '../lib/fuel';
 import { purchaseFees } from '../lib/loan';
 
 // Every number the tool assumes, with its source, read from the same config
@@ -31,9 +32,11 @@ export function Methodology() {
           never the dealer’s number.
         </li>
         <li>
-          <b>Gas.</b> {count(FUEL.milesPerMonth)} miles a month (the FHWA average) at ${FUEL.gasPrice.toFixed(2)}
-          /gal, the Wausau metro regular average reported by GasBuddy as of {FUEL.gasAsOf}. Combined economy
-          is the EPA 55/45 city/highway blend of each vehicle’s rated mpg.
+          <b>Fuel.</b> {count(FUEL.milesPerMonth)} miles a month (the FHWA average) at ${FUEL.gasPrice.toFixed(2)}
+          /gal regular or ${FUEL.dieselPrice.toFixed(2)}/gal diesel, the Wausau metro averages reported by GasBuddy
+          as of {FUEL.gasAsOf}; an electric at {(FUEL.kwhPrice * 100).toFixed(1)}¢/kWh, the Wisconsin residential
+          average (EIA, {FUEL.kwhAsOf}), with its MPGe converted at {KWH_PER_GALLON} kWh per gallon. Combined
+          economy is the EPA 55/45 city/highway blend of each vehicle’s rated mpg.
         </li>
         <li>
           <b>County income.</b> Median Marathon County household income of{' '}

@@ -1,7 +1,7 @@
 import { SPONSOR } from '../config/sponsor';
 import { FUEL } from '../config/wisconsin';
 import { count, dollars, percent } from '../lib/format';
-import { fuelPerMonth } from '../lib/fuel';
+import { energyWords, fuelPerMonth } from '../lib/fuel';
 import { Photo } from './Photo';
 import { maxPayment, quote, type LoanInputs } from '../lib/loan';
 import { trackVehicleClick, vdpLink } from '../lib/track';
@@ -15,13 +15,15 @@ interface Props {
 // Real feeds have gaps, and some publish one combined rating rather than a
 // city/highway pair — say which, and drop what the dealer didn't supply.
 function meta(v: Vehicle): string[] {
-  const mpg = v.mpgCity === v.mpgHwy ? `${v.mpgCity} mpg combined` : `${v.mpgCity}/${v.mpgHwy} mpg`;
+  const unit = v.fuel === 'Electric' ? 'MPGe' : 'mpg';
+  const mpg = v.mpgCity === v.mpgHwy ? `${v.mpgCity} ${unit} combined` : `${v.mpgCity}/${v.mpgHwy} ${unit}`;
   return [`${count(v.mileage)} mi`, v.drivetrain, mpg, v.exteriorColor].filter((p) => p !== '');
 }
 
 export function VehicleCard({ vehicle: v, inputs }: Props) {
   const q = quote(v.price, inputs);
-  const fuel = fuelPerMonth(v.mpgCity, v.mpgHwy);
+  const fuel = fuelPerMonth(v);
+  const energy = energyWords(v.fuel);
   const budget = maxPayment(inputs);
   const share = budget > 0 ? q.payment / budget : 0;
   // Cash down and trade-in equity can cover a cheap car outright; a $0
@@ -52,11 +54,10 @@ export function VehicleCard({ vehicle: v, inputs }: Props) {
             </p>
           )}
           <p className="fuel">
-            + about {dollars(fuel)}/mo in gas ({count(FUEL.milesPerMonth)} mi/mo at Wausau’s $
-            {FUEL.gasPrice.toFixed(2)}/gal)
+            + about {dollars(fuel)}/mo in {energy.word} ({count(FUEL.milesPerMonth)} mi/mo at {energy.rate})
           </p>
           {/* The number the fuel line exists for. */}
-          <p className="allin">≈ {dollars(q.payment + fuel)}/mo with gas</p>
+          <p className="allin">≈ {dollars(q.payment + fuel)}/mo with {energy.word}</p>
         </div>
         {/* Reg Z: payment shown with the terms that produce it. */}
         <p className="disclosure">

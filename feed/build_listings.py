@@ -13,9 +13,9 @@ named at build time instead.
 * Dealer listings publish one combined MPG, not the city/highway pair a feed
   carries. Writing the combined figure into both columns is exact — the EPA
   55/45 blend of x and x is x — and the card labels it "combined".
-* Some rows have no fuel economy, some no published price ("call"), and an
-  electric vehicle's figure is MPGe, which the gas line cannot use. Those
-  are dropped, each with its reason printed.
+* Some rows have no fuel economy and some no published price ("call"). Those
+  are dropped, each with its reason printed. An electric's figure is MPGe and
+  goes through as such; ingest canonicalises the dealer's fuel label.
 * Body style is the dealer's own facet label (`bd`), mapped below onto the
   feed's canonical bodies. An unknown label fails here, not on a reader's page.
 """
@@ -28,7 +28,7 @@ SITE = "https://www.bricknersofwausau.net"
 
 COLUMNS = [
     "stock_number", "vin", "year", "make", "model", "trim", "body_style",
-    "selling_price", "mileage", "city_mpg", "highway_mpg", "drivetrain",
+    "selling_price", "mileage", "city_mpg", "highway_mpg", "fuel", "drivetrain",
     "exterior_color", "features", "photo_url", "vdp_url",
 ]
 
@@ -88,8 +88,6 @@ def body(v: dict) -> str:
 def reason_to_drop(v: dict) -> str | None:
     if not v["px"]:
         return "no published price"
-    if v.get("fuel") == "Electric":
-        return "electric; the gas line needs MPGe handling first"
     if not v["mpg"]:
         return "no fuel economy published"
     return None
@@ -110,6 +108,7 @@ def to_row(v: dict) -> dict:
         # Same value in both columns: the combined figure the dealer published.
         "city_mpg": mpg,
         "highway_mpg": mpg,
+        "fuel": v["fuel"],
         "drivetrain": v["dr"],
         "exterior_color": v["col"],
         "features": "|".join(ordered(v["ft"])),

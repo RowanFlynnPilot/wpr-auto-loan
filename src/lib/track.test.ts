@@ -14,6 +14,7 @@ const v: Vehicle = {
   mileage: 18000,
   mpgCity: 30,
   mpgHwy: 37,
+  fuel: 'Gasoline',
   drivetrain: 'FWD',
   exteriorColor: 'Blue',
   features: [],

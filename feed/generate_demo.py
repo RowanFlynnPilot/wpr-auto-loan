@@ -149,6 +149,7 @@ def generate(name: str, profile: dict) -> None:
             "mileage": mileage,
             "city_mpg": city,
             "highway_mpg": hwy,
+            "fuel": "Gasoline",
             "drivetrain": drive,
             "exterior_color": rng.choice(COLORS),
             "features": features,

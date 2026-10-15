@@ -35,7 +35,7 @@ class BuildListingsTest(unittest.TestCase):
         self.assertIsNone(reason_to_drop(V))
         self.assertIn("price", reason_to_drop({**V, "px": None}))
         self.assertIn("fuel economy", reason_to_drop({**V, "mpg": None}))
-        self.assertIn("electric", reason_to_drop({**V, "fuel": "Electric", "mpg": 100}))
+        self.assertIsNone(reason_to_drop({**V, "fuel": "Electric", "mpg": 100}))
 
     def test_features_lead_with_the_distinctive_ones(self):
         self.assertEqual(ordered(["Bluetooth", "Apple CarPlay", "Sunroof", "One owner"]),
@@ -45,6 +45,7 @@ class BuildListingsTest(unittest.TestCase):
     def test_row_carries_combined_mpg_twice_and_an_absolute_page(self):
         row = to_row(V)
         self.assertEqual((row["city_mpg"], row["highway_mpg"]), (24, 24))
+        self.assertEqual(row["fuel"], "Gasoline")
         self.assertEqual(row["vdp_url"], "https://www.bricknersofwausau.net/auto/used-2020-jeep-cherokee/1/")
         self.assertEqual(page_url({**V, "url": "https://x.example/y"}), "https://x.example/y")
 

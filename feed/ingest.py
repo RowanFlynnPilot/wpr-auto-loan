@@ -25,6 +25,7 @@ FEED_COLUMNS = {
     "mileage": "mileage",
     "mpgCity": "city_mpg",
     "mpgHwy": "highway_mpg",
+    "fuel": "fuel",
     "drivetrain": "drivetrain",
     "exteriorColor": "exterior_color",
     "features": "features",
@@ -52,6 +53,25 @@ BODY_ALIASES = {
     "Passenger Van": "Van",
 }
 
+# What a vehicle burns. Must match Fuel in src/types.ts: the fuel line prices
+# gas, diesel and electricity at their own rates, and an electric's mpg
+# columns carry its MPGe.
+FUELS = {"Gasoline", "Diesel", "Hybrid", "Plug-in hybrid", "Electric"}
+# feed fuel label -> canonical. Extend line-for-line when a real feed arrives.
+FUEL_ALIASES = {
+    "Gas": "Gasoline",
+    "Gasoline Fuel": "Gasoline",
+    "GASOLINE/E85": "Gasoline",
+    "Flex Fuel": "Gasoline",
+    "Diesel Fuel": "Diesel",
+    "Full Hybrid Electric (FHEV)": "Hybrid",
+    "Hybrid Fuel": "Hybrid",
+    "Plug-In Hybrid": "Plug-in hybrid",
+    "Plug-in Hybrid": "Plug-in hybrid",
+    "Electric Fuel System": "Electric",
+    "EV": "Electric",
+}
+
 DEFAULT_OUT = Path(__file__).parent.parent / "public" / "inventory.json"
 
 
@@ -68,6 +88,9 @@ def parse_row(raw: dict, line: int) -> dict:
     v["body"] = BODY_ALIASES.get(v["body"], v["body"])
     if v["body"] not in BODIES:
         raise ValueError(f"line {line}: unknown body {raw[FEED_COLUMNS['body']]!r} for stock {v['stock']}; add it to BODY_ALIASES")
+    v["fuel"] = FUEL_ALIASES.get(v["fuel"], v["fuel"])
+    if v["fuel"] not in FUELS:
+        raise ValueError(f"line {line}: unknown fuel {raw[FEED_COLUMNS['fuel']]!r} for stock {v['stock']}; add it to FUEL_ALIASES")
     if v["price"] <= 0:
         raise ValueError(f"line {line}: non-positive price for stock {v['stock']}")
     if v["mileage"] < 0:
@@ -75,7 +98,7 @@ def parse_row(raw: dict, line: int) -> dict:
     # A model year outside anything a lot sells is a mis-mapped column.
     if not 1950 <= v["year"] <= datetime.now().year + 1:
         raise ValueError(f"line {line}: implausible year {v['year']} for stock {v['stock']}")
-    # The fuel line divides by mpg. EVs need MPGe handling before they can ship.
+    # The fuel line divides by mpg (MPGe for an electric).
     if v["mpgCity"] <= 0 or v["mpgHwy"] <= 0:
         raise ValueError(f"line {line}: mpg must be positive for stock {v['stock']}")
     if not is_https(v["vdpUrl"]):

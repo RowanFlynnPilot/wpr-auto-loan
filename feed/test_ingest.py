@@ -13,7 +13,7 @@ from ingest import FEED_COLUMNS, load_feed
 GOOD = {
     "stock_number": "T100", "vin": "1HGCM82633A004352", "year": "2022", "make": "Honda",
     "model": "Civic", "trim": "Sport", "body_style": "Sedan", "selling_price": "21500",
-    "mileage": "18000", "city_mpg": "30", "highway_mpg": "37", "drivetrain": "FWD",
+    "mileage": "18000", "city_mpg": "30", "highway_mpg": "37", "fuel": "Gasoline", "drivetrain": "FWD",
     "exterior_color": "Blue", "features": "Backup camera|Apple CarPlay", "photo_url": "",
     "vdp_url": "https://dealer.example/inventory/T100",
 }
@@ -72,6 +72,16 @@ class IngestTest(unittest.TestCase):
         load_feed(self.feed({**GOOD, "photo_url": "https://cdn.example/t100.jpg"}))
         with self.assertRaisesRegex(ValueError, "photo_url"):
             load_feed(self.feed({**GOOD, "photo_url": "http://cdn.example/t100.jpg"}))
+
+    def test_fuel_aliases_normalize(self):
+        [v] = load_feed(self.feed({**GOOD, "fuel": "GASOLINE/E85"}))
+        self.assertEqual(v["fuel"], "Gasoline")
+        [v] = load_feed(self.feed({**GOOD, "fuel": "Electric", "city_mpg": "100", "highway_mpg": "100"}))
+        self.assertEqual(v["fuel"], "Electric")
+
+    def test_unknown_fuel_fails(self):
+        with self.assertRaisesRegex(ValueError, "unknown fuel 'Steam'"):
+            load_feed(self.feed({**GOOD, "fuel": "Steam"}))
 
     def test_body_aliases_normalize(self):
         [v] = load_feed(self.feed({**GOOD, "body_style": "Sport Utility"}))

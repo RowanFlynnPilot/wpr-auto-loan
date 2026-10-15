@@ -16,6 +16,7 @@ const car = (stock: string, price: number, mpg: number, mileage: number, year: n
   mileage,
   mpgCity: mpg,
   mpgHwy: mpg,
+  fuel: 'Gasoline',
   drivetrain: '',
   exteriorColor: '',
   features: [],

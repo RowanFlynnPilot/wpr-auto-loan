@@ -14,6 +14,7 @@ const car = (stock: string, year: number, price: number): Vehicle => ({
   mileage: 0,
   mpgCity: 30,
   mpgHwy: 30,
+  fuel: 'Gasoline',
   drivetrain: '',
   exteriorColor: '',
   features: [],

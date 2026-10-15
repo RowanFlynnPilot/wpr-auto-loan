@@ -11,10 +11,14 @@ export const WISCONSIN = {
 } as const;
 
 // Seeds for the per-vehicle fuel line. Combined economy uses the EPA 55/45
-// city/highway blend on the feed's own mpg numbers.
+// city/highway blend on the feed's own mpg numbers; an electric's figure is
+// MPGe, converted at 33.7 kWh per gallon (src/lib/fuel.ts).
 export const FUEL = {
   gasPrice: 4.09,       // $/gal regular, Wausau metro average — GasBuddy via WPR's gas-prices tracker
-  gasAsOf: 'Oct 14 2026',  // price date; feed/refresh_gas.py rewrites both
+  dieselPrice: 6.28,    // $/gal diesel, same source and date
+  gasAsOf: 'Oct 14 2026',  // pump price date; feed/refresh_gas.py rewrites all three
+  kwhPrice: 0.1906,     // $/kWh, Wisconsin residential average — EIA Electric Power Monthly, table 5.6.A
+  kwhAsOf: 'July 2026',   // the month that table reports; update by hand with the table
   milesPerMonth: 1100, // ~13,200 mi/yr, FHWA average annual miles per driver
 } as const;
 

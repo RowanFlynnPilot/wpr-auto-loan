@@ -13,7 +13,7 @@ interface Sort {
 
 export const SORTS: Record<'price' | 'allin' | 'mileage' | 'mpg' | 'year', Sort> = {
   price: { label: 'Lowest payment', key: (v) => v.price },
-  allin: { label: 'Lowest with gas', key: (v, i) => allInMonthly(v, i) },
+  allin: { label: 'Lowest with fuel', key: (v, i) => allInMonthly(v, i) },
   mileage: { label: 'Fewest miles', key: (v) => v.mileage },
   mpg: { label: 'Best mpg', key: (v) => -combinedMpg(v.mpgCity, v.mpgHwy) },
   year: { label: 'Newest', key: (v) => -v.year },
