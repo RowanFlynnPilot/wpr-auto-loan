@@ -56,8 +56,11 @@ export function VehicleCard({ vehicle: v, inputs }: Props) {
           <p className="fuel">
             + about {dollars(fuel)}/mo in {energy.word} ({count(FUEL.milesPerMonth)} mi/mo at {energy.rate})
           </p>
-          {/* The number the fuel line exists for. */}
-          <p className="allin">≈ {dollars(q.payment + fuel)}/mo with {energy.word}</p>
+          {/* The number the fuel line exists for, and what it comes to over the loan. */}
+          <p className="allin">
+            ≈ {dollars(q.payment + fuel)}/mo with {energy.word}
+            {!cash && <span> · {dollars((q.payment + fuel) * q.termMonths)} over {q.termMonths} months</span>}
+          </p>
         </div>
         {/* Reg Z: payment shown with the terms that produce it. */}
         <p className="disclosure">
