@@ -4,7 +4,7 @@ Wausau Pilot & Review reader tool. A Wisconsin-seeded auto loan affordability
 calculator whose payoff is a sponsoring dealer's live inventory, filtered to
 what the reader can actually afford. Built to demo before a dealer is signed.
 
-## Status (Aug 2026)
+## Status (Oct 2026)
 
 Demo-complete for the dealer pitch: sponsor pre-approval CTA in the inventory
 header, body-type silhouettes on photoless cards (demo only — real feeds carry
@@ -35,9 +35,13 @@ No speculative abstraction. Let TypeScript catch it.
 
 1. `feed/ingest.py` reads a dealer inventory CSV (`FEED_PATH`) and writes
    `public/inventory.json`. Missing columns or a bad row (non-positive price,
-   non-https VDP or photo URL, unknown body, zero mpg, duplicate stock) exits
-   non-zero and the build fails. Column mapping lives in `FEED_COLUMNS` at the
-   top of the file; the contract is pinned by `feed/test_ingest.py`.
+   non-https VDP or photo URL, unknown body or fuel, zero mpg, negative
+   mileage, implausible year, duplicate stock) exits non-zero and the build
+   fails. Column mapping lives in `FEED_COLUMNS` at the top of the file; the
+   contract is pinned by `feed/test_ingest.py`. The `fuel` column (Gasoline,
+   Diesel, Hybrid, Plug-in hybrid, Electric; dealer labels aliased in
+   `FUEL_ALIASES`) prices each vehicle's fuel line at its own rate; an
+   electric's mpg columns carry its MPGe.
 2. `feed/generate_demo.py` writes `feed/demo.csv` — 40 synthetic "Demo Motors"
    vehicles in the same column shape as a HomeNet/vAuto export. Deterministic
    (seeded). Committed so the demo builds with no external dependency.
@@ -58,7 +62,12 @@ No speculative abstraction. Let TypeScript catch it.
    dealer's number), a Reg Z disclosure line, and a tracked link to the
    dealer's VDP. A car the cash covers outright says so instead of quoting
    loan terms on $0.
-5. GitHub Actions runs ingest → test → build → Pages daily and on push.
+5. GitHub Actions runs ingest → test → build → smoke test → Lighthouse floor
+   → Pages daily and on push. The smoke test (`tests/smoke.pw.ts`, Playwright,
+   `npm run smoke` after a build) checks the built site at desktop and phone
+   widths for what a reader would notice; `scripts/lighthouse_budget.mjs`
+   (`npm run budget`) fails the deploy under 85 performance / 95
+   accessibility / 90 best practices and SEO.
 
 ## Wisconsin seeding — `src/config/wisconsin.ts`
 
@@ -66,13 +75,17 @@ No speculative abstraction. Let TypeScript catch it.
 taxable price. Title $214.50 (Oct 1 2025), lien $10, registration $85,
 plate $6, Marathon County wheel tax $25. City of Wausau has no wheel tax.
 
-`FUEL` seeds the per-vehicle gas line: Wausau metro regular average (GasBuddy
-via the wpr-gas-prices tracker, dated in the comment) and 1,100 mi/mo (FHWA
-average). Combined economy is the EPA 55/45 blend of the feed's own mpg.
-`python feed/refresh_gas.py` rewrites `gasPrice` and `gasAsOf` from the
-tracker's published JSON; run it by hand when the price drifts and commit. The
-build itself stays network-free. `FUEL.gasAsOf` is shown to readers in the
-"How we figure this" block, which reads every constant from this config.
+`FUEL` seeds the per-vehicle fuel line: Wausau metro regular and diesel
+averages (GasBuddy via the wpr-gas-prices tracker, dated in the comment), the
+Wisconsin residential electricity rate (EIA Electric Power Monthly table
+5.6.A, updated by hand with the table), and 1,100 mi/mo (FHWA average).
+Combined economy is the EPA 55/45 blend of the feed's own mpg; an electric's
+MPGe converts at 33.7 kWh per gallon (`src/lib/fuel.ts`).
+`python feed/refresh_gas.py` rewrites `gasPrice`, `dieselPrice` and `gasAsOf`
+from the tracker's published JSON; `.github/workflows/gas-refresh.yml` runs
+it every Tuesday and commits the seed when it moves, which deploys. The build
+itself stays network-free. `FUEL.gasAsOf` is shown to readers in the "How we
+figure this" block, which reads every constant from this config.
 
 `COUNTY_MEDIAN_HOUSEHOLD_INCOME` ($77,884, ACS 5-yr 2020-2024 B19013) powers
 the "for scale" line under the price line — the same figure wpr-finance-tools
@@ -209,7 +222,7 @@ card's details table; features are matched from the dealer's description
 text. `build_listings.py` maps `bd` onto the canonical bodies (`BODIES` —
 re-check the odd labels against their vehicles each time) and drops, by name,
 rows with no price, no mpg, or an electric drivetrain. The snapshot keeps the
-facet counts and the method in its header. Oct 14 2026: 197 captured, 169 shown.
+facet counts and the method in its header. Oct 14 2026: 197 captured, 170 shown.
 
 **A snapshot is not a feed.** Prices and availability move daily. The capture
 date is in the file *and* on the page — `capturedOn` (YYYY-MM-DD) drives the
@@ -231,6 +244,15 @@ rows with no published fuel economy are dropped and named at build time rather
 than given an invented number, and a listing that carries one combined MPG
 instead of a city/highway pair is written into both columns — exact, since the
 EPA 55/45 blend of x and x is x — with the card labelling it "combined".
+
+**The media kit.** `/sponsors/` is the hosted media kit for this placement,
+in the house pattern: the two placements as screenshots of the Brickner's
+preview (labelled as a proposal), what the sponsor gets, the four audience
+figures from WPR's 2026–27 media kit (the only audience numbers a pitch may
+carry), how the tool stays honest, and Chris's contact. It quotes no price —
+the rate card publishes none for a tool sponsorship; Chris does. Screenshots
+in `public/media/` come from the built site (Playwright, see the Oct 14
+commit); reshoot after a visual change.
 
 `PROFILES` in `feed/generate_demo.py` still writes synthetic franchise-weighted
 lots (`house_share` from the prospect's brands, the rest from `TRADES`) for a
@@ -289,3 +311,5 @@ vehicle; feed data (mpg, drivetrain, features) speaks for itself.
     npm install; npm test; npm run dev
     python feed/check_snapshot.py feed/brickners_listings.json   # before a pitch showing
     python scripts/fetch_fonts.py                               # refresh public/fonts
+    python feed/refresh_gas.py                                  # pump prices (the Tuesday job does this)
+    npm run build; npm run smoke; npm run budget                # what the deploy checks
