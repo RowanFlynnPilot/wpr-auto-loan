@@ -37,6 +37,9 @@ def status(url: str) -> int | str:
 
 
 def main() -> int:
+    if len(sys.argv) != 2:
+        print("usage:", __doc__.strip().splitlines()[2].strip(), file=sys.stderr)
+        return 2
     snapshot = Path(sys.argv[1])
     data = json.loads(snapshot.read_text(encoding="utf-8"))
     listings = data["listings"]
