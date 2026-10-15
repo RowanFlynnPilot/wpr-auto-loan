@@ -31,7 +31,10 @@ export function Mini() {
   const [loadError, setLoadError] = useState(false);
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(() => !window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  const [held, setHeld] = useState(false); // hover or focus pauses the clock
+  // A mouse hovering, or focus, holds the clock. Touch has no hover — the
+  // mouseenter a tap emulates never gets its mouseleave — so only a real
+  // mouse pointer holds, and a swipe is an explicit stop.
+  const [held, setHeld] = useState(false);
   const swipe = useRef<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
@@ -91,8 +94,12 @@ export function Mini() {
       className="mini"
       aria-roledescription="carousel"
       aria-label={`${SPONSOR.name} inventory`}
-      onMouseEnter={() => setHeld(true)}
-      onMouseLeave={() => setHeld(false)}
+      onPointerEnter={(e) => {
+        if (e.pointerType === 'mouse') setHeld(true);
+      }}
+      onPointerLeave={(e) => {
+        if (e.pointerType === 'mouse') setHeld(false);
+      }}
       onFocus={() => setHeld(true)}
       onBlur={() => setHeld(false)}
     >
@@ -119,7 +126,10 @@ export function Mini() {
           swipe.current = null;
           if (from === null) return;
           const dx = e.clientX - from.x;
-          if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(e.clientY - from.y)) step(dx < 0 ? 1 : -1);
+          if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(e.clientY - from.y)) {
+            step(dx < 0 ? 1 : -1);
+            setPlaying(false); // the reader is browsing by hand now, and the button says so
+          }
         }}
         onPointerCancel={() => {
           swipe.current = null;
