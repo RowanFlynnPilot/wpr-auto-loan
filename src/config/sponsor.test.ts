@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import snapshot from '../../feed/brickners_listings.json';
 import { resolvePitch } from './sponsor';
 
 describe('resolvePitch', () => {
@@ -17,6 +18,11 @@ describe('resolvePitch', () => {
     // inventoryUrl is the fallback for a prospect with no per-vehicle pages;
     // these listings have real ones, so it stays null.
     expect(resolvePitch('?pitch=brickners')!.sponsor.inventoryUrl).toBeNull();
+  });
+  it('counts and dates the snapshot it is built from', () => {
+    const pitch = resolvePitch('?pitch=brickners')!;
+    expect(pitch.listed).toBe(snapshot.listings.length);
+    expect(pitch.capturedOn).toBe(snapshot.capturedAt);
   });
   it('falls back to the live sponsor on an unknown name', () => {
     expect(resolvePitch('?pitch=nobody')).toBeNull();
