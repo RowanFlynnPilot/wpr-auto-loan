@@ -24,6 +24,9 @@ export function VehicleCard({ vehicle: v, inputs }: Props) {
   const fuel = fuelPerMonth(v.mpgCity, v.mpgHwy);
   const budget = maxPayment(inputs);
   const share = budget > 0 ? q.payment / budget : 0;
+  // Cash down and trade-in equity can cover a cheap car outright; a $0
+  // payment with loan terms under it reads as a mistake.
+  const cash = q.financed === 0;
   return (
     <article className="card">
       <Photo vehicle={v} width={640} height={480} loading="lazy" />
@@ -40,7 +43,7 @@ export function VehicleCard({ vehicle: v, inputs }: Props) {
             </span>
             <span className="price">{dollars(v.price)}</span>
           </div>
-          {budget > 0 && (
+          {budget > 0 && !cash && (
             <p className="budget">
               <span className="budget-bar" aria-hidden="true">
                 <span style={{ transform: `scaleX(${Math.min(1, share)})` }} />
@@ -57,9 +60,19 @@ export function VehicleCard({ vehicle: v, inputs }: Props) {
         </div>
         {/* Reg Z: payment shown with the terms that produce it. */}
         <p className="disclosure">
-          {q.termMonths} months at {percent(inputs.apr)} APR with {dollars(inputs.downPayment)} down
-          {inputs.tradeValue > 0 && ` and a ${dollars(inputs.tradeValue)} trade-in`}. Estimate includes
-          Wisconsin tax and fees; {dollars(q.financed)} financed.
+          {cash ? (
+            <>
+              Your {dollars(inputs.downPayment)} down
+              {inputs.tradeValue > 0 && ` and ${dollars(inputs.tradeValue)} trade-in`} cover the price,
+              Wisconsin tax and fees; nothing to finance.
+            </>
+          ) : (
+            <>
+              {q.termMonths} months at {percent(inputs.apr)} APR with {dollars(inputs.downPayment)} down
+              {inputs.tradeValue > 0 && ` and a ${dollars(inputs.tradeValue)} trade-in`}. Estimate includes
+              Wisconsin tax and fees; {dollars(q.financed)} financed.
+            </>
+          )}
         </p>
         <ul className="features">
           {v.features.slice(0, 4).map((f) => (
