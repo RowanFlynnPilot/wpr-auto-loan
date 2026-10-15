@@ -1,0 +1,38 @@
+name: Fuel price refresh
+
+# The per-vehicle fuel line is seeded from Wausau pump prices. The build
+# itself stays network-free, so this is the job that looks out: once a week
+# it runs feed/refresh_gas.py and, if the seed moved, commits the new prices,
+# which triggers the ordinary deploy. The date readers see in "How we figure
+# this" moves with it.
+
+on:
+  schedule:
+    - cron: '0 11 * * 2' # Tuesdays, 06:00 Central, after the tracker's overnight scrape
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - id: refresh
+        run: |
+          python feed/refresh_gas.py | tee refresh.txt
+          echo "summary=$(tail -1 refresh.txt)" >> "$GITHUB_OUTPUT"
+      - name: Commit if the seed moved
+        run: |
+          if git diff --quiet; then
+            echo "seed unchanged"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Fuel seed: ${{ steps.refresh.outputs.summary }}"
+          git push
