@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { LoanInputs } from './loan';
-import { decodeInputs, encodeInputs, shareUrl } from './share';
+import { DEFAULT_VIEW, decodeInputs, decodeView, encodeInputs, encodeState, shareUrl } from './share';
 
 const inputs: LoanInputs = {
   monthlyIncome: 4500,
@@ -29,6 +29,23 @@ describe('share', () => {
   it('throws on a share or APR past 100%', () => {
     expect(() => decodeInputs(encodeInputs({ ...inputs, paymentShare: 3 }))).toThrow(/share/);
     expect(() => decodeInputs(encodeInputs({ ...inputs, apr: 5 }))).toThrow(/apr/);
+  });
+});
+
+describe('view in the hash', () => {
+  it('adds body and sort only when they are not the defaults', () => {
+    expect(encodeState(inputs, DEFAULT_VIEW)).toBe(encodeInputs(inputs));
+    const hash = encodeState(inputs, { body: 'SUV', sort: 'allin' });
+    expect(hash).toContain('body=SUV');
+    expect(hash).toContain('sort=allin');
+    expect(decodeInputs(hash)).toEqual(inputs); // the scenario still decodes with the view beside it
+    expect(decodeView(hash)).toEqual({ body: 'SUV', sort: 'allin' });
+  });
+  it('reads an older link, with no view, as the default view', () => {
+    expect(decodeView(encodeInputs(inputs))).toEqual(DEFAULT_VIEW);
+  });
+  it('refuses a sort it does not have', () => {
+    expect(() => decodeView('sort=cheapest')).toThrow(/sort/);
   });
 });
 

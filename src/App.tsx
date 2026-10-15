@@ -8,7 +8,7 @@ import { TermTable } from './components/TermTable';
 import { maxPrice, type LoanInputs } from './lib/loan';
 import { DEFAULTS } from './config/scenario';
 import { PITCH } from './config/sponsor';
-import { SETTLE_MS, decodeInputs, encodeInputs } from './lib/share';
+import { DEFAULT_VIEW, SETTLE_MS, decodeInputs, decodeView, encodeState, type View } from './lib/share';
 import type { Inventory } from './types';
 
 // A shared link with a mangled hash falls back to the defaults rather than
@@ -24,19 +24,30 @@ function initialInputs(): LoanInputs {
   }
 }
 
+function initialView(): View {
+  try {
+    return decodeView(window.location.hash.slice(1));
+  } catch (e) {
+    console.error(e);
+    return DEFAULT_VIEW;
+  }
+}
+
 export default function App() {
   const [inputs, setInputs] = useState<LoanInputs>(initialInputs);
+  const [view, setView] = useState<View>(initialView);
   const [inventory, setInventory] = useState<Inventory | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
 
-  // Keep the URL shareable: the current scenario always lives in the hash,
-  // written once the inputs have rested (see SETTLE_MS) rather than per
-  // keystroke. Copy-a-link encodes the live inputs itself, so it never reads
+  // Keep the URL shareable: the current scenario and view always live in the
+  // hash, written once the inputs have rested (see SETTLE_MS) rather than per
+  // keystroke. Copy-a-link uses the same encoding directly, so it never reads
   // a hash that is still pending.
+  const hash = encodeState(inputs, view);
   useEffect(() => {
-    const t = setTimeout(() => history.replaceState(null, '', `#${encodeInputs(inputs)}`), SETTLE_MS);
+    const t = setTimeout(() => history.replaceState(null, '', `#${hash}`), SETTLE_MS);
     return () => clearTimeout(t);
-  }, [inputs]);
+  }, [hash]);
 
   // A shared link opened while the tool is already loaded changes only the
   // hash — no reload — so apply it directly. Our own replaceState writes
@@ -45,6 +56,7 @@ export default function App() {
     const apply = () => {
       try {
         setInputs(decodeInputs(window.location.hash.slice(1)));
+        setView(decodeView(window.location.hash.slice(1)));
       } catch (e) {
         console.error(e);
       }
@@ -134,6 +146,7 @@ export default function App() {
         <main className="results" id="results" tabIndex={-1}>
           <Ceiling
             inputs={inputs}
+            hash={hash}
             ceiling={ceiling}
             lot={inventory?.vehicles.map((v) => ({ label: `${v.year} ${v.make} ${v.model}`, price: v.price })) ?? []}
             onUseIncome={(monthlyIncome) => setInputs({ ...inputs, monthlyIncome })}
@@ -150,7 +163,17 @@ export default function App() {
             </p>
           )}
           {!inventory && !loadError && <p className="loading">Loading the lot…</p>}
-          {inventory && <InventoryGrid inventory={inventory} inputs={inputs} ceiling={ceiling} />}
+          {inventory && (
+            // Keyed on the view so a new filter or sort starts the paging over.
+            <InventoryGrid
+              key={`${view.body}|${view.sort}`}
+              inventory={inventory}
+              inputs={inputs}
+              ceiling={ceiling}
+              view={view}
+              onView={setView}
+            />
+          )}
         </main>
       </div>
 

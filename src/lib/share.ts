@@ -1,4 +1,5 @@
 import { TERMS, type LoanInputs } from './loan';
+import { isSortKey, type SortKey } from './sorts';
 
 // How long the inputs rest before the URL hash is rewritten (and the ceiling
 // is announced to a screen reader). WebKit throws a SecurityError past ~100
@@ -23,6 +24,31 @@ export function encodeInputs(i: LoanInputs): string {
   const params = new URLSearchParams();
   for (const [key, field] of Object.entries(KEYS)) params.set(key, String(i[field]));
   return params.toString();
+}
+
+// What the reader is looking at in the lot: a body filter and a sort. Both
+// ride in the hash only when they are not the defaults, so a plain scenario
+// link stays short, and a link from before they existed still decodes.
+export interface View {
+  body: string;
+  sort: SortKey;
+}
+
+export const DEFAULT_VIEW: View = { body: 'All', sort: 'price' };
+
+export function encodeState(i: LoanInputs, view: View): string {
+  const params = new URLSearchParams(encodeInputs(i));
+  if (view.body !== DEFAULT_VIEW.body) params.set('body', view.body);
+  if (view.sort !== DEFAULT_VIEW.sort) params.set('sort', view.sort);
+  return params.toString();
+}
+
+export function decodeView(hash: string): View {
+  const params = new URLSearchParams(hash);
+  const body = params.get('body') ?? DEFAULT_VIEW.body;
+  const sort = params.get('sort') ?? DEFAULT_VIEW.sort;
+  if (!isSortKey(sort)) throw new Error(`Bad "sort" in shared link: ${sort}`);
+  return { body, sort };
 }
 
 export function decodeInputs(hash: string): LoanInputs {

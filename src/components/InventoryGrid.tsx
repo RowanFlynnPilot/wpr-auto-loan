@@ -3,7 +3,8 @@ import { PITCH, SPONSOR } from '../config/sponsor';
 import { dollars } from '../lib/format';
 import { downToReach, type LoanInputs } from '../lib/loan';
 import { capturedLine } from '../lib/snapshot';
-import { SORTS, SORT_KEYS, isSortKey, sortVehicles, type SortKey } from '../lib/sorts';
+import type { View } from '../lib/share';
+import { SORTS, SORT_KEYS, isSortKey, sortVehicles } from '../lib/sorts';
 import type { Inventory } from '../types';
 import { SponsorLockup } from './SponsorLockup';
 import { VehicleCard } from './VehicleCard';
@@ -12,6 +13,9 @@ interface Props {
   inventory: Inventory;
   inputs: LoanInputs;
   ceiling: number;
+  /** Body filter and sort — App's, so they ride in the share link. */
+  view: View;
+  onView: (view: View) => void;
 }
 
 // A real lot is a couple of hundred vehicles; 24 at a time keeps the page
@@ -24,9 +28,8 @@ export function pageCut(total: number, visible: number): number {
   return total - visible < 8 ? total : visible;
 }
 
-export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
-  const [body, setBody] = useState<string>('All');
-  const [sort, setSort] = useState<SortKey>('price');
+export function InventoryGrid({ inventory, inputs, ceiling, view, onView }: Props) {
+  const { body, sort } = view;
   const [visible, setVisible] = useState(PAGE);
 
   const fits = sortVehicles(inventory.vehicles.filter((v) => v.price <= ceiling), sort, inputs);
@@ -62,10 +65,7 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
                 key={b}
                 aria-pressed={b === active}
                 className={b === active ? 'chip on' : 'chip'}
-                onClick={() => {
-                  setBody(b);
-                  setVisible(PAGE);
-                }}
+                onClick={() => onView({ ...view, body: b })}
               >
                 {b}
                 <span>{b === 'All' ? fits.length : fits.filter((v) => v.body === b).length}</span>
@@ -77,8 +77,7 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
                 value={sort}
                 onChange={(e) => {
                   if (!isSortKey(e.target.value)) throw new Error(`Unknown sort ${e.target.value}`);
-                  setSort(e.target.value);
-                  setVisible(PAGE);
+                  onView({ ...view, sort: e.target.value });
                 }}
               >
                 {SORT_KEYS.map((key) => (

@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { COUNTY_MEDIAN_HOUSEHOLD_INCOME } from '../config/wisconsin';
 import { ceilingLevers, maxPayment, maxPrice, purchaseFees, quote, type LoanInputs } from '../lib/loan';
 import { cents, dollars, percent } from '../lib/format';
-import { SETTLE_MS, encodeInputs, shareUrl } from '../lib/share';
+import { SETTLE_MS, shareUrl } from '../lib/share';
 import { swarmRows } from '../lib/swarm';
 
 // Eases the displayed figure toward its new value over ~250ms so the number
@@ -44,28 +44,28 @@ function useSettled<T>(value: T, ms: number): T {
   return settled;
 }
 
-// The scenario always lives in the URL hash; this just makes that shareable
-// link discoverable. It encodes the live inputs rather than reading the
-// address bar, which is rewritten after a pause. Clipboard access can be
-// denied inside an embed, so fall back to showing the link for a manual copy.
-function linkToShare(inputs: LoanInputs): string {
-  const hash = `#${encodeInputs(inputs)}`;
+// The scenario and view always live in the URL hash; this just makes that
+// shareable link discoverable. It takes the encoded hash from App rather than
+// reading the address bar, which is rewritten after a pause. Clipboard access
+// can be denied inside an embed, so fall back to showing the link for a
+// manual copy.
+function linkToShare(hash: string): string {
   try {
-    return shareUrl(window.location.search, hash, window.location.href);
+    return shareUrl(window.location.search, `#${hash}`, window.location.href);
   } catch (e) {
     console.error(e); // a bad ?host= is the embed's mistake, not the reader's
-    return shareUrl('', hash, window.location.href);
+    return shareUrl('', `#${hash}`, window.location.href);
   }
 }
 
-function CopyLink({ inputs }: { inputs: LoanInputs }) {
+function CopyLink({ hash }: { hash: string }) {
   const [copied, setCopied] = useState(false);
   return (
     <button
       type="button"
       className="copylink"
       onClick={() => {
-        const link = linkToShare(inputs);
+        const link = linkToShare(hash);
         navigator.clipboard.writeText(link).then(
           () => {
             setCopied(true);
@@ -108,12 +108,14 @@ export interface LotDot {
 
 interface Props {
   inputs: LoanInputs;
+  /** The encoded scenario and view, as App writes it to the URL. */
+  hash: string;
   ceiling: number;
   lot: LotDot[];
   onUseIncome: (monthlyIncome: number) => void;
 }
 
-export function Ceiling({ inputs, ceiling, lot, onUseIncome }: Props) {
+export function Ceiling({ inputs, hash, ceiling, lot, onUseIncome }: Props) {
   const median = Math.round(COUNTY_MEDIAN_HOUSEHOLD_INCOME / 12);
   const q = quote(ceiling, inputs);
   const levers = ceilingLevers(inputs);
@@ -147,7 +149,7 @@ export function Ceiling({ inputs, ceiling, lot, onUseIncome }: Props) {
         .
       </p>
       <div className="actions">
-        <CopyLink inputs={inputs} />
+        <CopyLink hash={hash} />
         <HowWeFigure />
       </div>
       <PriceLine ceiling={ceiling} lot={lot} />
