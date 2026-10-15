@@ -15,8 +15,14 @@ interface Props {
 }
 
 // A real lot is a couple of hundred vehicles; 24 at a time keeps the page
-// (and the embed) a readable length, and the button says what is left.
-const PAGE = 24;
+// (and the embed) a readable length, and the button says what is left. A
+// button for the last handful is sillier than the handful, so fewer than
+// eight remaining show outright.
+export const PAGE = 24;
+
+export function pageCut(total: number, visible: number): number {
+  return total - visible < 8 ? total : visible;
+}
 
 export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
   const [body, setBody] = useState<string>('All');
@@ -31,8 +37,7 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
   const active = bodies.includes(body) ? body : 'All';
   const shown = active === 'All' ? fits : fits.filter((v) => v.body === active);
   const cheapest = inventory.vehicles.reduce((a, b) => (b.price < a.price ? b : a));
-  // A button for the last handful is sillier than the handful; show them.
-  const cut = shown.length - visible < 8 ? shown.length : visible;
+  const cut = pageCut(shown.length, visible);
 
   return (
     <section className="inventory">
