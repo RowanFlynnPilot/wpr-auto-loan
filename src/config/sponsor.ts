@@ -46,8 +46,8 @@ const PITCHES: Record<string, Pitch> = {
   brickners: {
     prospect: "Brickner's of Wausau",
     inventoryFile: 'inventory.brickners.json',
-    capturedOn: '2026-10-09',
-    listed: 194,
+    capturedOn: '2026-10-14',
+    listed: 197,
     sponsor: {
       name: "Brickner's of Wausau",
       disclosure: 'Sponsored inventory',

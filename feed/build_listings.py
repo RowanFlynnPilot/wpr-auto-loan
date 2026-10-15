@@ -35,7 +35,9 @@ COLUMNS = [
 # The dealer's body-style facets, as their site labels them. Checked against
 # the vehicles under each label at the Oct 2026 capture: every "Passenger Van"
 # is a Pacifica, Voyager or Grand Caravan; the one "4 DOOR WAGON" is a Jeep
-# Renegade and the one "4-DOOR" a Wrangler. Re-check those two on recapture.
+# Renegade and the one "4-DOOR" a Wrangler; the one "Wagon" is a Ford Transit
+# passenger wagon (dropped for no mpg both times — if one ever survives, it
+# belongs under Van). Re-check those three on recapture.
 BODIES = {
     "Sport Utility": "SUV",
     "SUV": "SUV",

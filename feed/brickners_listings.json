@@ -1,7 +1,7 @@
 {
  "source": "https://www.bricknersofwausau.net/search/used/?tp=used",
  "method": "schema.org Vehicle JSON-LD published on the dealer's own search pages, one pass per body-style facet (bd=) at 48 results per page; drivetrain from the result card's details table; body (bd) is the facet label; features are matched from the dealer's own description text; mpg is the single combined figure they publish, null when absent.",
- "capturedAt": "2026-10-09",
+ "capturedAt": "2026-10-14",
  "note": "Interim pitch-preview snapshot: real listings, real prices, captured once. Prices and availability change daily. Run feed/check_snapshot.py, then recapture or retire this file before showing it; it is not a live feed.",
  "facets": {
   "4 DOOR WAGON": 1,
@@ -9,32 +9,57 @@
   "4-DOOR": 1,
   "Cargo Van": 2,
   "Coupe": 1,
-  "Crew Cab": 45,
-  "Double Cab": 1,
+  "Crew Cab": 48,
+  "Double Cab": 3,
   "Extended Cab": 1,
   "Mega Cab": 1,
   "Passenger Van": 21,
   "Quad Cab": 4,
   "Regular Cab": 1,
   "SUV": 7,
-  "Sedan": 15,
-  "Sport Utility": 90,
+  "Sedan": 11,
+  "Sport Utility": 92,
   "Supercrew": 1,
   "Wagon": 1
  },
  "listings": [
   {
-   "yr": 2020,
-   "mk": "Ram",
-   "md": "2500",
-   "tr": "Big Horn",
-   "bd": "Crew Cab",
-   "col": "Diamond Black Crystal Pearlcoat",
-   "vin": "3C6UR5DJ8LG313943",
-   "sku": "45460A",
+   "yr": 2018,
+   "mk": "Jeep",
+   "md": "Compass",
+   "tr": "Sport 4x4",
+   "bd": "Sport Utility",
+   "col": "Spitfire Orange Clearcoat",
+   "vin": "3C4NJDAB6JT392271",
+   "sku": "5394",
    "px": null,
-   "mi": 99097,
-   "mpg": null,
+   "mi": null,
+   "mpg": 22,
+   "dr": "4WD",
+   "fuel": "Gasoline",
+   "ft": [
+    "Backup camera",
+    "Bluetooth",
+    "Remote start",
+    "Heated seats",
+    "Heated steering wheel",
+    "Clean CARFAX"
+   ],
+   "url": "/auto/used-2018-jeep-compass-sport-4x4/126739962/",
+   "img": "https://cloudflarestockimages.dealereprocess.com/resrc/images/stockphoto_asset-c_limit,f_auto,fl_lossy,w_auto/v1/svp/Colors_PNG1280/2018/18jeep/18jeepcompasssportod2a/jeep_18compasssportod2a_angularfront_spitfireorangeclearcoat"
+  },
+  {
+   "yr": 2020,
+   "mk": "Hyundai",
+   "md": "Tucson",
+   "tr": "VALUE AWD",
+   "bd": "Sport Utility",
+   "col": "Black Noir Pearl",
+   "vin": "KM8J3CA49LU211690",
+   "sku": "5395",
+   "px": null,
+   "mi": null,
+   "mpg": 22,
    "dr": "4WD",
    "fuel": "Gasoline",
    "ft": [
@@ -43,98 +68,56 @@
     "Android Auto",
     "Bluetooth",
     "Remote start",
-    "Heated seats"
+    "Clean CARFAX"
    ],
-   "url": "/auto/used-2020-ram-2500-big-horn/126557898/",
-   "img": "https://cloudflarestockimages.dealereprocess.com/resrc/images/stockphoto_asset-c_limit,f_auto,fl_lossy,w_auto/v1/svp/Colors_PNG1280/2020/20ram/20ram2laramielwb4wdtc5a/ram_202laramielwb4wdtc5a_angularfront_diamondblackcrystalpearlcoat"
+   "url": "/auto/used-2020-hyundai-tucson-value-awd/126739971/",
+   "img": "https://dealerimages.dealereprocess.com/image/upload/c_limit,f_auto,fl_lossy,w_auto/v1/svp/dep/20hyundaitucsonsesu3t/hyundai_20tucsonsesu3t_angularfront_blacknoirpearl"
   },
   {
-   "yr": 2015,
-   "mk": "Nissan",
-   "md": "Sentra",
-   "tr": "SV",
-   "bd": "Sedan",
-   "col": "Graphite Blue",
-   "vin": "3N1AB7AP1FY368403",
-   "sku": "5380A",
-   "px": null,
-   "mi": 109806,
-   "mpg": null,
-   "dr": "FWD",
-   "fuel": "Gasoline",
-   "ft": [
-    "Backup camera",
-    "Bluetooth"
-   ],
-   "url": "/auto/used-2015-nissan-sentra-sv/126514512/",
-   "img": "https://dealerimages.dealereprocess.com/image/upload/c_limit,f_auto,fl_lossy,w_auto/v1/svp/dep/colorpng/2015/15nissan/15nissansentrasv7a/nissan_15sentrasv7a_angularfront_graphiteblue"
-  },
-  {
-   "yr": 2021,
-   "mk": "Jeep",
-   "md": "Grand Cherokee L",
-   "tr": "Limited",
-   "bd": "SUV",
-   "col": "Baltic Gray Metallic Clearcoat",
-   "vin": "1C4RJKBG7M8211097",
-   "sku": "5390A",
-   "px": null,
-   "mi": 77816,
-   "mpg": 18,
-   "dr": "4WD",
-   "fuel": "Gasoline",
-   "ft": [
-    "Backup camera",
-    "Apple CarPlay",
-    "Android Auto",
-    "Bluetooth",
-    "Heated steering wheel",
-    "Leather seats"
-   ],
-   "url": "/auto/used-2021-jeep-grand-cherokee-l-limited/126333012/",
-   "img": "https://dealerimages.dealereprocess.com/image/upload/c_limit,f_auto,fl_lossy,w_auto/v1/svp/dep/21jeepgrandcherokeellimited/jeep_21grandcherokeellimited_angularfront_balticgraymetallic"
-  },
-  {
-   "yr": 2018,
-   "mk": "Jeep",
-   "md": "Cherokee",
-   "tr": "Latitude Plus",
+   "yr": 2017,
+   "mk": "Chevrolet",
+   "md": "Equinox",
+   "tr": "LT AWD",
    "bd": "Sport Utility",
-   "col": "Billet Silver Metallic Clearcoat",
-   "vin": "1C4PJMLXXJD598779",
-   "sku": "5391A",
+   "col": "Siren Red Tintcoat",
+   "vin": "2GNFLFEK3H6222783",
+   "sku": "5396",
    "px": null,
-   "mi": 106503,
-   "mpg": null,
-   "dr": "4WD",
-   "fuel": "Gasoline",
-   "ft": [],
-   "url": "/auto/used-2018-jeep-cherokee-latitude-plus/126575079/",
-   "img": "https://dealerimages.dealereprocess.com/image/upload/c_limit,f_auto,fl_lossy,w_auto/v1/svp/dep/17jeepcherokeelatde4x45t/jeep_17cherokeelatde4x45t_angularfront_billetsilvermetallicclearcoat"
+   "mi": null,
+   "mpg": 20,
+   "dr": "AWD",
+   "fuel": "GASOLINE/E85",
+   "ft": [
+    "Backup camera",
+    "Bluetooth",
+    "Remote start",
+    "Clean CARFAX"
+   ],
+   "url": "/auto/used-2017-chevrolet-equinox-lt-awd/126739959/",
+   "img": "https://cloudflarestockimages.dealereprocess.com/resrc/images/stockphoto_asset-c_limit,f_auto,fl_lossy,w_auto/v1/svp/Colors_PNG1280/2017/17chevrolet/17chevroletequinoxlt2fa/chevrolet_17equinoxlt2fa_angularfront_sirenredtintcoat"
   },
   {
-   "yr": 2025,
-   "mk": "Ram",
-   "md": "Promaster",
-   "tr": "Tradesman",
-   "bd": "Cargo Van",
-   "col": "Bright White Clearcoat",
-   "vin": "3C6LRVVGXSE517233",
-   "sku": "A3144",
+   "yr": 2024,
+   "mk": "Chevrolet",
+   "md": "Equinox",
+   "tr": "LT AWD",
+   "bd": "Sport Utility",
+   "col": "Mosaic Black Metallic",
+   "vin": "3GNAXUEG8RL160972",
+   "sku": "5397",
    "px": null,
-   "mi": 15798,
-   "mpg": null,
-   "dr": "FWD",
+   "mi": null,
+   "mpg": 24,
+   "dr": "AWD",
    "fuel": "Gasoline",
    "ft": [
     "Backup camera",
-    "Apple CarPlay",
-    "Android Auto",
     "Bluetooth",
-    "Adaptive cruise"
+    "Remote start",
+    "Clean CARFAX"
    ],
-   "url": "/auto/used-2025-ram-promaster-tradesman/126514503/",
-   "img": "https://cloudflarestockimages.dealereprocess.com/resrc/images/defaultmake_asset,w_auto,makeid_51/aW1nL21ha2VzLzUxX28uanBn"
+   "url": "/auto/used-2024-chevrolet-equinox-lt-awd/126739968/",
+   "img": "https://dealerimages.dealereprocess.com/image/upload/c_limit,f_auto,fl_lossy,w_auto/v1/svp/dep/24chevroletequinox4dr/chevrolet_24equinox4dr_angularfront_mosaicblackmetallic"
   },
   {
    "yr": 2016,
@@ -183,52 +166,6 @@
    "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/56808559626/Used-2009-Pontiac-G8-Base-ID56808559626-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTA0LzEtMjk0MDg3ODYtNmFjMjVjMGMyOGIxOS5qcGc="
   },
   {
-   "yr": 2016,
-   "mk": "Chevrolet",
-   "md": "Malibu",
-   "tr": "Premier",
-   "bd": "Sedan",
-   "col": "Mosaic Black Metallic",
-   "vin": "1G1ZH5SX3GF339536",
-   "sku": "10350N",
-   "px": 8744,
-   "mi": 159460,
-   "mpg": 22,
-   "dr": "FWD",
-   "fuel": "Gasoline",
-   "ft": [
-    "Backup camera",
-    "Apple CarPlay",
-    "Bluetooth",
-    "Remote start",
-    "Heated steering wheel",
-    "Leather seats"
-   ],
-   "url": "/auto/used-2016-chevrolet-malibu-premier/125090262/",
-   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/55693499502/Used-2016-Chevrolet-Malibu-Premier-ID55693499502-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA5LTIyLzEtMjk2MzQ5ODgtNmFiMzBmZDY2ZmE1Yy5qcGc="
-  },
-  {
-   "yr": 2015,
-   "mk": "Chevrolet",
-   "md": "Malibu",
-   "tr": "LS",
-   "bd": "Sedan",
-   "col": "Summit White",
-   "vin": "1G11B5SL7FF224254",
-   "sku": "5379A",
-   "px": 9994,
-   "mi": 102443,
-   "mpg": 25,
-   "dr": "FWD",
-   "fuel": "Gasoline",
-   "ft": [
-    "Bluetooth",
-    "Clean CARFAX"
-   ],
-   "url": "/auto/used-2015-chevrolet-malibu-ls/125007759/",
-   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/55146344169/Used-2015-Chevrolet-Malibu-LS-ID55146344169-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA5LTE1LzEtMjk2MTAxNzktNmFhOTJkMGRkNmQ2ZC5qcGc="
-  },
-  {
    "yr": 2017,
    "mk": "Chrysler",
    "md": "300",
@@ -249,7 +186,32 @@
     "Leather seats"
    ],
    "url": "/auto/used-2017-chrysler-300-limited/124810800/",
-   "img": "https://cloudflarestockimages.dealereprocess.com/resrc/images/stockphoto_asset-c_limit,f_auto,fl_lossy,w_auto/v1/svp/Colors_PNG1280/2017/17chrysler/17chrysler300ltdsa2fa/chrysler_17300ltdsa2fa_angularfront_glossblack"
+   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/57572248461/Used-2017-Chrysler-300-Limited-ID57572248461-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTEzLzEtMjk1NDExMTItNmFjZTZiMjEzODhlYy5qcGc="
+  },
+  {
+   "yr": 2018,
+   "mk": "Jeep",
+   "md": "Cherokee",
+   "tr": "Latitude Plus 4x4",
+   "bd": "Sport Utility",
+   "col": "Billet Silver Metallic Clearcoat",
+   "vin": "1C4PJMLXXJD598779",
+   "sku": "5391A",
+   "px": 12702,
+   "mi": 106503,
+   "mpg": null,
+   "dr": "4WD",
+   "fuel": "Gasoline",
+   "ft": [
+    "Backup camera",
+    "Bluetooth",
+    "Remote start",
+    "Heated seats",
+    "Heated steering wheel",
+    "Leather seats"
+   ],
+   "url": "/auto/used-2018-jeep-cherokee-latitude-plus-4x4/126575079/",
+   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/57662763048/Used-2018-Jeep-Cherokee-LatitudePlus4x4-ID57662763048-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTE0LzEtMzAxNDM5OTktNmFjZmJlYjEyZjRkZS5qcGc="
   },
   {
    "yr": 2020,
@@ -323,7 +285,7 @@
     "Tow package"
    ],
    "url": "/auto/used-2017-jeep-cherokee-latitude-4x4/123980879/",
-   "img": "https://dealerimages.dealereprocess.com/image/upload/c_limit,f_auto,fl_lossy,w_auto/v1/svp/dep/17jeepcherokeelatde4x45t/jeep_17cherokeelatde4x45t_angularfront_billetsilvermetallicclearcoat"
+   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/57572249493/Used-2017-Jeep-Cherokee-Latitude4X4-ID57572249493-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTEzLzEtMjkyNTEyNzEtNmFjZTZiMmY0ODFkZC5qcGc="
   },
   {
    "yr": 2021,
@@ -335,7 +297,7 @@
    "vin": "NM0LS7E22M1491467",
    "sku": "10202A",
    "px": 14410,
-   "mi": 144591,
+   "mi": 144606,
    "mpg": 24,
    "dr": "FWD",
    "fuel": "Gasoline",
@@ -396,31 +358,6 @@
    ],
    "url": "/auto/used-2015-ram-1500-big-horn-crew-4x4/126173019/",
    "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/57013966422/Used-2015-Ram-1500-BigHornCrew4x4-ID57013966422-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTA2LzEtMzAwMDM3NjEtNmFjNWE3YzUyOGFhZS5qcGc="
-  },
-  {
-   "yr": 2021,
-   "mk": "Kia",
-   "md": "Telluride",
-   "tr": "EX",
-   "bd": "Sport Utility",
-   "col": "Gravity Grey",
-   "vin": "5XYP3DHC9MG128670",
-   "sku": "3250B",
-   "px": 15303,
-   "mi": 167900,
-   "mpg": 19,
-   "dr": "AWD",
-   "fuel": "Gasoline",
-   "ft": [
-    "Backup camera",
-    "Apple CarPlay",
-    "Android Auto",
-    "Bluetooth",
-    "Remote start",
-    "Heated steering wheel"
-   ],
-   "url": "/auto/used-2021-kia-telluride-ex/125361810/",
-   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/54721425264/Used-2021-Kia-Telluride-EX-ID54721425264-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA5LTExLzEtMjk3MjYxODgtNmFhNDVlMjFiMjNmOC5qcGc="
   },
   {
    "yr": 2005,
@@ -518,6 +455,29 @@
    "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/53600132733/Used-2018-Jeep-GrandCherokee-Trailhawk-ID53600132733-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA5LTAyLzEtMTE5Mjc2ODEtNmE5ODcyYjJkYzhmOS5qcGc="
   },
   {
+   "yr": 2018,
+   "mk": "Chevrolet",
+   "md": "Silverado 1500",
+   "tr": "LT",
+   "bd": "Double Cab",
+   "col": "Summit White",
+   "vin": "1GCVKREC7JZ207196",
+   "sku": "3280B",
+   "px": 16517,
+   "mi": 151522,
+   "mpg": 16,
+   "dr": "4WD",
+   "fuel": "Gasoline",
+   "ft": [
+    "Backup camera",
+    "Bluetooth",
+    "Remote start",
+    "Clean CARFAX"
+   ],
+   "url": "/auto/used-2018-chevrolet-silverado-1500-lt/126678054/",
+   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/57647740791/Used-2018-Chevrolet-Silverado1500-LT-ID57647740791-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTE0LzEtMzAxODAwNjUtNmFjZjhiNjg0OGM4MC5qcGc="
+  },
+  {
    "yr": 2019,
    "mk": "Chevrolet",
    "md": "Equinox",
@@ -562,7 +522,7 @@
     "Clean CARFAX"
    ],
    "url": "/auto/used-2018-dodge-grand-caravan-se/119693855/",
-   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/56651466414/Used-2018-Dodge-GrandCaravan-SE-ID56651466414-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTAyLzEtMjc3OTcxMjEtNmFjMDBkZDhlMjY2NS5qcGc="
+   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/57480908727/Used-2018-Dodge-GrandCaravan-SE-ID57480908727-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTEyLzEtMjc3OTcxMjEtNmFjZDE5YTZhMjRiZS5qcGc="
   },
   {
    "yr": 2017,
@@ -647,7 +607,7 @@
    "vin": "2C4RC1CGXMR577756",
    "sku": "10521A",
    "px": 17361,
-   "mi": 102321,
+   "mi": 102469,
    "mpg": 19,
    "dr": "FWD",
    "fuel": "Gasoline",
@@ -860,7 +820,7 @@
     "Navigation"
    ],
    "url": "/auto/used-2015-ram-1500-big-horn-crew-4x4/126138141/",
-   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/56724329655/Used-2015-Ram-1500-BigHornCrew4x4-ID56724329655-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTAzLzEtMjk5OTIwODYtNmFjMTBhOWMwZDlkOC5qcGc="
+   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/57480906594/Used-2015-Ram-1500-BigHornCrew4x4-ID57480906594-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTEyLzEtMjk5OTIwODYtNmFjZDE5YjRlNmI3Yy5qcGc="
   },
   {
    "yr": 2024,
@@ -1176,31 +1136,6 @@
    "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/55659634608/Used-2024-Jeep-Compass-Latitude-ID55659634608-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA5LTIyLzEtMjk3MDkxNjMtNmFiMjhhMjg3MzY4OC5qcGc="
   },
   {
-   "yr": 2024,
-   "mk": "Jeep",
-   "md": "Compass",
-   "tr": "Latitude",
-   "bd": "Sport Utility",
-   "col": "Silver Zynith Metallic Clearcoat",
-   "vin": "3C4NJDBN7RT607046",
-   "sku": "3247B",
-   "px": 20386,
-   "mi": 54939,
-   "mpg": 24,
-   "dr": "4WD",
-   "fuel": "Gasoline",
-   "ft": [
-    "Backup camera",
-    "Apple CarPlay",
-    "Android Auto",
-    "Bluetooth",
-    "Remote start",
-    "One owner"
-   ],
-   "url": "/auto/used-2024-jeep-compass-latitude/125311812/",
-   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/55463652102/Used-2024-Jeep-Compass-Latitude-ID55463652102-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA5LTE5LzEtMjk3MDkxNjQtNmFhZTk1YmU2YjdjYS5qcGc="
-  },
-  {
    "yr": 2021,
    "mk": "Nissan",
    "md": "Rogue",
@@ -1508,7 +1443,7 @@
    "vin": "3C4NJDFB9NT219097",
    "sku": "5335",
    "px": 22325,
-   "mi": 32852,
+   "mi": 37382,
    "mpg": 22,
    "dr": "4WD",
    "fuel": "Gasoline",
@@ -1890,6 +1825,31 @@
    "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/57184662855/Used-2024-Chevrolet-Equinox-LT-ID57184662855-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTA4LzEtMjkyMDAzNDAtNmFjN2QzYjkwMzY3Mi5qcGc="
   },
   {
+   "yr": 2024,
+   "mk": "Jeep",
+   "md": "Compass",
+   "tr": "Latitude 4X4",
+   "bd": "Sport Utility",
+   "col": "Red Hot Pearlcoat",
+   "vin": "3C4NJDBN6RT154912",
+   "sku": "5392",
+   "px": 24825,
+   "mi": 13282,
+   "mpg": 24,
+   "dr": "4WD",
+   "fuel": "Gasoline",
+   "ft": [
+    "Backup camera",
+    "Bluetooth",
+    "Remote start",
+    "Heated seats",
+    "Heated steering wheel",
+    "One owner"
+   ],
+   "url": "/auto/used-2024-jeep-compass-latitude-4x4/126653181/",
+   "img": "https://dealerimages.dealereprocess.com/image/upload/c_limit,f_auto,fl_lossy,w_auto/v1/svp/dep/23jeepcompasslat/jeep_23compasslat_angularfront_billetsilvermetallicclear"
+  },
+  {
    "yr": 2023,
    "mk": "Ford",
    "md": "Escape",
@@ -1941,6 +1901,31 @@
   },
   {
    "yr": 2021,
+   "mk": "Jeep",
+   "md": "Grand Cherokee L",
+   "tr": "Limited 4X4",
+   "bd": "SUV",
+   "col": "Baltic Gray Metallic Clearcoat",
+   "vin": "1C4RJKBG7M8211097",
+   "sku": "5390A",
+   "px": 24971,
+   "mi": 77819,
+   "mpg": 18,
+   "dr": "4WD",
+   "fuel": "Gasoline",
+   "ft": [
+    "Backup camera",
+    "Apple CarPlay",
+    "Android Auto",
+    "Bluetooth",
+    "Heated steering wheel",
+    "Leather seats"
+   ],
+   "url": "/auto/used-2021-jeep-grand-cherokee-l-limited-4x4/126333012/",
+   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/57603330795/Used-2021-Jeep-GrandCherokeeL-Limited4X4-ID57603330795-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTEzLzEtMjEzOTUzODQtNmFjZWUyNjFlMzBlMy5qcGc="
+  },
+  {
+   "yr": 2021,
    "mk": "Ford",
    "md": "Edge",
    "tr": "SEL",
@@ -1963,6 +1948,31 @@
    ],
    "url": "/auto/used-2021-ford-edge-sel/123220514/",
    "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/53595575433/Used-2021-Ford-Edge-SEL-ID53595575433-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA5LTAyLzEtMjg5OTQwODQtNmE5ODcxNzEyYTExZS5qcGc="
+  },
+  {
+   "yr": 2019,
+   "mk": "Chevrolet",
+   "md": "Silverado 1500",
+   "tr": "LT Double Cab 4X4",
+   "bd": "Double Cab",
+   "col": "Cajun Red Tintcoat",
+   "vin": "1GCRYDED1KZ385845",
+   "sku": "5357A",
+   "px": 25346,
+   "mi": 84121,
+   "mpg": 16,
+   "dr": "4WD",
+   "fuel": "Gasoline",
+   "ft": [
+    "Backup camera",
+    "Apple CarPlay",
+    "Android Auto",
+    "Bluetooth",
+    "Remote start",
+    "Heated steering wheel"
+   ],
+   "url": "/auto/used-2019-chevrolet-silverado-1500-lt-double-cab-4x4/126739956/",
+   "img": "https://cloudflarestockimages.dealereprocess.com/resrc/images/stockphoto_asset-c_limit,f_auto,fl_lossy,w_auto/v1/svp/Colors_PNG1280/2019/19chevrolet/19chevroletsilverado1wtte4a/chevrolet_19silverado1wtte4a_angularfront_summitwhite"
   },
   {
    "yr": 2024,
@@ -2021,7 +2031,7 @@
    "vin": "1V2TE2CA0LC227365",
    "sku": "A3098",
    "px": 25810,
-   "mi": 85090,
+   "mi": 85139,
    "mpg": 16,
    "dr": "AWD",
    "fuel": "Gasoline",
@@ -2034,7 +2044,7 @@
     "Heated steering wheel"
    ],
    "url": "/auto/used-2020-volkswagen-atlas-cross-sport-36l-v6-sel-premium-rline/122348804/",
-   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/53610881841/Used-2020-Volkswagen-AtlasCrossSport-36LV6SELPremiumR-Line-ID53610881841-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA5LTAyLzEtMjg2OTc2MTctNmE5ODczZDM1YzhmOC5qcGc="
+   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/57503230254/Used-2020-Volkswagen-AtlasCrossSport-36LV6SELPremiumR-Line-ID57503230254-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTEyLzEtMjg2OTc2MTctNmFjZDZkZjU4ZTZlYy5qcGc="
   },
   {
    "yr": 2024,
@@ -2085,6 +2095,31 @@
    ],
    "url": "/auto/used-2021-gmc-acadia-at4-4x4/125526513/",
    "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/55360350207/Used-2021-GMC-Acadia-AT44X4-ID55360350207-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA5LTE4LzEtMjk3Nzk5NzgtNmFhZDIxNGY4MWIxMi5qcGc="
+  },
+  {
+   "yr": 2023,
+   "mk": "Chevrolet",
+   "md": "Traverse",
+   "tr": "LT AWD 7Pass",
+   "bd": "Sport Utility",
+   "col": "Mosaic Black Metallic",
+   "vin": "1GNEVGKW5PJ303871",
+   "sku": "5393",
+   "px": 26442,
+   "mi": 77868,
+   "mpg": 17,
+   "dr": "AWD",
+   "fuel": "Gasoline",
+   "ft": [
+    "Backup camera",
+    "Apple CarPlay",
+    "Android Auto",
+    "Bluetooth",
+    "Remote start",
+    "Third row"
+   ],
+   "url": "/auto/used-2023-chevrolet-traverse-lt-awd-7pass/126695709/",
+   "img": "https://dealerimages.dealereprocess.com/image/upload/c_limit,f_auto,fl_lossy,w_auto/v1/svp/dep/22chevrolettraverseltclthfwdsu2t/chevrolet_22traverseltclthfwdsu2t_angularfront_mosaicblackmetallic"
   },
   {
    "yr": 2018,
@@ -2171,7 +2206,7 @@
    "vin": "1C4RJYB60R8959417",
    "sku": "A3126",
    "px": 26987,
-   "mi": 50643,
+   "mi": 50840,
    "mpg": null,
    "dr": "4WD",
    "fuel": "Plug-in Hybrid",
@@ -2411,31 +2446,6 @@
    "img": "https://dealerimages.dealereprocess.com/image/upload/c_limit,f_auto,fl_lossy,w_auto/v1/svp/dep/23chryslerpacificahybridtouringl/chrysler_23pacificahybridtouringl_angularfront_brightwhiteclear"
   },
   {
-   "yr": 2021,
-   "mk": "Volkswagen",
-   "md": "Atlas",
-   "tr": "3.6L V6 SEL Premium",
-   "bd": "Sport Utility",
-   "col": "Tourmaline Blue Metallic",
-   "vin": "1V2TR2CA0MC583353",
-   "sku": "3241B",
-   "px": 27997,
-   "mi": 47447,
-   "mpg": 16,
-   "dr": "AWD",
-   "fuel": "Gasoline",
-   "ft": [
-    "Backup camera",
-    "Apple CarPlay",
-    "Android Auto",
-    "Bluetooth",
-    "Remote start",
-    "Heated steering wheel"
-   ],
-   "url": "/auto/used-2021-volkswagen-atlas-36l-v6-sel-premium/124762938/",
-   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/53608155717/Used-2021-Volkswagen-Atlas-36LV6SELPremium-ID53608155717-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA5LTAyLzEtMjk1MjQzMzktNmE5ODc2MmYzMDQzMC5qcGc="
-  },
-  {
    "yr": 2025,
    "mk": "Chrysler",
    "md": "Pacifica",
@@ -2536,31 +2546,6 @@
   },
   {
    "yr": 2022,
-   "mk": "Ford",
-   "md": "Explorer",
-   "tr": "Limited 4x4 6Pass",
-   "bd": "Sport Utility",
-   "col": "Stone Blue Metallic",
-   "vin": "1FMSK8FH5NGA01038",
-   "sku": "5357",
-   "px": 28977,
-   "mi": 63449,
-   "mpg": 20,
-   "dr": "4WD",
-   "fuel": "Gasoline",
-   "ft": [
-    "Apple CarPlay",
-    "Android Auto",
-    "Bluetooth",
-    "Remote start",
-    "Heated steering wheel",
-    "Leather seats"
-   ],
-   "url": "/auto/used-2022-ford-explorer-limited-4x4-6pass/123688463/",
-   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/53600169354/Used-2022-Ford-Explorer-Limited4x46Pass-ID53600169354-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA5LTAyLzEtMjkxNTM2MTEtNmE5ODcxODBiZmU4MS5qcGc="
-  },
-  {
-   "yr": 2022,
    "mk": "Jeep",
    "md": "Wrangler Unlimited",
    "tr": "Unlimited Sport S",
@@ -2608,31 +2593,6 @@
    ],
    "url": "/auto/used-2023-jeep-grand-cherokee-l-laredo-4x4/125007756/",
    "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/55261614906/Used-2023-Jeep-GrandCherokeeL-Laredo4x4-ID55261614906-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA5LTE3LzEtMjk2MTAxNzgtNmFhYmYyZmNhYjljZC5qcGc="
-  },
-  {
-   "yr": 2025,
-   "mk": "Kia",
-   "md": "K5",
-   "tr": "GT-Line",
-   "bd": "Sedan",
-   "col": "Yacht Blue",
-   "vin": "KNAG64J73S5385721",
-   "sku": "10388A",
-   "px": 29949,
-   "mi": 15612,
-   "mpg": 24,
-   "dr": "FWD / AWD",
-   "fuel": "Gasoline",
-   "ft": [
-    "Backup camera",
-    "Apple CarPlay",
-    "Android Auto",
-    "Bluetooth",
-    "Heated steering wheel",
-    "Leather seats"
-   ],
-   "url": "/auto/used-2025-kia-k5-gtline/123535460/",
-   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/57209226873/Used-2025-Kia-K5-GT-Line-ID57209226873-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTA4LzEtMjkxMDI1NTgtNmFjODI3ZjY1MGUyNS5qcGc="
   },
   {
    "yr": 2021,
@@ -2882,7 +2842,7 @@
     "Navigation"
    ],
    "url": "/auto/used-2019-ford-ranger-lariat-supercrew-4x4/126173022/",
-   "img": "https://cloudflarestockimages.dealereprocess.com/resrc/images/defaultmake_asset,w_auto,makeid_20/aW1nL21ha2VzLzIwX28uanBn"
+   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/57558983424/Used-2019-Ford-Ranger-LariatSuperCrew4x4-ID57558983424-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTEzLzEtMzAwMDM3NjMtNmFjZTM5ZWQ1ZDAzYy5qcGc="
   },
   {
    "yr": 2023,
@@ -2958,6 +2918,30 @@
    ],
    "url": "/auto/used-2019-ram-1500-laramie/123768494/",
    "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/53595567981/Used-2019-Ram-1500-Laramie-ID53595567981-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA5LTAyLzEtMjkxODAwMjItNmE5ODcxMDI5OWU5Ni5qcGc="
+  },
+  {
+   "yr": 2025,
+   "mk": "Ram",
+   "md": "Promaster",
+   "tr": "Tradesman",
+   "bd": "Cargo Van",
+   "col": "Bright White Clearcoat",
+   "vin": "3C6LRVVGXSE517233",
+   "sku": "A3144",
+   "px": 31990,
+   "mi": 15798,
+   "mpg": null,
+   "dr": "FWD",
+   "fuel": "Gasoline",
+   "ft": [
+    "Backup camera",
+    "Apple CarPlay",
+    "Android Auto",
+    "Bluetooth",
+    "Adaptive cruise"
+   ],
+   "url": "/auto/used-2025-ram-promaster-tradesman/126514503/",
+   "img": "https://cloudflarestockimages.dealereprocess.com/resrc/images/defaultmake_asset,w_auto,makeid_51/aW1nL21ha2VzLzUxX28uanBn"
   },
   {
    "yr": 2025,
@@ -3094,7 +3078,7 @@
    "vin": "1C4RJKBG3P8750272",
    "sku": "3276B",
    "px": 32708,
-   "mi": 39484,
+   "mi": 39503,
    "mpg": 18,
    "dr": "4WD",
    "fuel": "Gasoline",
@@ -3132,7 +3116,32 @@
     "Leather seats"
    ],
    "url": "/auto/used-2023-jeep-grand-cherokee-l-limited/126122595/",
-   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/57291956085/Used-2023-Jeep-GrandCherokeeL-Limited-ID57291956085-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTA5LzEtMjk5ODY4MzktNmFjOTI1MjVlMTA3Yy5qcGc="
+   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/57323935152/Used-2023-Jeep-GrandCherokeeL-Limited-ID57323935152-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTA5LzEtMjk5ODY4MzktNmFjOTljNGQ2ZWNiOC5qcGc="
+  },
+  {
+   "yr": 2020,
+   "mk": "Ram",
+   "md": "2500",
+   "tr": "Big Horn Crew 4x4",
+   "bd": "Crew Cab",
+   "col": "Diamond Black Crystal Pearlcoat",
+   "vin": "3C6UR5DJ8LG313943",
+   "sku": "45460A",
+   "px": 33367,
+   "mi": 99097,
+   "mpg": null,
+   "dr": "4WD",
+   "fuel": "Gasoline",
+   "ft": [
+    "Backup camera",
+    "Apple CarPlay",
+    "Android Auto",
+    "Bluetooth",
+    "Remote start",
+    "Heated seats"
+   ],
+   "url": "/auto/used-2020-ram-2500-big-horn-crew-4x4/126557898/",
+   "img": "https://cloudflarestockimages.dealereprocess.com/resrc/images/stockphoto_asset-c_limit,f_auto,fl_lossy,w_auto/v1/svp/Colors_PNG1280/2020/20ram/20ram2laramielwb4wdtc5a/ram_202laramielwb4wdtc5a_angularfront_diamondblackcrystalpearlcoat"
   },
   {
    "yr": 2019,
@@ -3594,7 +3603,7 @@
    "vin": "1C6SRFHT8MN830435",
    "sku": "10472A",
    "px": 36943,
-   "mi": 89307,
+   "mi": 89351,
    "mpg": 15,
    "dr": "4WD",
    "fuel": "Gasoline",
@@ -3607,7 +3616,7 @@
     "Leather seats"
    ],
    "url": "/auto/used-2021-ram-1500-limited/125007723/",
-   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/53622665982/Used-2021-Ram-1500-Limited-ID53622665982-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA5LTAyLzEtMjk2MTAxODEtNmE5OGIxZjk1OTE2YS5qcGc="
+   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/57558982854/Used-2021-Ram-1500-Limited-ID57558982854-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTEzLzEtMjk2MTAxODEtNmFjZTM5ZWUwOTA1ZS5qcGc="
   },
   {
    "yr": 2024,
@@ -3857,6 +3866,31 @@
    "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/53600149548/Used-2020-Ram-2500-Laramie-ID53600149548-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA5LTAyLzEtMjY3NTYzNDMtNmE5ODcxODBjMjA5Mi5qcGc="
   },
   {
+   "yr": 2023,
+   "mk": "Ford",
+   "md": "F-150",
+   "tr": "Tremor",
+   "bd": "Crew Cab",
+   "col": "Agate Black Metallic",
+   "vin": "1FTEW1E80PFA87897",
+   "sku": "10158A",
+   "px": 39923,
+   "mi": 112781,
+   "mpg": 16,
+   "dr": "4WD",
+   "fuel": "Gasoline",
+   "ft": [
+    "Backup camera",
+    "Apple CarPlay",
+    "Android Auto",
+    "Bluetooth",
+    "Remote start",
+    "Heated seats"
+   ],
+   "url": "/auto/used-2023-ford-f-150-tremor/126620781/",
+   "img": "https://dealerimages.dealereprocess.com/image/upload/c_limit,f_auto,fl_lossy,w_auto/v1/svp/dep/21fordf150xltshorttc14a/ford_21f150xltshorttc14a_angularfront_agateblack"
+  },
+  {
    "yr": 2022,
    "mk": "Ford",
    "md": "Bronco",
@@ -4029,7 +4063,7 @@
     "Heated seats"
    ],
    "url": "/auto/used-2023-jeep-gladiator-mojave/124954605/",
-   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/53595564045/Used-2023-Jeep-Gladiator-Mojave-ID53595564045-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA5LTAyLzEtMjk1OTgyMjgtNmE5ODcxMGFlNjc1ZC5qcGc="
+   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/57572247153/Used-2023-Jeep-Gladiator-Mojave-ID57572247153-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTEzLzEtMjk1OTgyMjgtNmFjZTZiMzE2MjVjNy5qcGc="
   },
   {
    "yr": 2022,
@@ -4079,7 +4113,7 @@
     "Heated steering wheel"
    ],
    "url": "/auto/used-2025-dodge-durango-rt-plus-awd-7pass/123372305/",
-   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/53600159628/Used-2025-Dodge-Durango-RTPlusAWD7Pass-ID53600159628-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA5LTAyLzEtMjkwNDUzNjMtNmE5ODcyNDFjN2FhYy5qcGc="
+   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/57582350184/Used-2025-Dodge-Durango-RTPlusAWD7Pass-ID57582350184-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTEzLzEtMjkwNDUzNjMtNmFjZThlNTI5MDhjZS5qcGc="
   },
   {
    "yr": 2026,
@@ -4630,6 +4664,31 @@
   },
   {
    "yr": 2026,
+   "mk": "Toyota",
+   "md": "Tundra",
+   "tr": "Limited",
+   "bd": "Crew Cab",
+   "col": "Ice Cap",
+   "vin": "5TFWA5DB8TX391359",
+   "sku": "10525A",
+   "px": 56951,
+   "mi": 12119,
+   "mpg": 17,
+   "dr": "4WD",
+   "fuel": "Gasoline",
+   "ft": [
+    "Apple CarPlay",
+    "Android Auto",
+    "Bluetooth",
+    "Remote start",
+    "Heated steering wheel",
+    "Leather seats"
+   ],
+   "url": "/auto/used-2026-toyota-tundra-limited/126653172/",
+   "img": "https://dealerimages.dealereprocess.com/image/upload/c_limit,f_auto,fl_lossy,w_auto/v1/svp/dep/26toyotatundra2wdbedcrewmax5limited/toyota_26tundra2wdbedcrewmax5limited_angularfront_icecap"
+  },
+  {
+   "yr": 2026,
    "mk": "Chevrolet",
    "md": "Silverado 1500",
    "tr": "LTZ",
@@ -4652,6 +4711,31 @@
    ],
    "url": "/auto/used-2026-chevrolet-silverado-1500-ltz/116162774/",
    "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/53603275164/Used-2026-Chevrolet-Silverado1500-LTZ-ID53603275164-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA5LTAyLzEtMjY2MjU1NjItNmE5ODc1NDdkZDcwMC5qcGc="
+  },
+  {
+   "yr": 2022,
+   "mk": "Ram",
+   "md": "3500",
+   "tr": "Longhorn",
+   "bd": "Crew Cab",
+   "col": "Delmonico Red Pearlcoat",
+   "vin": "3C63R3FL2NG339293",
+   "sku": "10388B",
+   "px": 59644,
+   "mi": 69996,
+   "mpg": null,
+   "dr": "4WD",
+   "fuel": "Diesel",
+   "ft": [
+    "Apple CarPlay",
+    "Android Auto",
+    "Remote start",
+    "Heated steering wheel",
+    "Leather seats",
+    "Navigation"
+   ],
+   "url": "/auto/used-2022-ram-3500-longhorn/126620784/",
+   "img": "https://dealerimages.dealereprocess.com/image/upload/c_limit,f_auto,fl_lossy,w_auto/v1/svp/dep/19ram35crewltdsb4x2tc4t/ram_1935crewltdsb4x2tc4t_angularfront_delmonicoredpearlcoat"
   },
   {
    "yr": 2024,
@@ -4738,7 +4822,7 @@
    "vin": "3C63R3MLXNG408282",
    "sku": "10408A",
    "px": 63946,
-   "mi": 40692,
+   "mi": 40708,
    "mpg": null,
    "dr": "4WD",
    "fuel": "Diesel",
@@ -4801,7 +4885,7 @@
     "Heated steering wheel"
    ],
    "url": "/auto/used-2023-ram-3500-limited/119972444/",
-   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/53600146602/Used-2023-Ram-3500-Limited-ID53600146602-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA5LTAyLzEtMTE5Mjc1MDItNmE5ODcyNzM1ZTU5MC5qcGc="
+   "img": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/4239/57489840648/Used-2023-Ram-3500-Limited-ID57489840648-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTEwLTEyLzEtMTE5Mjc1MDItNmFjZDNjOTg1OTFlMC5qcGc="
   }
  ]
 }
