@@ -149,7 +149,7 @@ input, select { font: inherit; color: inherit; }
 /* 16px is the size under which iOS Safari zooms the page into a focused
    field and never zooms back out. */
 input[type='number'] { font-family: var(--mono); font-size: 16px; }
-@media (pointer: coarse) { input, select { font-size: 16px; } }
+@media (pointer: coarse) { input, select, .sort select { font-size: 16px; } }
 input[type='number']:focus, select:focus { outline: none; }
 .field:focus-within, select:focus-visible { box-shadow: 0 0 0 2px var(--teal); border-color: var(--teal); }
 select { padding: 8px 10px; border: 1px solid var(--rule); border-radius: 4px; background: #fff; }
