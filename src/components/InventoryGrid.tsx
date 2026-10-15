@@ -116,7 +116,7 @@ export function InventoryGrid({ inventory, inputs, ceiling }: Props) {
       <p className="note">
         {over > 0 && `${over} more ${over === 1 ? 'vehicle is' : 'vehicles are'} above your ceiling. `}
         {PITCH
-          ? `Listings captured ${capturedOn(PITCH.capturedOn)} (${capturedAgo(PITCH.capturedOn)}): ${inventory.vehicles.length} of the ${PITCH.listed} they listed; the rest publish no price or no fuel economy.`
+          ? `Listings captured ${capturedOn(PITCH.capturedOn)} (${capturedAgo(PITCH.capturedOn)}): ${inventory.vehicles.length} of the ${PITCH.listed} they listed; the rest publish no price or no gas mileage.`
           : `Inventory updated ${new Date(inventory.generatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}.`}
       </p>
     </section>
